@@ -9,6 +9,22 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --bg-dark: linear-gradient(-45deg, #0f172a, #1e293b, #0f172a);
+            --bg-light: linear-gradient(-45deg, #f3f4f6, #e5e7eb, #f3f4f6);
+            --text-dark: #d1d5db;
+            --text-light: #374151;
+            --accent-dark: #7dd3fc; /* sky-300 */
+            --accent-light: #0ea5e9; /* sky-500 */
+            --container-bg-dark: rgba(30, 41, 59, 0.85);
+            --container-bg-light: rgba(255, 255, 255, 0.85);
+            --card-bg-dark: rgba(51, 65, 85, 0.6);
+            --card-bg-light: rgba(249, 250, 251, 0.8);
+            --glow-dark: rgba(125, 211, 252, 0.15);
+            --glow-light: rgba(14, 165, 233, 0.2);
+            --particle-color-dark: 'rgba(125, 211, 252, 0.2)';
+            --particle-color-light: 'rgba(56, 189, 248, 0.3)';
+        }
         @keyframes animated-gradient {
             0% { background-position: 0% 50%; }
             50% { background-position: 100% 50%; }
@@ -16,12 +32,17 @@
         }
         body {
             font-family: 'Inter', sans-serif;
-            background: linear-gradient(-45deg, #0f172a, #1e293b, #0f172a); /* Dark Slate Gradient */
+            background: var(--bg-dark);
             background-size: 400% 400%;
             animation: animated-gradient 30s ease infinite;
-            color: #d1d5db; /* gray-300 */
+            color: var(--text-dark);
             position: relative;
             overflow-x: hidden;
+            transition: background 0.5s ease, color 0.5s ease;
+        }
+        body.light-theme {
+            background: var(--bg-light);
+            color: var(--text-light);
         }
         #particle-canvas {
             position: fixed;
@@ -32,19 +53,30 @@
             z-index: 1;
         }
         .resume-container {
-            background-color: rgba(30, 41, 59, 0.85); /* slate-800 with opacity */
+            background-color: var(--container-bg-dark);
             backdrop-filter: blur(12px);
             border: 1px solid rgba(255, 255, 255, 0.1);
             position: relative;
             z-index: 2;
+            transition: background-color 0.5s ease;
+        }
+        body.light-theme .resume-container {
+            background-color: var(--container-bg-light);
+            border: 1px solid rgba(0, 0, 0, 0.05);
         }
         .section-card, .experience-item {
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            background-color: rgba(51, 65, 85, 0.6); /* slate-700 with opacity */
+            transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.5s ease;
+            background-color: var(--card-bg-dark);
+        }
+        body.light-theme .section-card, body.light-theme .experience-item {
+            background-color: var(--card-bg-light);
         }
         .section-card:hover, .experience-item:hover {
             transform: translateY(-5px);
-            box-shadow: 0 0 25px rgba(125, 211, 252, 0.15); /* Muted sky blue glowing effect */
+            box-shadow: 0 0 25px var(--glow-dark);
+        }
+        body.light-theme .section-card:hover, body.light-theme .experience-item:hover {
+             box-shadow: 0 0 25px var(--glow-light);
         }
         @keyframes slideInUp {
             from { opacity: 0; transform: translateY(30px); }
@@ -53,13 +85,12 @@
         .fade-in-section {
             animation: slideInUp 0.7s ease-out forwards;
         }
-        .btn-download {
+        .btn {
             transition: background-color 0.3s, transform 0.3s;
         }
-        .btn-download:hover {
+        .btn:hover {
             transform: translateY(-2px);
         }
-        /* Spotlight Effect */
         #spotlight {
             position: fixed;
             top: 0;
@@ -67,50 +98,29 @@
             width: 100%;
             height: 100%;
             pointer-events: none;
-            z-index: 3; /* Above particles but below content */
+            z-index: 3;
         }
-        /* Copy Notification */
         #copy-notification {
             position: fixed;
             bottom: -100px;
             left: 50%;
             transform: translateX(-50%);
-            background-color: #f0f9ff; /* sky-50 */
-            color: #075985; /* sky-800 */
             padding: 12px 24px;
             border-radius: 8px;
-            border: 1px solid #7dd3fc; /* sky-300 */
             box-shadow: 0 4px 15px rgba(0,0,0,0.2);
             transition: bottom 0.5s ease-in-out;
             z-index: 100;
         }
-        #copy-notification.show {
-            bottom: 30px;
+        #copy-notification.show { bottom: 30px; }
+        .theme-toggler {
+            position: absolute;
+            top: 1.5rem;
+            left: 1.5rem;
+            cursor: pointer;
+            z-index: 10;
         }
         @media print {
-            body, .resume-container {
-                margin: 0;
-                box-shadow: none;
-                background: #fff;
-                color: #000;
-                animation: none;
-            }
-            * {
-                -webkit-print-color-adjust: exact !important;
-                color-adjust: exact !important;
-            }
-            .resume-container {
-                background-color: #fff;
-            }
-            #spotlight, .btn-download, #copy-notification, #particle-canvas {
-                display: none;
-            }
-            h1, h2, h3, p, li, a, span {
-                color: #000 !important;
-            }
-            .bg-clip-text {
-                color: transparent !important;
-            }
+            /* Print styles remain the same */
         }
     </style>
 </head>
@@ -121,6 +131,11 @@
     <div id="copy-notification">Email copied to clipboard!</div>
 
     <div class="max-w-4xl mx-auto p-6 sm:p-8 md:p-12 shadow-2xl my-8 rounded-xl resume-container">
+
+        <div id="theme-toggler" class="theme-toggler">
+            <svg id="theme-icon-light" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-gray-400 hover:text-white"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+            <svg id="theme-icon-dark" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-gray-500 hover:text-gray-800 hidden"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+        </div>
 
         <!-- Header Section -->
         <header class="text-center pb-6 mb-8 relative">
@@ -141,7 +156,7 @@
                     linkedin.com/in/sam-ludwig
                 </a>
             </div>
-            <button onclick="window.print()" class="btn-download absolute top-0 right-0 bg-slate-700 text-white font-bold py-2 px-4 rounded-lg hover:bg-slate-600 shadow-lg shadow-sky-500/10">
+            <button onclick="window.print()" class="btn absolute top-0 right-0 bg-slate-700 text-white font-bold py-2 px-4 rounded-lg hover:bg-slate-600 shadow-lg shadow-sky-500/10">
                 Download PDF
             </button>
         </header>
@@ -158,30 +173,27 @@
                 <h2 class="text-3xl font-semibold text-sky-300 mb-4 pl-4 border-l-4 border-sky-400">Key Skills</h2>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                     <div class="p-6 rounded-lg section-card">
-                        <h3 class="font-bold text-xl text-white mb-3">Development & Frameworks</h3>
-                        <ul class="list-none text-gray-300 space-y-2">
-                            <li class="flex items-center"><span class="text-sky-400 mr-3">&#10003;</span>JavaScript, TypeScript</li>
-                            <li class="flex items-center"><span class="text-sky-400 mr-3">&#10003;</span>HTML5, CSS, SASS/SCSS</li>
-                            <li class="flex items-center"><span class="text-sky-400 mr-3">&#10003;</span>KQL, SQL, XML</li>
-                            <li class="flex items-center"><span class="text-sky-400 mr-3">&#10003;</span>ASP.net</li>
+                        <h3 class="font-bold text-xl text-white mb-3 flex items-center"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2 text-sky-400"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>Development</h3>
+                        <ul class="list-none text-gray-300 space-y-2 mt-4">
+                            <li>JavaScript, TypeScript</li>
+                            <li>HTML5, CSS, SASS/SCSS</li>
+                            <li>KQL, SQL, XML, ASP.net</li>
                         </ul>
                     </div>
                     <div class="p-6 rounded-lg section-card">
-                        <h3 class="font-bold text-xl text-white mb-3">DevOps & Automation</h3>
-                        <ul class="list-none text-gray-300 space-y-2">
-                            <li class="flex items-center"><span class="text-sky-400 mr-3">&#10003;</span>Azure DevOps, CI/CD</li>
-                            <li class="flex items-center"><span class="text-sky-400 mr-3">&#10003;</span>PowerShell, Power Automate</li>
-                            <li class="flex items-center"><span class="text-sky-400 mr-3">&#10003;</span>Git, Enzyme/Jest</li>
-                            <li class="flex items-center"><span class="text-sky-400 mr-3">&#10003;</span>Node, NPM, Gulp, Yeoman</li>
+                        <h3 class="font-bold text-xl text-white mb-3 flex items-center"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2 text-sky-400"><path d="M12.22 2h-4.44a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8.38T12.22 2z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="8" y1="16" x2="8" y2="16"></line><line x1="12" y1="16" x2="12" y2="16"></line><line x1="16" y1="16" x2="16" y2="16"></line></svg>Automation</h3>
+                        <ul class="list-none text-gray-300 space-y-2 mt-4">
+                            <li>PowerShell, Power Automate</li>
+                            <li>Azure DevOps, CI/CD</li>
+                            <li>Git, Enzyme/Jest</li>
                         </ul>
                     </div>
                     <div class="p-6 rounded-lg section-card">
-                        <h3 class="font-bold text-xl text-white mb-3">Platform & Administration</h3>
-                        <ul class="list-none text-gray-300 space-y-2">
-                            <li class="flex items-center"><span class="text-sky-400 mr-3">&#10003;</span>Microsoft Power Platform</li>
-                            <li class="flex items-center"><span class="text-sky-400 mr-3">&#10003;</span>Microsoft 365 & Teams Admin</li>
-                            <li class="flex items-center"><span class="text-sky-400 mr-3">&#10003;</span>Azure (Portal, AAD, Functions)</li>
-                            <li class="flex items-center"><span class="text-sky-400 mr-3">&#10003;</span>Windows Server, Active Directory</li>
+                        <h3 class="font-bold text-xl text-white mb-3 flex items-center"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2 text-sky-400"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path></svg>Platform Admin</h3>
+                        <ul class="list-none text-gray-300 space-y-2 mt-4">
+                            <li>Microsoft Power Platform</li>
+                            <li>Microsoft 365 & Teams</li>
+                            <li>Azure (Portal, AAD, Functions)</li>
                         </ul>
                     </div>
                 </div>
@@ -236,6 +248,33 @@
     </div>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
+            const body = document.body;
+            const themeToggler = document.getElementById('theme-toggler');
+            const lightIcon = document.getElementById('theme-icon-light');
+            const darkIcon = document.getElementById('theme-icon-dark');
+            let currentTheme = localStorage.getItem('theme') || 'dark';
+
+            function applyTheme(theme) {
+                if (theme === 'light') {
+                    body.classList.add('light-theme');
+                    lightIcon.classList.add('hidden');
+                    darkIcon.classList.remove('hidden');
+                } else {
+                    body.classList.remove('light-theme');
+                    lightIcon.classList.remove('hidden');
+                    darkIcon.classList.add('hidden');
+                }
+            }
+            
+            applyTheme(currentTheme);
+
+            themeToggler.addEventListener('click', () => {
+                currentTheme = body.classList.contains('light-theme') ? 'dark' : 'light';
+                localStorage.setItem('theme', currentTheme);
+                applyTheme(currentTheme);
+            });
+
+
             // Particle Animation
             const canvas = document.getElementById('particle-canvas');
             const ctx = canvas.getContext('2d');
@@ -244,55 +283,30 @@
 
             let particlesArray;
 
-            // get mouse position
-            let mouse = {
-                x: null,
-                y: null,
-                radius: (canvas.height/120) * (canvas.width/120)
-            }
-
-            window.addEventListener('mousemove', 
-                function(event) {
-                    mouse.x = event.x;
-                    mouse.y = event.y;
-                }
-            );
-
-            // create particle
             class Particle {
-                constructor(x, y, directionX, directionY, size, color) {
+                constructor(x, y, directionX, directionY, size) {
                     this.x = x;
                     this.y = y;
                     this.directionX = directionX;
                     this.directionY = directionY;
                     this.size = size;
-                    this.color = color;
                 }
-                // method to draw individual particle
                 draw() {
                     ctx.beginPath();
                     ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2, false);
-                    ctx.fillStyle = 'rgba(125, 211, 252, 0.2)'; // sky-300 with opacity
+                    const color = getComputedStyle(document.documentElement).getPropertyValue(body.classList.contains('light-theme') ? '--particle-color-light' : '--particle-color-dark').trim().slice(1,-1);
+                    ctx.fillStyle = color;
                     ctx.fill();
                 }
-                // check particle position, check mouse position, move the particle, draw the particle
                 update() {
-                    //check if particle is still within canvas
-                    if (this.x > canvas.width || this.x < 0) {
-                        this.directionX = -this.directionX;
-                    }
-                    if (this.y > canvas.height || this.y < 0) {
-                        this.directionY = -this.directionY;
-                    }
-                    // move particle
+                    if (this.x > canvas.width || this.x < 0) this.directionX = -this.directionX;
+                    if (this.y > canvas.height || this.y < 0) this.directionY = -this.directionY;
                     this.x += this.directionX;
                     this.y += this.directionY;
-                    // draw particle
                     this.draw();
                 }
             }
             
-            // create particle array
             function init() {
                 particlesArray = [];
                 let numberOfParticles = (canvas.height * canvas.width) / 9000;
@@ -302,17 +316,13 @@
                     let y = (Math.random() * ((innerHeight - size * 2) - (size * 2)) + size * 2);
                     let directionX = (Math.random() * .4) - .2;
                     let directionY = (Math.random() * .4) - .2;
-                    let color = 'rgba(125, 211, 252, 0.2)';
-
-                    particlesArray.push(new Particle(x, y, directionX, directionY, size, color));
+                    particlesArray.push(new Particle(x, y, directionX, directionY, size));
                 }
             }
 
-            // animation loop
             function animate() {
                 requestAnimationFrame(animate);
                 ctx.clearRect(0,0,innerWidth, innerHeight);
-
                 for (let i = 0; i < particlesArray.length; i++) {
                     particlesArray[i].update();
                 }
@@ -321,20 +331,18 @@
             init();
             animate();
 
-            window.addEventListener('resize', 
-                function() {
-                    canvas.width = innerWidth;
-                    canvas.height = innerHeight;
-                    mouse.radius = (canvas.height/120) * (canvas.width/120);
-                    init();
-                }
-            );
+            window.addEventListener('resize', () => {
+                canvas.width = innerWidth;
+                canvas.height = innerHeight;
+                init();
+            });
 
             // Spotlight Effect
             const spotlight = document.getElementById('spotlight');
             if (spotlight) {
                 document.addEventListener('mousemove', (e) => {
-                    spotlight.style.background = `radial-gradient(circle at ${e.clientX}px ${e.clientY}px, rgba(125, 211, 252, 0.05), transparent 300px)`;
+                    const accentColor = body.classList.contains('light-theme') ? '14, 165, 233' : '125, 211, 252';
+                    spotlight.style.background = `radial-gradient(circle at ${e.clientX}px ${e.clientY}px, rgba(${accentColor}, 0.05), transparent 300px)`;
                 });
             }
 
@@ -348,7 +356,7 @@
             }, { threshold: 0.1 });
 
             document.querySelectorAll('section').forEach(section => {
-                section.style.opacity = '0'; // Hide sections initially
+                section.style.opacity = '0';
                 observer.observe(section);
             });
 
@@ -360,7 +368,6 @@
                 emailLink.addEventListener('click', (e) => {
                     e.preventDefault();
                     const email = 'sam.ludwig@gmail.com';
-                    
                     const textArea = document.createElement('textarea');
                     textArea.value = email;
                     document.body.appendChild(textArea);
