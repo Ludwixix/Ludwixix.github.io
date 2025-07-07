@@ -19,6 +19,8 @@
             --card-bg-dark: rgba(55, 65, 81, 0.7);
             --glow-dark: rgba(125, 211, 252, 0.15);
             --particle-color-dark: 'rgba(125, 211, 252, 0.2)';
+            --border-gradient-dark: linear-gradient(90deg, rgba(56,189,248,0.2), rgba(56,189,248,0), rgba(56,189,248,0.2));
+
 
             /* Light Theme Colors */
             --bg-light: #f4f7fa; /* A subtle, cool off-white */
@@ -29,6 +31,7 @@
             --card-bg-light: #f9fafb; /* gray-50 */
             --glow-light: rgba(14, 165, 233, 0.1);
             --particle-color-light: 'rgba(56, 189, 248, 0.3)';
+            --border-gradient-light: linear-gradient(90deg, rgba(14,165,233,0.1), rgba(14,165,233,0), rgba(14,165,233,0.1));
         }
         @keyframes animated-gradient {
             0% { background-position: 0% 50%; }
@@ -86,6 +89,12 @@
         body.light-theme .section-card:hover, body.light-theme .experience-item:hover {
              box-shadow: 0 8px 25px var(--glow-light);
         }
+        .section-card:hover .skill-icon {
+            transform: scale(1.1) rotate(5deg);
+        }
+        .skill-icon {
+            transition: transform 0.3s ease;
+        }
         @keyframes slideInUp {
             from { opacity: 0; transform: translateY(30px); }
             to { opacity: 1; transform: translateY(0); }
@@ -138,6 +147,13 @@
         body.light-theme .section-heading { color: var(--accent-light); }
         .certification-text { color: var(--text-heading-dark); }
         body.light-theme .certification-text { color: var(--text-heading-light); }
+        #clock {
+            position: absolute;
+            top: 1.5rem;
+            right: 8rem; /* Positioned left of the download button */
+            font-size: 0.875rem;
+            letter-spacing: 0.05em;
+        }
 
         @media print {
             /* Print styles remain the same */
@@ -176,6 +192,7 @@
                     linkedin.com/in/sam-ludwig
                 </a>
             </div>
+            <div id="clock"></div>
             <button onclick="window.print()" class="btn absolute top-2 right-2 sm:top-4 sm:right-4 bg-slate-700 text-white font-bold py-2 px-4 rounded-lg hover:bg-slate-600 shadow-lg shadow-sky-500/10">
                 Download PDF
             </button>
@@ -193,7 +210,7 @@
                 <h2 class="section-heading text-3xl font-semibold mb-4 pl-4 border-l-4 border-sky-400">Key Skills</h2>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                     <div class="p-6 rounded-lg section-card">
-                        <h3 class="font-bold text-xl mb-3 flex items-center"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2 section-heading"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>Development</h3>
+                        <h3 class="font-bold text-xl mb-3 flex items-center"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2 section-heading skill-icon"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>Development</h3>
                         <ul class="list-none space-y-2 mt-4">
                             <li>JavaScript, TypeScript</li>
                             <li>HTML5, CSS, SASS/SCSS</li>
@@ -201,7 +218,7 @@
                         </ul>
                     </div>
                     <div class="p-6 rounded-lg section-card">
-                        <h3 class="font-bold text-xl mb-3 flex items-center"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2 section-heading"><path d="M12.22 2h-4.44a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8.38T12.22 2z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="8" y1="16" x2="8" y2="16"></line><line x1="12" y1="16" x2="12" y2="16"></line><line x1="16" y1="16" x2="16" y2="16"></line></svg>Automation</h3>
+                        <h3 class="font-bold text-xl mb-3 flex items-center"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2 section-heading skill-icon"><path d="M12.22 2h-4.44a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8.38T12.22 2z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="8" y1="16" x2="8" y2="16"></line><line x1="12" y1="16" x2="12" y2="16"></line><line x1="16" y1="16" x2="16" y2="16"></line></svg>Automation</h3>
                         <ul class="list-none space-y-2 mt-4">
                             <li>PowerShell, Power Automate</li>
                             <li>Azure DevOps, CI/CD</li>
@@ -209,7 +226,7 @@
                         </ul>
                     </div>
                     <div class="p-6 rounded-lg section-card">
-                        <h3 class="font-bold text-xl mb-3 flex items-center"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2 section-heading"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path></svg>Platform Admin</h3>
+                        <h3 class="font-bold text-xl mb-3 flex items-center"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2 section-heading skill-icon"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path></svg>Platform Admin</h3>
                         <ul class="list-none space-y-2 mt-4">
                             <li>Microsoft Power Platform</li>
                             <li>Microsoft 365 & Teams</li>
@@ -217,7 +234,7 @@
                         </ul>
                     </div>
                 </div>
-                 <p class="mt-6 text-lg"><span class="font-semibold certification-text">Certifications:</span> Certified SCRUM Master, Azure Fundamentals (AZ-900)</p>
+                 <p class="mt-6 text-lg"><span class="font-semibold certification-text">Certifications:</span> Certified SCRUM Master, Azure Fundamentals (AZ-900), ITIL 4 Foundation</p>
             </section>
 
             <!-- Professional Experience Section -->
@@ -404,6 +421,19 @@
                     document.body.removeChild(textArea);
                 });
             }
+
+             // Live Clock
+            const clockElement = document.getElementById('clock');
+            function updateClock() {
+                if(clockElement){
+                    const now = new Date();
+                    const timeString = now.toLocaleTimeString('en-AU', { hour: '2-digit', minute:'2-digit', hour12: true });
+                    clockElement.textContent = `AEST ${timeString}`;
+                }
+            }
+            updateClock();
+            setInterval(updateClock, 1000);
+
         });
     </script>
 </body>
