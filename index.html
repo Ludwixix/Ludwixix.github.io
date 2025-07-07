@@ -10,19 +10,22 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-dark: linear-gradient(-45deg, #0f172a, #1e293b, #0f172a);
-            --bg-light: linear-gradient(-45deg, #f3f4f6, #e5e7eb, #f3f4f6);
+            /* Dark Theme Colors */
+            --bg-dark: linear-gradient(-45deg, #1f2937, #374151, #1f2937);
             --text-dark: #d1d5db;
-            --text-light: #374151;
             --accent-dark: #7dd3fc; /* sky-300 */
-            --accent-light: #0ea5e9; /* sky-500 */
             --container-bg-dark: rgba(30, 41, 59, 0.85);
-            --container-bg-light: rgba(255, 255, 255, 0.85);
-            --card-bg-dark: rgba(51, 65, 85, 0.6);
-            --card-bg-light: rgba(249, 250, 251, 0.8);
+            --card-bg-dark: rgba(55, 65, 81, 0.7);
             --glow-dark: rgba(125, 211, 252, 0.15);
-            --glow-light: rgba(14, 165, 233, 0.2);
             --particle-color-dark: 'rgba(125, 211, 252, 0.2)';
+
+            /* Light Theme Colors */
+            --bg-light: #f9fafb; /* gray-50 */
+            --text-light: #374151; /* gray-700 */
+            --accent-light: #0ea5e9; /* sky-500 */
+            --container-bg-light: #ffffff;
+            --card-bg-light: #f3f4f6; /* gray-100 */
+            --glow-light: rgba(14, 165, 233, 0.2);
             --particle-color-light: 'rgba(56, 189, 248, 0.3)';
         }
         @keyframes animated-gradient {
@@ -58,11 +61,12 @@
             border: 1px solid rgba(255, 255, 255, 0.1);
             position: relative;
             z-index: 2;
-            transition: background-color 0.5s ease;
+            transition: background-color 0.5s ease, border-color 0.5s ease;
         }
         body.light-theme .resume-container {
             background-color: var(--container-bg-light);
             border: 1px solid rgba(0, 0, 0, 0.05);
+            backdrop-filter: none;
         }
         .section-card, .experience-item {
             transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.5s ease;
@@ -76,7 +80,7 @@
             box-shadow: 0 0 25px var(--glow-dark);
         }
         body.light-theme .section-card:hover, body.light-theme .experience-item:hover {
-             box-shadow: 0 0 25px var(--glow-light);
+             box-shadow: 0 8px 25px var(--glow-light);
         }
         @keyframes slideInUp {
             from { opacity: 0; transform: translateY(30px); }
@@ -86,7 +90,7 @@
             animation: slideInUp 0.7s ease-out forwards;
         }
         .btn {
-            transition: background-color 0.3s, transform 0.3s;
+            transition: all 0.3s ease;
         }
         .btn:hover {
             transform: translateY(-2px);
@@ -140,25 +144,27 @@
         <!-- Header Section -->
         <header class="text-center pb-6 mb-8 relative">
             <h1 class="text-5xl font-bold tracking-tight bg-gradient-to-r from-sky-300 to-slate-200 bg-clip-text text-transparent pb-2">SAM LUDWIG</h1>
-            <div class="mt-4 flex justify-center items-center flex-wrap gap-x-6 gap-y-2 text-gray-400">
+            <div class="mt-8 flex justify-center items-center flex-wrap gap-4">
+                 <a href="https://linkedin.com/in/sam-ludwig" target="_blank" class="btn linkedin-btn inline-flex items-center font-bold py-2 px-5 rounded-lg">
+                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+                    Connect on LinkedIn
+                </a>
+                <button onclick="window.print()" class="btn download-btn inline-flex items-center font-bold py-2 px-5 rounded-lg">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+                    Download PDF
+                </button>
+            </div>
+            <div class="mt-8 flex justify-center items-center flex-wrap gap-x-6 gap-y-2 text-gray-400">
                 <a href="mailto:sam.ludwig@gmail.com" id="email-link" class="flex items-center hover:text-sky-300 transition-colors cursor-pointer">
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
                     sam.ludwig@gmail.com
                 </a>
-                <span class="text-gray-600 hidden md:inline">|</span>
+                <span class="text-gray-500 hidden md:inline">|</span>
                 <span class="flex items-center">
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
                     0405 993 245
                 </span>
-                <span class="text-gray-600 hidden md:inline">|</span>
-                <a href="https://linkedin.com/in/sam-ludwig" target="_blank" class="flex items-center hover:text-sky-300 transition-colors">
-                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
-                    linkedin.com/in/sam-ludwig
-                </a>
             </div>
-            <button onclick="window.print()" class="btn absolute top-0 right-0 bg-slate-700 text-white font-bold py-2 px-4 rounded-lg hover:bg-slate-600 shadow-lg shadow-sky-500/10">
-                Download PDF
-            </button>
         </header>
 
         <main>
