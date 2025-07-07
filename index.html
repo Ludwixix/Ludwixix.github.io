@@ -11,122 +11,171 @@
     <style>
         body {
             font-family: 'Inter', sans-serif;
+            background-color: #f0f4f8; /* Lighter blue-gray background */
+        }
+        .resume-container {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .section-card, .experience-item {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .section-card:hover, .experience-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.08);
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .fade-in-section {
+            animation: fadeIn 0.8s ease-out forwards;
+        }
+        .btn-download {
+            transition: background-color 0.3s, transform 0.3s;
+        }
+        .btn-download:hover {
+            transform: translateY(-2px);
+        }
+        @media print {
+            body, .resume-container {
+                margin: 0;
+                box-shadow: none;
+            }
+            .btn-download {
+                display: none;
+            }
         }
     </style>
 </head>
 <body class="bg-gray-100 text-gray-800">
 
-    <div class="max-w-4xl mx-auto p-6 sm:p-8 md:p-12 bg-white shadow-lg my-8 rounded-lg">
+    <div class="max-w-4xl mx-auto p-6 sm:p-8 md:p-12 bg-white shadow-2xl my-8 rounded-xl resume-container">
 
         <!-- Header Section -->
-        <header class="text-center border-b-2 border-gray-200 pb-6 mb-8">
+        <header class="text-center border-b-2 border-gray-200 pb-6 mb-8 relative">
             <h1 class="text-5xl font-bold text-gray-900 tracking-tight">SAM LUDWIG</h1>
-            <div class="mt-4 flex justify-center items-center space-x-6 text-gray-600">
-                <a href="mailto:sam.ludwig@gmail.com" class="flex items-center hover:text-blue-600 transition-colors">
+            <div class="mt-4 flex justify-center items-center flex-wrap gap-x-6 gap-y-2 text-gray-600">
+                <a href="mailto:sam.ludwig@gmail.com" class="flex items-center hover:text-blue-700 transition-colors">
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
                     sam.ludwig@gmail.com
                 </a>
-                <span class="text-gray-300">|</span>
+                <span class="text-gray-300 hidden md:inline">|</span>
                 <span class="flex items-center">
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
                     0405 993 245
                 </span>
-                <span class="text-gray-300">|</span>
-                <a href="https://linkedin.com/in/sam-ludwig" target="_blank" class="flex items-center hover:text-blue-600 transition-colors">
+                <span class="text-gray-300 hidden md:inline">|</span>
+                <a href="https://linkedin.com/in/sam-ludwig" target="_blank" class="flex items-center hover:text-blue-700 transition-colors">
                      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
                     linkedin.com/in/sam-ludwig
                 </a>
             </div>
+            <button onclick="window.print()" class="btn-download absolute top-0 right-0 bg-blue-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-blue-700 shadow-md">
+                Download PDF
+            </button>
         </header>
 
         <main>
             <!-- Professional Summary Section -->
-            <section class="mb-8">
-                <h2 class="text-2xl font-bold text-blue-700 border-b-2 border-blue-200 pb-2 mb-4">Professional Summary</h2>
-                <p class="text-md leading-relaxed">A results-driven Senior Application Support Engineer with over 6 years of experience in high-stakes technical environments. Specializes in developing, supporting, and automating solutions using React, SharePoint Framework (SPFx). Proven ability to enhance system functionality, streamline processes, and lead collaborative projects that meet and exceed client expectations.</p>
+            <section class="mb-10 fade-in-section">
+                <h2 class="text-3xl font-bold text-blue-800 border-b-2 border-blue-300 pb-2 mb-4">Professional Summary</h2>
+                <p class="text-lg leading-relaxed text-gray-700">A results-driven Senior Application Support Engineer with over 6 years of experience in high-stakes technical environments. Specializes in developing, supporting, and automating solutions using React, SharePoint Framework (SPFx). Proven ability to enhance system functionality, streamline processes, and lead collaborative projects that meet and exceed client expectations.</p>
             </section>
 
             <!-- Key Skills Section -->
-            <section class="mb-8">
-                <h2 class="text-2xl font-bold text-blue-700 border-b-2 border-blue-200 pb-2 mb-4">Key Skills</h2>
+            <section class="mb-10 fade-in-section">
+                <h2 class="text-3xl font-bold text-blue-800 border-b-2 border-blue-300 pb-2 mb-4">Key Skills</h2>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                    <div class="bg-gray-50 p-4 rounded-lg">
-                        <h3 class="font-semibold text-lg text-gray-800 mb-2">Development & Frameworks</h3>
-                        <ul class="list-disc list-inside text-gray-700 space-y-1">
-                            <li>React, JavaScript, TypeScript</li>
-                            <li>SPFx (SharePoint Framework)</li>
-                            <li>HTML5, CSS, SASS/SCSS</li>
-                            <li>KQL, SQL, XML, ASP.net</li>
+                    <div class="bg-gray-50 p-6 rounded-lg shadow-sm section-card">
+                        <h3 class="font-bold text-xl text-gray-800 mb-3">Development & Frameworks</h3>
+                        <ul class="list-none text-gray-700 space-y-2">
+                            <li class="flex items-center"><span class="text-blue-500 mr-2">&#10003;</span>React, JavaScript, TypeScript</li>
+                            <li class="flex items-center"><span class="text-blue-500 mr-2">&#10003;</span>SPFx (SharePoint Framework)</li>
+                            <li class="flex items-center"><span class="text-blue-500 mr-2">&#10003;</span>HTML5, CSS, SASS/SCSS</li>
+                            <li class="flex items-center"><span class="text-blue-500 mr-2">&#10003;</span>KQL, SQL, XML, ASP.net</li>
                         </ul>
                     </div>
-                    <div class="bg-gray-50 p-4 rounded-lg">
-                        <h3 class="font-semibold text-lg text-gray-800 mb-2">DevOps & Automation</h3>
-                        <ul class="list-disc list-inside text-gray-700 space-y-1">
-                            <li>Azure DevOps, CI/CD Pipelines</li>
-                            <li>PowerShell, Power Automate</li>
-                            <li>Git, Enzyme/Jest</li>
-                            <li>Node, NPM, Gulp, Yeoman</li>
+                    <div class="bg-gray-50 p-6 rounded-lg shadow-sm section-card">
+                        <h3 class="font-bold text-xl text-gray-800 mb-3">DevOps & Automation</h3>
+                        <ul class="list-none text-gray-700 space-y-2">
+                            <li class="flex items-center"><span class="text-blue-500 mr-2">&#10003;</span>Azure DevOps, CI/CD Pipelines</li>
+                            <li class="flex items-center"><span class="text-blue-500 mr-2">&#10003;</span>PowerShell, Power Automate</li>
+                            <li class="flex items-center"><span class="text-blue-500 mr-2">&#10003;</span>Git, Enzyme/Jest</li>
+                            <li class="flex items-center"><span class="text-blue-500 mr-2">&#10003;</span>Node, NPM, Gulp, Yeoman</li>
                         </ul>
                     </div>
-                    <div class="bg-gray-50 p-4 rounded-lg">
-                        <h3 class="font-semibold text-lg text-gray-800 mb-2">Platform & Administration</h3>
-                        <ul class="list-disc list-inside text-gray-700 space-y-1">
-                            <li>Microsoft Power Platform</li>
-                            <li>SharePoint & Teams Admin</li>
-                            <li>Azure (Portal, AAD, Functions)</li>
-                            <li>Windows Server, Active Directory</li>
+                    <div class="bg-gray-50 p-6 rounded-lg shadow-sm section-card">
+                        <h3 class="font-bold text-xl text-gray-800 mb-3">Platform & Administration</h3>
+                        <ul class="list-none text-gray-700 space-y-2">
+                            <li class="flex items-center"><span class="text-blue-500 mr-2">&#10003;</span>Microsoft Power Platform</li>
+                            <li class="flex items-center"><span class="text-blue-500 mr-2">&#10003;</span>SharePoint & Teams Admin</li>
+                            <li class="flex items-center"><span class="text-blue-500 mr-2">&#10003;</span>Azure (Portal, AAD, Functions)</li>
+                            <li class="flex items-center"><span class="text-blue-500 mr-2">&#10003;</span>Windows Server, Active Directory</li>
                         </ul>
                     </div>
                 </div>
-                 <p class="mt-4 text-md"><span class="font-semibold">Certifications:</span> Certified SCRUM Master, Azure Fundamentals (AZ-900)</p>
+                 <p class="mt-6 text-lg"><span class="font-semibold text-gray-800">Certifications:</span> Certified SCRUM Master, Azure Fundamentals (AZ-900)</p>
             </section>
 
             <!-- Professional Experience Section -->
-            <section class="mb-8">
-                <h2 class="text-2xl font-bold text-blue-700 border-b-2 border-blue-200 pb-2 mb-4">Professional Experience</h2>
-                <div class="space-y-6">
-                    <div>
-                        <h3 class="text-xl font-semibold text-gray-900">Senior Application Support Consultant</h3>
-                        <p class="text-md text-gray-600">CapGemini, Melbourne | December 2021 - Present</p>
-                        <ul class="list-disc list-inside mt-2 space-y-1 text-md leading-relaxed">
+            <section class="mb-10 fade-in-section">
+                <h2 class="text-3xl font-bold text-blue-800 border-b-2 border-blue-300 pb-2 mb-4">Professional Experience</h2>
+                <div class="space-y-8">
+                    <div class="p-6 rounded-lg experience-item bg-white border border-gray-200">
+                        <h3 class="text-2xl font-semibold text-gray-900">Senior Application Support Consultant</h3>
+                        <p class="text-lg text-gray-600">CapGemini, Melbourne | December 2021 - Present</p>
+                        <ul class="list-disc list-inside mt-3 space-y-2 text-lg leading-relaxed text-gray-700">
                             <li>Diagnose and resolve complex application issues, leading to a 15% reduction in recurring incidents for key client accounts.</li>
                             <li>Act as the primary technical liaison for external stakeholders, improving bug-fix deployment times through proactive on-site support and streamlined communication.</li>
                             <li>Champion the use of IT Service Management (ITSM) best practices to log, manage, and resolve incidents, consistently meeting or exceeding SLA targets.</li>
                         </ul>
                     </div>
-                    <div>
-                        <h3 class="text-xl font-semibold text-gray-900">Application Support Engineer</h3>
-                        <p class="text-md text-gray-600">Knosys, Melbourne | December 2020 - December 2021</p>
-                        <ul class="list-disc list-inside mt-2 space-y-1 text-md leading-relaxed">
+                    <div class="p-6 rounded-lg experience-item bg-white border border-gray-200">
+                        <h3 class="text-2xl font-semibold text-gray-900">Application Support Engineer</h3>
+                        <p class="text-lg text-gray-600">Knosys, Melbourne | December 2020 - December 2021</p>
+                        <ul class="list-disc list-inside mt-3 space-y-2 text-lg leading-relaxed text-gray-700">
                              <li>Provided advanced L2/L3 support for the GreenOrbit intranet platform, successfully resolving 95% of tickets within service-level agreements.</li>
                              <li>Developed and implemented PowerShell scripts to automate routine software updates, reducing manual effort by over 10 hours per month.</li>
                              <li>Identified and addressed critical bugs in web-based knowledge management solutions, enhancing application stability and user productivity.</li>
                         </ul>
                     </div>
-                    <div>
-                        <h3 class="text-xl font-semibold text-gray-900">SharePoint Developer</h3>
-                        <p class="text-md text-gray-600">Engage Squared, Melbourne | March 2018 - December 2020</p>
-                        <ul class="list-disc list-inside mt-2 space-y-1 text-md leading-relaxed">
+                    <div class="p-6 rounded-lg experience-item bg-white border border-gray-200">
+                        <h3 class="text-2xl font-semibold text-gray-900">SharePoint Developer</h3>
+                        <p class="text-lg text-gray-600">Engage Squared, Melbourne | March 2018 - December 2020</p>
+                        <ul class="list-disc list-inside mt-3 space-y-2 text-lg leading-relaxed text-gray-700">
                             <li>Engineered and launched over 10 responsive, client-focused solutions using React, TypeScript, and SPFx, resulting in high client adoption and satisfaction.</li>
                             <li>Implemented and managed a full CI/CD pipeline using Azure DevOps and Git, which automated testing and deployment processes and reduced release cycles by 25%.</li>
                             <li>Led client-facing workshops to demonstrate new product features, contributing to a 20% increase in the uptake of new technologies across client projects.</li>
-                            <li>Facilitated seamless project delivery between local and offshore teams, ensuring consistent quality and on-time completion of project milestones.</li>
                         </ul>
                     </div>
                 </div>
             </section>
 
             <!-- Education Section -->
-            <section>
-                <h2 class="text-2xl font-bold text-blue-700 border-b-2 border-blue-200 pb-2 mb-4">Education</h2>
-                <div>
-                    <h3 class="text-xl font-semibold text-gray-900">Coder Academy, Melbourne</h3>
-                    <p class="text-md text-gray-600">Web Development, Fast Track Bootcamp Graduate | February 2018</p>
+            <section class="fade-in-section">
+                <h2 class="text-3xl font-bold text-blue-800 border-b-2 border-blue-300 pb-2 mb-4">Education</h2>
+                <div class="p-6 rounded-lg bg-white border border-gray-200">
+                    <h3 class="text-2xl font-semibold text-gray-900">Coder Academy, Melbourne</h3>
+                    <p class="text-lg text-gray-600">Web Development, Fast Track Bootcamp Graduate | February 2018</p>
                 </div>
             </section>
 
         </main>
     </div>
+    <script>
+        // Simple intersection observer for fade-in animations
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('fade-in-section');
+                }
+            });
+        }, { threshold: 0.1 });
 
+        document.querySelectorAll('section').forEach(section => {
+            section.style.opacity = '0'; // Hide sections initially
+            observer.observe(section);
+        });
+    </script>
 </body>
 </html>
