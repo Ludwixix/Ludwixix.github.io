@@ -16,14 +16,23 @@
         }
         body {
             font-family: 'Inter', sans-serif;
-            background: linear-gradient(-45deg, #121828, #182038, #121828);
+            background: linear-gradient(-45deg, #1d1029, #2c123f, #1d1029);
             background-size: 400% 400%;
             animation: animated-gradient 30s ease infinite;
             color: #e0e0e0;
             position: relative;
+            overflow-x: hidden;
+        }
+        #particle-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
         }
         .resume-container {
-            background-color: rgba(28, 38, 59, 0.85); /* Dark blue with opacity */
+            background-color: rgba(29, 16, 41, 0.85); /* Dark purple with opacity */
             backdrop-filter: blur(12px);
             border: 1px solid rgba(255, 255, 255, 0.1);
             position: relative;
@@ -31,11 +40,11 @@
         }
         .section-card, .experience-item {
             transition: transform 0.3s ease, box-shadow 0.3s ease;
-            background-color: rgba(39, 52, 75, 0.6); /* Lighter dark blue with opacity */
+            background-color: rgba(44, 18, 63, 0.6); /* Lighter purple with opacity */
         }
         .section-card:hover, .experience-item:hover {
             transform: translateY(-5px);
-            box-shadow: 0 0 25px rgba(125, 211, 252, 0.15); /* Muted blue glowing effect */
+            box-shadow: 0 0 25px rgba(252, 211, 77, 0.15); /* Muted gold glowing effect */
         }
         @keyframes slideInUp {
             from { opacity: 0; transform: translateY(30px); }
@@ -58,7 +67,7 @@
             width: 100%;
             height: 100%;
             pointer-events: none;
-            z-index: 1;
+            z-index: 3; /* Above particles but below content */
         }
         /* Copy Notification */
         #copy-notification {
@@ -66,11 +75,11 @@
             bottom: -100px;
             left: 50%;
             transform: translateX(-50%);
-            background-color: #f0f9ff; /* sky-50 */
-            color: #075985; /* sky-800 */
+            background-color: #fffbeb; /* amber-50 */
+            color: #92400e; /* amber-800 */
             padding: 12px 24px;
             border-radius: 8px;
-            border: 1px solid #7dd3fc; /* sky-300 */
+            border: 1px solid #fcd34d; /* amber-300 */
             box-shadow: 0 4px 15px rgba(0,0,0,0.2);
             transition: bottom 0.5s ease-in-out;
             z-index: 100;
@@ -93,7 +102,7 @@
             .resume-container {
                 background-color: #fff;
             }
-            #spotlight, .btn-download, #copy-notification {
+            #spotlight, .btn-download, #copy-notification, #particle-canvas {
                 display: none;
             }
             h1, h2, h3, p, li, a, span {
@@ -107,6 +116,7 @@
 </head>
 <body class="text-gray-200">
 
+    <canvas id="particle-canvas"></canvas>
     <div id="spotlight"></div>
     <div id="copy-notification">Email copied to clipboard!</div>
 
@@ -114,9 +124,9 @@
 
         <!-- Header Section -->
         <header class="text-center pb-6 mb-8 relative">
-            <h1 class="text-5xl font-bold tracking-tight bg-gradient-to-r from-sky-300 to-cyan-300 bg-clip-text text-transparent pb-2">SAM LUDWIG</h1>
+            <h1 class="text-5xl font-bold tracking-tight bg-gradient-to-r from-amber-300 to-yellow-400 bg-clip-text text-transparent pb-2">SAM LUDWIG</h1>
             <div class="mt-4 flex justify-center items-center flex-wrap gap-x-6 gap-y-2 text-gray-400">
-                <a href="mailto:sam.ludwig@gmail.com" id="email-link" class="flex items-center hover:text-sky-300 transition-colors cursor-pointer">
+                <a href="mailto:sam.ludwig@gmail.com" id="email-link" class="flex items-center hover:text-amber-300 transition-colors cursor-pointer">
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
                     sam.ludwig@gmail.com
                 </a>
@@ -126,12 +136,12 @@
                     0405 993 245
                 </span>
                 <span class="text-gray-600 hidden md:inline">|</span>
-                <a href="https://linkedin.com/in/sam-ludwig" target="_blank" class="flex items-center hover:text-sky-300 transition-colors">
+                <a href="https://linkedin.com/in/sam-ludwig" target="_blank" class="flex items-center hover:text-amber-300 transition-colors">
                      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
                     linkedin.com/in/sam-ludwig
                 </a>
             </div>
-            <button onclick="window.print()" class="btn-download absolute top-0 right-0 bg-sky-700 text-white font-bold py-2 px-4 rounded-lg hover:bg-sky-600 shadow-lg shadow-sky-500/20">
+            <button onclick="window.print()" class="btn-download absolute top-0 right-0 bg-amber-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-amber-700 shadow-lg shadow-amber-500/20">
                 Download PDF
             </button>
         </header>
@@ -139,39 +149,39 @@
         <main>
             <!-- Professional Summary Section -->
             <section class="mb-10">
-                <h2 class="text-3xl font-semibold text-sky-300 mb-4 pl-4 border-l-4 border-sky-400">Professional Summary</h2>
+                <h2 class="text-3xl font-semibold text-amber-300 mb-4 pl-4 border-l-4 border-amber-400">Professional Summary</h2>
                 <p class="text-lg leading-relaxed text-gray-300">A results-driven Senior Application Support Engineer with over 6 years of experience providing Level 2 and Level 3 support in high-stakes technical environments. Specializes in troubleshooting, maintaining, and automating solutions using a wide range of modern technologies. Proven ability to enhance system functionality and streamline processes to ensure system stability.</p>
             </section>
 
             <!-- Key Skills Section -->
             <section class="mb-10">
-                <h2 class="text-3xl font-semibold text-sky-300 mb-4 pl-4 border-l-4 border-sky-400">Key Skills</h2>
+                <h2 class="text-3xl font-semibold text-amber-300 mb-4 pl-4 border-l-4 border-amber-400">Key Skills</h2>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                     <div class="p-6 rounded-lg section-card">
                         <h3 class="font-bold text-xl text-white mb-3">Development & Frameworks</h3>
                         <ul class="list-none text-gray-300 space-y-2">
-                            <li class="flex items-center"><span class="text-sky-400 mr-3">&#10003;</span>JavaScript, TypeScript</li>
-                            <li class="flex items-center"><span class="text-sky-400 mr-3">&#10003;</span>HTML5, CSS, SASS/SCSS</li>
-                            <li class="flex items-center"><span class="text-sky-400 mr-3">&#10003;</span>KQL, SQL, XML</li>
-                            <li class="flex items-center"><span class="text-sky-400 mr-3">&#10003;</span>ASP.net</li>
+                            <li class="flex items-center"><span class="text-amber-400 mr-3">&#10003;</span>JavaScript, TypeScript</li>
+                            <li class="flex items-center"><span class="text-amber-400 mr-3">&#10003;</span>HTML5, CSS, SASS/SCSS</li>
+                            <li class="flex items-center"><span class="text-amber-400 mr-3">&#10003;</span>KQL, SQL, XML</li>
+                            <li class="flex items-center"><span class="text-amber-400 mr-3">&#10003;</span>ASP.net</li>
                         </ul>
                     </div>
                     <div class="p-6 rounded-lg section-card">
                         <h3 class="font-bold text-xl text-white mb-3">DevOps & Automation</h3>
                         <ul class="list-none text-gray-300 space-y-2">
-                            <li class="flex items-center"><span class="text-sky-400 mr-3">&#10003;</span>Azure DevOps, CI/CD</li>
-                            <li class="flex items-center"><span class="text-sky-400 mr-3">&#10003;</span>PowerShell, Power Automate</li>
-                            <li class="flex items-center"><span class="text-sky-400 mr-3">&#10003;</span>Git, Enzyme/Jest</li>
-                            <li class="flex items-center"><span class="text-sky-400 mr-3">&#10003;</span>Node, NPM, Gulp, Yeoman</li>
+                            <li class="flex items-center"><span class="text-amber-400 mr-3">&#10003;</span>Azure DevOps, CI/CD</li>
+                            <li class="flex items-center"><span class="text-amber-400 mr-3">&#10003;</span>PowerShell, Power Automate</li>
+                            <li class="flex items-center"><span class="text-amber-400 mr-3">&#10003;</span>Git, Enzyme/Jest</li>
+                            <li class="flex items-center"><span class="text-amber-400 mr-3">&#10003;</span>Node, NPM, Gulp, Yeoman</li>
                         </ul>
                     </div>
                     <div class="p-6 rounded-lg section-card">
                         <h3 class="font-bold text-xl text-white mb-3">Platform & Administration</h3>
                         <ul class="list-none text-gray-300 space-y-2">
-                            <li class="flex items-center"><span class="text-sky-400 mr-3">&#10003;</span>Microsoft Power Platform</li>
-                            <li class="flex items-center"><span class="text-sky-400 mr-3">&#10003;</span>Microsoft 365 & Teams Admin</li>
-                            <li class="flex items-center"><span class="text-sky-400 mr-3">&#10003;</span>Azure (Portal, AAD, Functions)</li>
-                            <li class="flex items-center"><span class="text-sky-400 mr-3">&#10003;</span>Windows Server, Active Directory</li>
+                            <li class="flex items-center"><span class="text-amber-400 mr-3">&#10003;</span>Microsoft Power Platform</li>
+                            <li class="flex items-center"><span class="text-amber-400 mr-3">&#10003;</span>Microsoft 365 & Teams Admin</li>
+                            <li class="flex items-center"><span class="text-amber-400 mr-3">&#10003;</span>Azure (Portal, AAD, Functions)</li>
+                            <li class="flex items-center"><span class="text-amber-400 mr-3">&#10003;</span>Windows Server, Active Directory</li>
                         </ul>
                     </div>
                 </div>
@@ -180,7 +190,7 @@
 
             <!-- Professional Experience Section -->
             <section class="mb-10">
-                <h2 class="text-3xl font-semibold text-sky-300 mb-4 pl-4 border-l-4 border-sky-400">Professional Experience</h2>
+                <h2 class="text-3xl font-semibold text-amber-300 mb-4 pl-4 border-l-4 border-amber-400">Professional Experience</h2>
                 <div class="space-y-8">
                     <div class="p-6 rounded-lg experience-item">
                         <h3 class="text-2xl font-semibold text-white">Senior Application Support Engineer</h3>
@@ -215,7 +225,7 @@
 
             <!-- Education Section -->
             <section>
-                <h2 class="text-3xl font-semibold text-sky-300 mb-4 pl-4 border-l-4 border-sky-400">Education</h2>
+                <h2 class="text-3xl font-semibold text-amber-300 mb-4 pl-4 border-l-4 border-amber-400">Education</h2>
                 <div class="p-6 rounded-lg experience-item">
                     <h3 class="text-2xl font-semibold text-white">Coder Academy, Melbourne</h3>
                     <p class="text-lg text-gray-400">Web Development, Fast Track Bootcamp Graduate | February 2018</p>
@@ -226,11 +236,105 @@
     </div>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
+            // Particle Animation
+            const canvas = document.getElementById('particle-canvas');
+            const ctx = canvas.getContext('2d');
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+
+            let particlesArray;
+
+            // get mouse position
+            let mouse = {
+                x: null,
+                y: null,
+                radius: (canvas.height/120) * (canvas.width/120)
+            }
+
+            window.addEventListener('mousemove', 
+                function(event) {
+                    mouse.x = event.x;
+                    mouse.y = event.y;
+                }
+            );
+
+            // create particle
+            class Particle {
+                constructor(x, y, directionX, directionY, size, color) {
+                    this.x = x;
+                    this.y = y;
+                    this.directionX = directionX;
+                    this.directionY = directionY;
+                    this.size = size;
+                    this.color = color;
+                }
+                // method to draw individual particle
+                draw() {
+                    ctx.beginPath();
+                    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2, false);
+                    ctx.fillStyle = 'rgba(252, 211, 77, 0.15)'; // amber-300 with opacity
+                    ctx.fill();
+                }
+                // check particle position, check mouse position, move the particle, draw the particle
+                update() {
+                    //check if particle is still within canvas
+                    if (this.x > canvas.width || this.x < 0) {
+                        this.directionX = -this.directionX;
+                    }
+                    if (this.y > canvas.height || this.y < 0) {
+                        this.directionY = -this.directionY;
+                    }
+                    // move particle
+                    this.x += this.directionX;
+                    this.y += this.directionY;
+                    // draw particle
+                    this.draw();
+                }
+            }
+            
+            // create particle array
+            function init() {
+                particlesArray = [];
+                let numberOfParticles = (canvas.height * canvas.width) / 9000;
+                for (let i = 0; i < numberOfParticles; i++) {
+                    let size = (Math.random() * 2) + 1;
+                    let x = (Math.random() * ((innerWidth - size * 2) - (size * 2)) + size * 2);
+                    let y = (Math.random() * ((innerHeight - size * 2) - (size * 2)) + size * 2);
+                    let directionX = (Math.random() * .4) - .2;
+                    let directionY = (Math.random() * .4) - .2;
+                    let color = 'rgba(252, 211, 77, 0.15)';
+
+                    particlesArray.push(new Particle(x, y, directionX, directionY, size, color));
+                }
+            }
+
+            // animation loop
+            function animate() {
+                requestAnimationFrame(animate);
+                ctx.clearRect(0,0,innerWidth, innerHeight);
+
+                for (let i = 0; i < particlesArray.length; i++) {
+                    particlesArray[i].update();
+                }
+            }
+            
+            init();
+            animate();
+
+            window.addEventListener('resize', 
+                function() {
+                    canvas.width = innerWidth;
+                    canvas.height = innerHeight;
+                    mouse.radius = (canvas.height/120) * (canvas.width/120);
+                    init();
+                }
+            );
+
             // Spotlight Effect
             const spotlight = document.getElementById('spotlight');
             if (spotlight) {
                 document.addEventListener('mousemove', (e) => {
-                    spotlight.style.background = `radial-gradient(circle at ${e.clientX}px ${e.clientY}px, rgba(125, 211, 252, 0.05), transparent 300px)`;
+                    spotlight.style.background = `radial-gradient(circle at ${e.clientX}px ${e.clientY}px, rgba(252, 211, 77, 0.05), transparent 300px)`;
                 });
             }
 
