@@ -10,24 +10,21 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         @keyframes animated-gradient {
-            0% {
-                background-position: 0% 50%;
-            }
-            50% {
-                background-position: 100% 50%;
-            }
-            100% {
-                background-position: 0% 50%;
-            }
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
         body {
             font-family: 'Inter', sans-serif;
             background: linear-gradient(-45deg, #e7f5ff, #f0f9ff, #e6fffa, #f0f4f8);
             background-size: 400% 400%;
             animation: animated-gradient 25s ease infinite;
+            position: relative; /* Needed for spotlight */
         }
         .resume-container {
             transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            z-index: 2;
         }
         .section-card, .experience-item {
             transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -36,12 +33,12 @@
             transform: translateY(-5px);
             box-shadow: 0 10px 20px rgba(0,0,0,0.08);
         }
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
+        @keyframes slideInUp {
+            from { opacity: 0; transform: translateY(40px); }
             to { opacity: 1; transform: translateY(0); }
         }
         .fade-in-section {
-            animation: fadeIn 0.8s ease-out forwards;
+            animation: slideInUp 0.8s ease-out forwards;
         }
         .btn-download {
             transition: background-color 0.3s, transform 0.3s;
@@ -49,13 +46,42 @@
         .btn-download:hover {
             transform: translateY(-2px);
         }
+        /* Spotlight Effect */
+        #spotlight {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+            background: radial-gradient(circle at 50% 50%, transparent, transparent 200px, rgba(0, 0, 0, 0.05) 400px, rgba(0, 0, 0, 0.1) 800px);
+        }
+        /* Copy Notification */
+        #copy-notification {
+            position: fixed;
+            bottom: -100px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #2c3e50;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            transition: bottom 0.5s ease-in-out;
+            z-index: 100;
+        }
+        #copy-notification.show {
+            bottom: 30px;
+        }
         @media print {
             body, .resume-container {
                 margin: 0;
                 box-shadow: none;
                 background: #fff;
+                animation: none;
             }
-            .btn-download {
+            #spotlight, .btn-download, #copy-notification {
                 display: none;
             }
         }
@@ -63,13 +89,16 @@
 </head>
 <body class="text-gray-800">
 
+    <div id="spotlight"></div>
+    <div id="copy-notification">Email copied to clipboard!</div>
+
     <div class="max-w-4xl mx-auto p-6 sm:p-8 md:p-12 bg-white/90 backdrop-blur-sm shadow-2xl my-8 rounded-xl resume-container">
 
         <!-- Header Section -->
         <header class="text-center border-b-2 border-gray-200 pb-6 mb-8 relative">
             <h1 class="text-5xl font-bold tracking-tight bg-gradient-to-r from-teal-500 to-cyan-500 bg-clip-text text-transparent">SAM LUDWIG</h1>
             <div class="mt-4 flex justify-center items-center flex-wrap gap-x-6 gap-y-2 text-gray-600">
-                <a href="mailto:sam.ludwig@gmail.com" class="flex items-center hover:text-teal-600 transition-colors">
+                <a href="mailto:sam.ludwig@gmail.com" id="email-link" class="flex items-center hover:text-teal-600 transition-colors cursor-pointer">
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
                     sam.ludwig@gmail.com
                 </a>
@@ -91,13 +120,13 @@
 
         <main>
             <!-- Professional Summary Section -->
-            <section class="mb-10 fade-in-section">
+            <section class="mb-10">
                 <h2 class="text-3xl font-bold text-teal-800 border-b-2 border-teal-300 pb-2 mb-4">Professional Summary</h2>
                 <p class="text-lg leading-relaxed text-gray-700">A results-driven Senior Application Support Engineer with over 6 years of experience providing Level 2 and Level 3 support in high-stakes technical environments. Specializes in troubleshooting, maintaining, and automating solutions using a wide range of modern technologies. Proven ability to enhance system functionality and streamline processes to ensure system stability.</p>
             </section>
 
             <!-- Key Skills Section -->
-            <section class="mb-10 fade-in-section">
+            <section class="mb-10">
                 <h2 class="text-3xl font-bold text-teal-800 border-b-2 border-teal-300 pb-2 mb-4">Key Skills</h2>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                     <div class="bg-gray-50 p-6 rounded-lg shadow-sm section-card">
@@ -132,7 +161,7 @@
             </section>
 
             <!-- Professional Experience Section -->
-            <section class="mb-10 fade-in-section">
+            <section class="mb-10">
                 <h2 class="text-3xl font-bold text-teal-800 border-b-2 border-teal-300 pb-2 mb-4">Professional Experience</h2>
                 <div class="space-y-8">
                     <div class="p-6 rounded-lg experience-item bg-white border border-gray-200">
@@ -167,7 +196,7 @@
             </section>
 
             <!-- Education Section -->
-            <section class="fade-in-section">
+            <section>
                 <h2 class="text-3xl font-bold text-teal-800 border-b-2 border-teal-300 pb-2 mb-4">Education</h2>
                 <div class="p-6 rounded-lg bg-white border border-gray-200">
                     <h3 class="text-2xl font-semibold text-gray-900">Coder Academy, Melbourne</h3>
@@ -178,18 +207,55 @@
         </main>
     </div>
     <script>
-        // Simple intersection observer for fade-in animations
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('fade-in-section');
-                }
-            });
-        }, { threshold: 0.1 });
+        document.addEventListener('DOMContentLoaded', () => {
+            // Spotlight Effect
+            const spotlight = document.getElementById('spotlight');
+            if (spotlight) {
+                document.addEventListener('mousemove', (e) => {
+                    spotlight.style.background = `radial-gradient(circle at ${e.clientX}px ${e.clientY}px, rgba(45, 212, 191, 0.1), transparent 250px)`;
+                });
+            }
 
-        document.querySelectorAll('section').forEach(section => {
-            section.style.opacity = '0'; // Hide sections initially
-            observer.observe(section);
+            // Scroll Animations
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('fade-in-section');
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            document.querySelectorAll('section').forEach(section => {
+                section.style.opacity = '0'; // Hide sections initially
+                observer.observe(section);
+            });
+
+            // Copy to Clipboard
+            const emailLink = document.getElementById('email-link');
+            const notification = document.getElementById('copy-notification');
+
+            if(emailLink && notification) {
+                emailLink.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const email = 'sam.ludwig@gmail.com';
+                    
+                    const textArea = document.createElement('textarea');
+                    textArea.value = email;
+                    document.body.appendChild(textArea);
+                    textArea.select();
+                    try {
+                        document.execCommand('copy');
+                        notification.classList.add('show');
+                        setTimeout(() => {
+                            notification.classList.remove('show');
+                        }, 2500);
+                    } catch (err) {
+                        console.error('Failed to copy text: ', err);
+                        // Fallback can be added here, e.g., prompt()
+                    }
+                    document.body.removeChild(textArea);
+                });
+            }
         });
     </script>
 </body>
