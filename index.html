@@ -147,12 +147,20 @@
         body.light-theme .section-heading { color: var(--accent-light); }
         .certification-text { color: var(--text-heading-dark); }
         body.light-theme .certification-text { color: var(--text-heading-light); }
-        #clock {
+        #clock-container {
             position: absolute;
             top: 1.5rem;
-            right: 8rem; /* Positioned left of the download button */
+            right: 8rem;
             font-size: 0.875rem;
             letter-spacing: 0.05em;
+            text-align: right;
+        }
+        #clock-time .colon {
+            animation: tick 1s infinite;
+        }
+        @keyframes tick {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
         }
 
         @media print {
@@ -192,7 +200,10 @@
                     linkedin.com/in/sam-ludwig
                 </a>
             </div>
-            <div id="clock"></div>
+            <div id="clock-container">
+                <div id="clock-date"></div>
+                <div id="clock-time"></div>
+            </div>
             <button onclick="window.print()" class="btn absolute top-2 right-2 sm:top-4 sm:right-4 bg-slate-700 text-white font-bold py-2 px-4 rounded-lg hover:bg-slate-600 shadow-lg shadow-sky-500/10">
                 Download PDF
             </button>
@@ -423,12 +434,22 @@
             }
 
              // Live Clock
-            const clockElement = document.getElementById('clock');
+            const dateElement = document.getElementById('clock-date');
+            const timeElement = document.getElementById('clock-time');
+            
             function updateClock() {
-                if(clockElement){
+                if(dateElement && timeElement){
                     const now = new Date();
-                    const timeString = now.toLocaleTimeString('en-AU', { hour: '2-digit', minute:'2-digit', hour12: true });
-                    clockElement.textContent = `AEST ${timeString}`;
+                    const dateOptions = { weekday: 'short', day: 'numeric', month: 'short' };
+                    const timeOptions = { hour: '2-digit', minute:'2-digit', hour12: true };
+                    
+                    dateElement.textContent = `AEST ${now.toLocaleDateString('en-AU', dateOptions)}`;
+                    
+                    const timeString = now.toLocaleTimeString('en-AU', timeOptions);
+                    const [time, period] = timeString.split(' ');
+                    const [hour, minute] = time.split(':');
+
+                    timeElement.innerHTML = `${hour}<span class="colon">:</span>${minute} ${period}`;
                 }
             }
             updateClock();
