@@ -9,9 +9,22 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
+        @keyframes animated-gradient {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #f0f4f8; /* Lighter blue-gray background */
+            background: linear-gradient(-45deg, #e7f5ff, #f0f9ff, #e6fffa, #f0f4f8);
+            background-size: 400% 400%;
+            animation: animated-gradient 25s ease infinite;
         }
         .resume-container {
             transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -40,6 +53,7 @@
             body, .resume-container {
                 margin: 0;
                 box-shadow: none;
+                background: #fff;
             }
             .btn-download {
                 display: none;
@@ -47,9 +61,9 @@
         }
     </style>
 </head>
-<body class="bg-gray-100 text-gray-800">
+<body class="text-gray-800">
 
-    <div class="max-w-4xl mx-auto p-6 sm:p-8 md:p-12 bg-white shadow-2xl my-8 rounded-xl resume-container">
+    <div class="max-w-4xl mx-auto p-6 sm:p-8 md:p-12 bg-white/90 backdrop-blur-sm shadow-2xl my-8 rounded-xl resume-container">
 
         <!-- Header Section -->
         <header class="text-center border-b-2 border-gray-200 pb-6 mb-8 relative">
