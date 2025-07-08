@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sam Ludwig - Resume</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -164,7 +165,38 @@
         }
 
         @media print {
-            /* Print styles remain the same */
+            body, html {
+                background: #ffffff !important;
+                color: #000000 !important;
+                -webkit-print-color-adjust: exact;
+                color-adjust: exact;
+            }
+            .resume-container {
+                margin: 0 !important;
+                box-shadow: none !important;
+                border: none !important;
+                backdrop-filter: none !important;
+                background-color: #ffffff !important;
+            }
+            .section-card, .experience-item {
+                background-color: #ffffff !important;
+                border: 1px solid #e5e7eb !important;
+                box-shadow: none !important;
+            }
+            #particle-canvas, #spotlight, .theme-toggler, .btn, #clock-container {
+                display: none !important;
+            }
+            h1, h2, h3, p, li, a, span, div {
+                color: #000000 !important;
+                text-shadow: none !important;
+            }
+            .bg-clip-text {
+                color: transparent !important;
+                -webkit-text-fill-color: #000000 !important;
+            }
+            .section-heading, .skill-icon {
+                color: #0ea5e9 !important;
+            }
         }
     </style>
 </head>
@@ -174,7 +206,7 @@
     <div id="spotlight"></div>
     <div id="copy-notification">Email copied to clipboard!</div>
 
-    <div class="max-w-4xl mx-auto p-6 sm:p-8 md:p-12 shadow-2xl my-8 rounded-xl resume-container">
+    <div id="resume-content" class="max-w-4xl mx-auto p-6 sm:p-8 md:p-12 shadow-2xl my-8 rounded-xl resume-container">
 
         <div id="theme-toggler" class="theme-toggler">
             <svg id="theme-icon-light" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-gray-400 hover:text-white"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
@@ -204,7 +236,7 @@
                 <div id="clock-date"></div>
                 <div id="clock-time"></div>
             </div>
-            <button onclick="window.print()" class="btn absolute top-2 right-2 sm:top-4 sm:right-4 bg-slate-700 text-white font-bold py-2 px-4 rounded-lg hover:bg-slate-600 shadow-lg shadow-sky-500/10">
+            <button onclick="downloadPDF()" class="btn absolute top-2 right-2 sm:top-4 sm:right-4 bg-slate-700 text-white font-bold py-2 px-4 rounded-lg hover:bg-slate-600 shadow-lg shadow-sky-500/10">
                 Download PDF
             </button>
         </header>
@@ -295,6 +327,19 @@
         </main>
     </div>
     <script>
+        function downloadPDF(){
+            const element = document.getElementById('resume-content');
+            const opt = {
+              margin:       0.5,
+              filename:     'Sam_Ludwig_Resume.pdf',
+              image:        { type: 'jpeg', quality: 0.98 },
+              html2canvas:  { scale: 2, useCORS: true },
+              jsPDF:        { unit: 'in', format: 'a4', orientation: 'portrait' }
+            };
+            // New Promise-based usage:
+            html2pdf().set(opt).from(element).save();
+        }
+
         document.addEventListener('DOMContentLoaded', () => {
             const body = document.body;
             const themeToggler = document.getElementById('theme-toggler');
