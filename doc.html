@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sam Ludwig - Resume</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f3f4f6; /* gray-100 */
+        }
+        .resume-page {
+            max-width: 8.5in;
+            min-height: 11in;
+            margin: 2rem auto;
+            padding: 2rem;
+            background-color: white;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            border-top: 8px solid #0ea5e9; /* sky-500 */
+        }
+        .section-heading {
+            border-bottom: 2px solid #e5e7eb; /* gray-200 */
+            color: #0c4a6e; /* sky-800 */
+            padding-bottom: 0.5rem;
+            margin-bottom: 1.5rem;
+            font-weight: 700;
+        }
+        .job-title {
+            color: #111827; /* gray-900 */
+            font-weight: 700;
+        }
+        .company-info {
+            color: #4b5563; /* gray-600 */
+            font-weight: 500;
+        }
+        ul {
+            list-style-position: outside;
+            padding-left: 1.25rem;
+        }
+        .client-tag {
+            background-color: #e0f2fe; /* sky-100 */
+            color: #0369a1; /* sky-700 */
+            font-size: 0.75rem;
+            font-weight: 600;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+        }
+        @media print {
+            body {
+                background-color: white;
+            }
+            .resume-page {
+                margin: 0;
+                padding: 0.75in;
+                box-shadow: none;
+                border-top: 8px solid #0ea5e9;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="resume-page">
+        <header class="text-center mb-10">
+            <h1 class="text-5xl font-bold text-gray-900 tracking-tight">SAM LUDWIG</h1>
+            <div class="mt-4 flex justify-center items-center flex-wrap gap-x-4 gap-y-1 text-gray-600">
+                <a href="mailto:sam.ludwig@gmail.com" class="hover:text-sky-600">sam.ludwig@gmail.com</a>
+                <span>&bull;</span>
+                <span>0405 993 245</span>
+                <span>&bull;</span>
+                <a href="https://linkedin.com/in/sam-ludwig" target="_blank" class="hover:text-sky-600">linkedin.com/in/sam-ludwig</a>
+                <span>&bull;</span>
+                <a href="http://samludwig.au" target="_blank" class="hover:text-sky-600">samludwig.au</a>
+            </div>
+        </header>
+
+        <main>
+            <section class="mb-8" style="break-inside: avoid;">
+                <h2 class="text-2xl section-heading">Professional Summary</h2>
+                <p class="text-gray-700 leading-relaxed">A results-driven Senior Application Support Engineer with over 6 years of experience providing Level 2 and Level 3 support in high-stakes technical environments. Specializes in troubleshooting, maintaining, and automating solutions using a wide range of modern technologies. Proven ability to enhance system functionality and streamline processes to ensure system stability.</p>
+            </section>
+
+            <section class="mb-8" style="break-inside: avoid;">
+                <h2 class="text-2xl section-heading">Key Skills</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-6">
+                    <div>
+                        <h3 class="font-semibold text-lg text-gray-800 mb-2">Development</h3>
+                        <ul class="list-disc text-gray-700 space-y-1">
+                            <li>JavaScript, TypeScript</li>
+                            <li>HTML5, CSS, SASS</li>
+                            <li>KQL, SQL, XML</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="font-semibold text-lg text-gray-800 mb-2">Automation & DevOps</h3>
+                        <ul class="list-disc text-gray-700 space-y-1">
+                            <li>PowerShell, Power Automate</li>
+                            <li>Azure DevOps (CI/CD)</li>
+                            <li>Git, Enzyme/Jest</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="font-semibold text-lg text-gray-800 mb-2">Platform Administration</h3>
+                        <ul class="list-disc text-gray-700 space-y-1">
+                            <li>Microsoft 365 Suite</li>
+                            <li>SharePoint Online</li>
+                            <li>Azure (Entra ID, Functions)</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="font-semibold text-lg text-gray-800 mb-2">Security & Monitoring</h3>
+                        <ul class="list-disc text-gray-700 space-y-1">
+                            <li>Splunk</li>
+                            <li>Microsoft Defender</li>
+                            <li>Purview</li>
+                        </ul>
+                    </div>
+                </div>
+                <p class="mt-6 font-semibold text-gray-800">Certifications: <span class="font-normal text-gray-700">Certified SCRUM Master, Azure Fundamentals (AZ-900), ITIL 4 Foundation</span></p>
+            </section>
+
+            <section class="mb-8">
+                <h2 class="text-2xl section-heading">Professional Experience</h2>
+                <div class="space-y-8">
+                    <div style="break-inside: avoid;">
+                        <h3 class="text-xl job-title">Senior Application Support Engineer</h3>
+                        <p class="text-md company-info">CapGemini, Melbourne | December 2021 - Present</p>
+                        <ul class="mt-2 list-disc text-gray-700 space-y-1 leading-relaxed">
+                            <li>Provided dedicated application support for the Department of Education, ensuring system stability for critical educational services.</li>
+                            <li>Diagnose and resolve complex application issues, leading to a 15% reduction in recurring incidents for key client accounts.</li>
+                            <li>Act as the primary technical liaison for external stakeholders, improving bug-fix deployment times through proactive on-site support and streamlined communication.</li>
+                            <li>Champion the use of IT Service Management (ITSM) best practices to log, manage, and resolve incidents, consistently meeting or exceeding SLA targets.</li>
+                        </ul>
+                        <div class="mt-3">
+                            <h4 class="font-semibold text-gray-600 inline-block mr-2">Key Client:</h4>
+                            <div class="inline-flex flex-wrap gap-2">
+                                <span class="client-tag">Department of Education Victoria</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="break-inside: avoid;">
+                        <h3 class="text-xl job-title">Application Support Engineer</h3>
+                        <p class="text-md company-info">Knosys, Melbourne | December 2020 - December 2021</p>
+                        <ul class="mt-2 list-disc text-gray-700 space-y-1 leading-relaxed">
+                            <li>Provided advanced L2/L3 support for the GreenOrbit intranet platform, successfully resolving 95% of tickets within service-level agreements.</li>
+                            <li>Proactively identified inefficient manual processes and developed PowerShell scripts to automate them, saving over 10 hours of manual work per month.</li>
+                            <li>Identified and addressed critical bugs in web-based knowledge management solutions, enhancing application stability and user productivity.</li>
+                        </ul>
+                        <div class="mt-3">
+                            <h4 class="font-semibold text-gray-600 inline-block mr-2">Key Clients:</h4>
+                            <div class="inline-flex flex-wrap gap-2">
+                                <span class="client-tag">Cotton On</span>
+                                <span class="client-tag">Harvey Norman</span>
+                                <span class="client-tag">Healthscope</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="break-inside: avoid;">
+                        <h3 class="text-xl job-title">SharePoint Developer</h3>
+                        <p class="text-md company-info">Engage Squared, Melbourne | March 2018 - December 2020</p>
+                        <ul class="mt-2 list-disc text-gray-700 space-y-1 leading-relaxed">
+                            <li>Engineered and launched over 10 responsive, client-focused solutions using modern JavaScript frameworks, resulting in high client adoption and satisfaction.</li>
+                            <li>Implemented and managed a full CI/CD pipeline using Azure DevOps and Git, which automated testing and deployment processes and reduced release cycles by 25%.</li>
+                            <li>Led client-facing workshops to demonstrate new product features, contributing to a 20% increase in the uptake of new technologies across client projects.</li>
+                        </ul>
+                        <div class="mt-3">
+                            <h4 class="font-semibold text-gray-600 inline-block mr-2">Key Clients:</h4>
+                            <div class="inline-flex flex-wrap gap-2">
+                                <span class="client-tag">Victoria Police</span>
+                                <span class="client-tag">Transurban</span>
+                                <span class="client-tag">Cimic Group</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section style="break-inside: avoid;">
+                <h2 class="text-2xl section-heading">Education</h2>
+                <h3 class="text-xl job-title">Coder Academy, Melbourne</h3>
+                <p class="text-md company-info">Web Development, Fast Track Bootcamp Graduate | February 2018</p>
+            </section>
+        </main>
+
+    </div>
+
+</body>
+</html>

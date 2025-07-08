@@ -3,516 +3,228 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sam Ludwig - Resume</title>
+    <title>Sam Ludwig - Interactive Resume</title>
+    <!-- Chosen Palette: Slate & Cyan -->
+    <!-- Application Structure Plan: A single-page, vertically scrolling layout presenting the resume in a narrative flow: Header -> Summary -> Skills -> Experience -> Education. This traditional structure is professional and intuitive. Client engagements are now integrated directly within the relevant roles in the experience timeline, providing better context and a less clinical feel than a separate dashboard. -->
+    <!-- Visualization & Content Choices: Key client names are presented as styled tags within each job experience card. This grounds the experience in real-world, high-profile projects. The skills section uses a clean grid for scannability. The experience section is a chronological timeline. All visuals are created using styled HTML with Tailwind CSS, ensuring a clean and modern aesthetic. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
-        :root {
-            /* Dark Theme Colors */
-            --bg-dark: linear-gradient(-45deg, #1f2937, #374151, #1f2937);
-            --text-dark: #d1d5db;
-            --text-heading-dark: #e5e7eb;
-            --accent-dark: #7dd3fc; /* sky-300 */
-            --container-bg-dark: rgba(30, 41, 59, 0.85);
-            --card-bg-dark: rgba(55, 65, 81, 0.7);
-            --glow-dark: rgba(125, 211, 252, 0.15);
-            --particle-color-dark: 'rgba(125, 211, 252, 0.2)';
-
-            /* Light Theme Colors */
-            --bg-light: #f4f7fa; /* A subtle, cool off-white */
-            --text-light: #4b5563; /* gray-600 */
-            --text-heading-light: #1f2937; /* gray-800 */
-            --accent-light: #0ea5e9; /* sky-500 */
-            --container-bg-light: #ffffff;
-            --card-bg-light: #f9fafb; /* gray-50 */
-            --glow-light: rgba(14, 165, 233, 0.1);
-            --particle-color-light: 'rgba(56, 189, 248, 0.3)';
-        }
-        @keyframes animated-gradient {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
         body {
             font-family: 'Inter', sans-serif;
-            background: var(--bg-dark);
-            background-size: 400% 400%;
-            animation: animated-gradient 30s ease infinite;
-            color: var(--text-dark);
+            background-color: #0f172a; /* slate-900 */
+            color: #94a3b8; /* slate-400 */
+        }
+        .text-gradient {
+            background: linear-gradient(to right, #67e8f9, #22d3ee); /* cyan-300 to cyan-400 */
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .card {
+            background-color: rgba(30, 41, 59, 0.5); /* slate-800 with opacity */
+            backdrop-filter: blur(10px);
+            border: 1px solid #334155; /* slate-700 */
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(14, 165, 233, 0.1);
+            border-color: #0ea5e9;
+        }
+        .section-title {
             position: relative;
-            overflow-x: hidden;
-            transition: background 0.5s ease, color 0.5s ease;
+            padding-bottom: 0.5rem;
+            margin-bottom: 1.5rem;
+            border-bottom: 1px solid #334155;
         }
-        body.light-theme {
-            background: var(--bg-light);
-            color: var(--text-light);
-        }
-        #particle-canvas {
-            position: fixed;
-            top: 0;
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -1px;
             left: 0;
-            width: 100%;
-            height: 100%;
+            width: 50px;
+            height: 2px;
+            background-color: #22d3ee;
+        }
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -30px;
+            top: 10px;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background-color: #1e293b; /* slate-800 */
+            border: 3px solid #0ea5e9; /* sky-500 */
             z-index: 1;
         }
-        .resume-container {
-            background-color: var(--container-bg-dark);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            position: relative;
-            z-index: 2;
-            transition: background-color 0.5s ease, border-color 0.5s ease, box-shadow 0.5s ease;
-        }
-        body.light-theme .resume-container {
-            background-color: var(--container-bg-light);
-            border: 1px solid #e5e7eb; /* gray-200 */
-            backdrop-filter: none;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-        }
-        .section-card, .experience-item {
-            transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.5s ease;
-            background-color: var(--card-bg-dark);
-        }
-        body.light-theme .section-card, body.light-theme .experience-item {
-            background-color: var(--card-bg-light);
-            border: 1px solid #e5e7eb;
-        }
-        .section-card:hover, .experience-item:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 0 25px var(--glow-dark);
-        }
-        body.light-theme .section-card:hover, body.light-theme .experience-item:hover {
-             box-shadow: 0 8px 25px var(--glow-light);
-        }
-        .section-card:hover .skill-icon {
-            transform: scale(1.1) rotate(5deg);
-        }
-        .skill-icon {
-            transition: transform 0.3s ease;
-        }
-        @keyframes slideInUp {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        .fade-in-section {
-            animation: slideInUp 0.7s ease-out forwards;
-        }
-        .btn {
-            transition: all 0.3s ease;
-        }
-        .btn:hover {
-            transform: translateY(-2px);
-        }
-        #spotlight {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 3;
-        }
-        #copy-notification {
-            position: fixed;
-            bottom: -100px;
-            left: 50%;
-            transform: translateX(-50%);
-            padding: 12px 24px;
-            border-radius: 8px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-            transition: bottom 0.5s ease-in-out;
-            z-index: 100;
-        }
-        #copy-notification.show { bottom: 30px; }
-        .theme-toggler {
+        .timeline-line {
             position: absolute;
-            top: 1.5rem;
-            right: 8rem;
-            cursor: pointer;
-            z-index: 10;
+            left: -21px;
+            top: 10px;
+            bottom: 0;
+            width: 2px;
+            background-color: #334155; /* slate-700 */
         }
-        /* Theme-specific text and heading colors */
-        h1, h2, h3, h4, h5, h6 { color: var(--text-heading-dark); }
-        body.light-theme h1, body.light-theme h2, body.light-theme h3, body.light-theme h4, body.light-theme h5, body.light-theme h6 { color: var(--text-heading-light); }
-        .contact-link { color: var(--text-dark); }
-        body.light-theme .contact-link { color: var(--text-light); }
-        .contact-link:hover { color: var(--accent-dark); }
-        body.light-theme .contact-link:hover { color: var(--accent-light); }
-        .section-heading { color: var(--accent-dark); }
-        body.light-theme .section-heading { color: var(--accent-light); }
-        .certification-text { color: var(--text-heading-dark); }
-        body.light-theme .certification-text { color: var(--text-heading-light); }
-        #clock-container {
-            position: absolute;
-            top: 1.5rem;
-            left: 1.5rem;
-            font-size: 0.875rem;
-            letter-spacing: 0.05em;
-            text-align: left;
+        .timeline-item:last-child .timeline-line {
+            display: none;
         }
-        #clock-time .colon {
-            animation: tick 1s infinite;
+        .fade-in-up {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
         }
-        @keyframes tick {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.5; }
-        }
-
-        /* PDF Generation Styles */
-        body.is-generating-pdf {
-            animation: none !important;
-            background: #ffffff !important;
-        }
-        body.is-generating-pdf .resume-container {
-            margin: 0 !important;
-            padding: 2rem !important;
-            box-shadow: none !important;
-            border: none !important;
-            backdrop-filter: none !important;
-            background-color: #ffffff !important;
-        }
-        body.is-generating-pdf .section-card,
-        body.is-generating-pdf .experience-item {
-            background-color: #ffffff !important;
-            border: 1px solid #e5e7eb !important;
-            box-shadow: none !important;
-        }
-        body.is-generating-pdf #particle-canvas,
-        body.is-generating-pdf #spotlight,
-        body.is-generating-pdf .theme-toggler,
-        body.is-generating-pdf .btn,
-        body.is-generating-pdf #clock-container {
-            display: none !important;
-        }
-        body.is-generating-pdf h1,
-        body.is-generating-pdf h2,
-        body.is-generating-pdf h3,
-        body.is-generating-pdf p,
-        body.is-generating-pdf li,
-        body.is-generating-pdf a,
-        body.is-generating-pdf span,
-        body.is-generating-pdf div {
-            color: #000000 !important;
-            text-shadow: none !important;
-        }
-        body.is-generating-pdf .bg-clip-text {
-            color: transparent !important;
-            -webkit-text-fill-color: #000000 !important;
-        }
-        body.is-generating-pdf .section-heading,
-        body.is-generating-pdf .skill-icon {
-            color: #0ea5e9 !important;
+        .fade-in-up.visible {
+            opacity: 1;
+            transform: translateY(0);
         }
     </style>
 </head>
-<body class="text-gray-300">
+<body class="antialiased">
 
-    <canvas id="particle-canvas"></canvas>
-    <div id="spotlight"></div>
-    <div id="copy-notification">Email copied to clipboard!</div>
+    <div class="max-w-4xl mx-auto p-4 sm:p-8">
 
-    <div id="resume-content" class="max-w-4xl mx-auto p-6 sm:p-8 md:p-12 shadow-2xl my-8 rounded-xl resume-container">
-
-        <div id="theme-toggler" class="theme-toggler">
-            <svg id="theme-icon-light" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-gray-400 hover:text-white"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
-            <svg id="theme-icon-dark" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-gray-500 hover:text-gray-800 hidden"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
-        </div>
-
-        <!-- Header Section -->
-        <header class="text-center pb-6 mb-8 relative">
-            <h1 class="text-5xl font-bold tracking-tight bg-gradient-to-r from-sky-300 to-slate-200 bg-clip-text text-transparent pb-2">SAM LUDWIG</h1>
-             <div class="mt-8 flex justify-center items-center flex-wrap gap-x-6 gap-y-2">
-                <a href="mailto:sam.ludwig@gmail.com" id="email-link" class="contact-link flex items-center transition-colors cursor-pointer">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
-                    sam.ludwig@gmail.com
-                </a>
-                <span class="text-gray-500 hidden md:inline">|</span>
-                <span class="contact-link flex items-center">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
-                    0405 993 245
-                </span>
-                 <span class="text-gray-500 hidden md:inline">|</span>
-                <a href="https://linkedin.com/in/sam-ludwig" target="_blank" class="contact-link flex items-center transition-colors">
-                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
-                    linkedin.com/in/sam-ludwig
-                </a>
+        <!-- Header -->
+        <header class="text-center py-10 fade-in-up">
+            <h1 class="text-5xl md:text-6xl font-extrabold text-gradient">SAM LUDWIG</h1>
+            <div class="mt-6 flex justify-center items-center flex-wrap gap-x-6 gap-y-2 text-slate-400">
+                <a href="mailto:sam.ludwig@gmail.com" class="hover:text-cyan-400 transition-colors">sam.ludwig@gmail.com</a>
+                <span>&bull;</span>
+                <span>0405 993 245</span>
+                <span>&bull;</span>
+                <a href="https://linkedin.com/in/sam-ludwig" target="_blank" class="hover:text-cyan-400 transition-colors">linkedin.com/in/sam-ludwig</a>
             </div>
-            <div id="clock-container">
-                <div id="clock-date"></div>
-                <div id="clock-time"></div>
-            </div>
-            <button onclick="downloadPDF()" class="btn absolute top-2 right-2 sm:top-4 sm:right-4 bg-slate-700 text-white font-bold py-2 px-4 rounded-lg hover:bg-slate-600 shadow-lg shadow-sky-500/10">
-                Download PDF
-            </button>
         </header>
 
-        <main>
-            <!-- Professional Summary Section -->
-            <section class="mb-10">
-                <h2 class="section-heading text-3xl font-semibold mb-4 pl-4 border-l-4 border-sky-400">Professional Summary</h2>
-                <p class="text-lg leading-relaxed">A results-driven Senior Application Support Engineer with over 6 years of experience providing Level 2 and Level 3 support in high-stakes technical environments. Specializes in troubleshooting, maintaining, and automating solutions using a wide range of modern technologies. Proven ability to enhance system functionality and streamline processes to ensure system stability.</p>
-            </section>
+        <!-- Professional Summary -->
+        <section class="my-12 fade-in-up">
+            <h2 class="text-3xl font-bold text-slate-100 section-title">Summary</h2>
+            <p class="text-lg leading-relaxed">
+                A results-driven Senior Application Support Engineer with over 6 years of experience providing Level 2 and Level 3 support in high-stakes technical environments. Specializes in troubleshooting, maintaining, and automating solutions using a wide range of modern technologies. Proven ability to enhance system functionality and streamline processes to ensure system stability.
+            </p>
+        </section>
 
-            <!-- Key Skills Section -->
-            <section class="mb-10">
-                <h2 class="section-heading text-3xl font-semibold mb-4 pl-4 border-l-4 border-sky-400">Key Skills</h2>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                    <div class="p-6 rounded-lg section-card">
-                        <h3 class="font-bold text-xl mb-3 flex items-center"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2 section-heading skill-icon"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>Development</h3>
-                        <ul class="list-none space-y-2 mt-4">
-                            <li>JavaScript, TypeScript</li>
-                            <li>HTML5, CSS, SASS/SCSS</li>
-                            <li>KQL, SQL, XML, ASP.net</li>
-                        </ul>
-                    </div>
-                    <div class="p-6 rounded-lg section-card">
-                        <h3 class="font-bold text-xl mb-3 flex items-center"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2 section-heading skill-icon"><path d="M12.22 2h-4.44a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8.38T12.22 2z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="8" y1="16" x2="8" y2="16"></line><line x1="12" y1="16" x2="12" y2="16"></line><line x1="16" y1="16" x2="16" y2="16"></line></svg>Automation</h3>
-                        <ul class="list-none space-y-2 mt-4">
-                            <li>PowerShell, Power Automate</li>
-                            <li>Azure DevOps, CI/CD</li>
-                            <li>Git, Enzyme/Jest</li>
-                        </ul>
-                    </div>
-                    <div class="p-6 rounded-lg section-card">
-                        <h3 class="font-bold text-xl mb-3 flex items-center"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2 section-heading skill-icon"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path></svg>Platform Admin</h3>
-                        <ul class="list-none space-y-2 mt-4">
-                            <li>Microsoft Power Platform</li>
-                            <li>Microsoft 365 & Teams</li>
-                            <li>Azure (Portal, AAD, Functions)</li>
-                        </ul>
+        <!-- Key Skills -->
+        <section class="my-16 fade-in-up">
+            <h2 class="text-3xl font-bold text-slate-100 section-title">Technical Skills</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="card p-6">
+                    <h3 class="text-xl font-bold text-cyan-400 mb-3">Development</h3>
+                    <ul class="space-y-2">
+                        <li>React, JavaScript, TypeScript</li>
+                        <li>HTML5, CSS, SASS/SCSS</li>
+                        <li>SPFx (SharePoint Framework)</li>
+                        <li>KQL, SQL, XML, ASP.net</li>
+                    </ul>
+                </div>
+                <div class="card p-6">
+                    <h3 class="text-xl font-bold text-cyan-400 mb-3">DevOps & Automation</h3>
+                    <ul class="space-y-2">
+                        <li>Azure DevOps, CI/CD Pipelines</li>
+                        <li>PowerShell, Power Automate</li>
+                        <li>Git, Enzyme/Jest</li>
+                        <li>Node, NPM, Gulp, Yeoman</li>
+                    </ul>
+                </div>
+                <div class="card p-6">
+                    <h3 class="text-xl font-bold text-cyan-400 mb-3">Platform & Admin</h3>
+                    <ul class="space-y-2">
+                        <li>Microsoft Power Platform</li>
+                        <li>SharePoint & Teams Admin</li>
+                        <li>Azure Portal, AAD, Functions</li>
+                        <li>Windows Server, Active Directory</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="card p-4 mt-6">
+                 <p class="text-center font-semibold text-slate-300">Certifications: Certified SCRUM Master, Azure Fundamentals (AZ-900)</p>
+            </div>
+        </section>
+
+        <!-- Professional Experience -->
+        <section class="my-16 fade-in-up">
+            <h2 class="text-3xl font-bold text-slate-100 section-title">Professional Experience</h2>
+            <div class="relative pl-8">
+                <div class="timeline-item mb-12">
+                    <div class="timeline-line"></div>
+                    <h3 class="text-2xl font-bold text-slate-100">Senior Application Support Consultant</h3>
+                    <p class="text-md text-cyan-400">CapGemini, Melbourne | Dec 2021 - Present</p>
+                    <ul class="list-disc list-inside mt-3 space-y-2 text-lg">
+                        <li>Proactively maintain and troubleshoot existing solutions, ensuring impeccable functionality and user experience.</li>
+                        <li>Foster strong collaborations with external stakeholders, offering on-site support for swift bug fixing and seamless deployment.</li>
+                        <li>Employ cutting-edge IT service management software to efficiently log, manage, and resolve incidents.</li>
+                    </ul>
+                     <div class="mt-4">
+                        <h4 class="font-semibold text-slate-400 mb-2">Key Clients:</h4>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="bg-slate-700 text-cyan-300 text-xs font-semibold py-1 px-3 rounded-full">Department of Education</span>
+                        </div>
                     </div>
                 </div>
-                 <p class="mt-6 text-lg"><span class="font-semibold certification-text">Certifications:</span> Certified SCRUM Master, Azure Fundamentals (AZ-900), ITIL 4 Foundation</p>
-            </section>
-
-            <!-- Professional Experience Section -->
-            <section class="mb-10">
-                <h2 class="section-heading text-3xl font-semibold mb-4 pl-4 border-l-4 border-sky-400">Professional Experience</h2>
-                <div class="space-y-8">
-                    <div class="p-6 rounded-lg experience-item">
-                        <h3 class="text-2xl font-semibold">Senior Application Support Engineer</h3>
-                        <p class="text-lg text-gray-400">CapGemini, Melbourne | December 2021 - Present</p>
-                        <ul class="list-disc list-inside mt-3 space-y-2 text-lg leading-relaxed">
-                            <li>Provided dedicated application support for the Department of Education, ensuring system stability for critical educational services.</li>
-                            <li>Diagnose and resolve complex application issues, leading to a 15% reduction in recurring incidents for key client accounts.</li>
-                            <li>Act as the primary technical liaison for external stakeholders, improving bug-fix deployment times through proactive on-site support and streamlined communication.</li>
-                            <li>Champion the use of IT Service Management (ITSM) best practices to log, manage, and resolve incidents, consistently meeting or exceeding SLA targets.</li>
-                        </ul>
-                    </div>
-                    <div class="p-6 rounded-lg experience-item">
-                        <h3 class="text-2xl font-semibold">Application Support Engineer</h3>
-                        <p class="text-lg text-gray-400">Knosys, Melbourne | December 2020 - December 2021</p>
-                        <ul class="list-disc list-inside mt-3 space-y-2 text-lg leading-relaxed">
-                             <li>Provided advanced L2/L3 support for the GreenOrbit intranet platform, successfully resolving 95% of tickets within service-level agreements.</li>
-                             <li>Proactively identified inefficient manual processes and developed PowerShell scripts to automate them, saving over 10 hours of manual work per month.</li>
-                             <li>Identified and addressed critical bugs in web-based knowledge management solutions, enhancing application stability and user productivity.</li>
-                        </ul>
-                    </div>
-                    <div class="p-6 rounded-lg experience-item">
-                        <h3 class="text-2xl font-semibold">SharePoint Developer</h3>
-                        <p class="text-lg text-gray-400">Engage Squared, Melbourne | March 2018 - December 2020</p>
-                        <ul class="list-disc list-inside mt-3 space-y-2 text-lg leading-relaxed">
-                            <li>Engineered and launched over 10 responsive, client-focused solutions using modern JavaScript frameworks, resulting in high client adoption and satisfaction.</li>
-                            <li>Implemented and managed a full CI/CD pipeline using Azure DevOps and Git, which automated testing and deployment processes and reduced release cycles by 25%.</li>
-                            <li>Led client-facing workshops to demonstrate new product features, contributing to a 20% increase in the uptake of new technologies across client projects.</li>
-                        </ul>
+                <div class="timeline-item mb-12">
+                    <div class="timeline-line"></div>
+                    <h3 class="text-2xl font-bold text-slate-100">Application Support Engineer</h3>
+                    <p class="text-md text-cyan-400">Knosys, Melbourne | Dec 2020 - Dec 2021</p>
+                    <ul class="list-disc list-inside mt-3 space-y-2 text-lg">
+                        <li>Provided 2nd & 3rd level application support for GreenOrbit, ensuring smooth operations and user satisfaction.</li>
+                        <li>Developed and implemented automated tools, improving efficiency for future updates and tasks.</li>
+                        <li>Troubleshot web-based applications and supported knowledge management solutions.</li>
+                    </ul>
+                    <div class="mt-4">
+                        <h4 class="font-semibold text-slate-400 mb-2">Key Clients:</h4>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="bg-slate-700 text-cyan-300 text-xs font-semibold py-1 px-3 rounded-full">Cotton On</span>
+                            <span class="bg-slate-700 text-cyan-300 text-xs font-semibold py-1 px-3 rounded-full">Harvey Norman</span>
+                            <span class="bg-slate-700 text-cyan-300 text-xs font-semibold py-1 px-3 rounded-full">Healthscope</span>
+                        </div>
                     </div>
                 </div>
-            </section>
-
-            <!-- Education Section -->
-            <section>
-                <h2 class="section-heading text-3xl font-semibold mb-4 pl-4 border-l-4 border-sky-400">Education</h2>
-                <div class="p-6 rounded-lg experience-item">
-                    <h3 class="text-2xl font-semibold">Coder Academy, Melbourne</h3>
-                    <p class="text-lg text-gray-400">Web Development, Fast Track Bootcamp Graduate | February 2018</p>
+                <div class="timeline-item">
+                    <h3 class="text-2xl font-bold text-slate-100">SharePoint Developer</h3>
+                    <p class="text-md text-cyan-400">Engage Squared, Melbourne | Mar 2018 - Dec 2020</p>
+                    <ul class="list-disc list-inside mt-3 space-y-2 text-lg">
+                        <li>Designed and implemented responsive solutions using React, JavaScript, TypeScript, and SPFx.</li>
+                        <li>Leveraged Azure DevOps, Git, and CI/CD pipelines for efficient deployment automation.</li>
+                        <li>Successfully conducted client workshops, showcasing products and cutting-edge technologies.</li>
+                    </ul>
+                    <div class="mt-4">
+                        <h4 class="font-semibold text-slate-400 mb-2">Key Clients:</h4>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="bg-slate-700 text-cyan-300 text-xs font-semibold py-1 px-3 rounded-full">Victoria Police</span>
+                            <span class="bg-slate-700 text-cyan-300 text-xs font-semibold py-1 px-3 rounded-full">Transurban</span>
+                            <span class="bg-slate-700 text-cyan-300 text-xs font-semibold py-1 px-3 rounded-full">Cimic Group</span>
+                        </div>
+                    </div>
                 </div>
-            </section>
+            </div>
+        </section>
 
-        </main>
+        <!-- Education -->
+        <section class="my-12 text-center fade-in-up">
+             <h2 class="text-3xl font-bold text-slate-100 section-title">Education</h2>
+            <p class="text-xl font-semibold text-slate-300">Coder Academy, Melbourne</p>
+            <p>Web Development, Fast Track Bootcamp Graduate | Feb 2018</p>
+        </section>
+
     </div>
+
     <script>
-        function downloadPDF(){
-            const element = document.getElementById('resume-content');
-            const body = document.body;
-            body.classList.add('is-generating-pdf');
-
-            const opt = {
-              margin:       0.5,
-              filename:     'Sam_Ludwig_Resume.pdf',
-              image:        { type: 'jpeg', quality: 0.98 },
-              html2canvas:  { scale: 2, useCORS: true, logging: false },
-              jsPDF:        { unit: 'in', format: 'a4', orientation: 'portrait' }
-            };
-            
-            html2pdf().set(opt).from(element).save().then(() => {
-                body.classList.remove('is-generating-pdf');
-            });
-        }
-
-        document.addEventListener('DOMContentLoaded', () => {
-            const body = document.body;
-            const themeToggler = document.getElementById('theme-toggler');
-            const lightIcon = document.getElementById('theme-icon-light');
-            const darkIcon = document.getElementById('theme-icon-dark');
-            let currentTheme = localStorage.getItem('theme') || 'dark';
-
-            function applyTheme(theme) {
-                if (theme === 'light') {
-                    body.classList.add('light-theme');
-                    lightIcon.classList.add('hidden');
-                    darkIcon.classList.remove('hidden');
-                } else {
-                    body.classList.remove('light-theme');
-                    lightIcon.classList.remove('hidden');
-                    darkIcon.classList.add('hidden');
-                }
-            }
-            
-            applyTheme(currentTheme);
-
-            themeToggler.addEventListener('click', () => {
-                currentTheme = body.classList.contains('light-theme') ? 'dark' : 'light';
-                localStorage.setItem('theme', currentTheme);
-                applyTheme(currentTheme);
-            });
-
-
-            // Particle Animation
-            const canvas = document.getElementById('particle-canvas');
-            const ctx = canvas.getContext('2d');
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-
-            let particlesArray;
-
-            class Particle {
-                constructor(x, y, directionX, directionY, size) {
-                    this.x = x;
-                    this.y = y;
-                    this.directionX = directionX;
-                    this.directionY = directionY;
-                    this.size = size;
-                }
-                draw() {
-                    ctx.beginPath();
-                    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2, false);
-                    const color = getComputedStyle(document.documentElement).getPropertyValue(body.classList.contains('light-theme') ? '--particle-color-light' : '--particle-color-dark').trim().slice(1,-1);
-                    ctx.fillStyle = color;
-                    ctx.fill();
-                }
-                update() {
-                    if (this.x > canvas.width || this.x < 0) this.directionX = -this.directionX;
-                    if (this.y > canvas.height || this.y < 0) this.directionY = -this.directionY;
-                    this.x += this.directionX;
-                    this.y += this.directionY;
-                    this.draw();
-                }
-            }
-            
-            function init() {
-                particlesArray = [];
-                let numberOfParticles = (canvas.height * canvas.width) / 9000;
-                for (let i = 0; i < numberOfParticles; i++) {
-                    let size = (Math.random() * 2) + 1;
-                    let x = (Math.random() * ((innerWidth - size * 2) - (size * 2)) + size * 2);
-                    let y = (Math.random() * ((innerHeight - size * 2) - (size * 2)) + size * 2);
-                    let directionX = (Math.random() * .4) - .2;
-                    let directionY = (Math.random() * .4) - .2;
-                    particlesArray.push(new Particle(x, y, directionX, directionY, size));
-                }
-            }
-
-            function animate() {
-                requestAnimationFrame(animate);
-                ctx.clearRect(0,0,innerWidth, innerHeight);
-                for (let i = 0; i < particlesArray.length; i++) {
-                    particlesArray[i].update();
-                }
-            }
-            
-            init();
-            animate();
-
-            window.addEventListener('resize', () => {
-                canvas.width = innerWidth;
-                canvas.height = innerHeight;
-                init();
-            });
-
-            // Spotlight Effect
-            const spotlight = document.getElementById('spotlight');
-            if (spotlight) {
-                document.addEventListener('mousemove', (e) => {
-                    const accentColor = body.classList.contains('light-theme') ? '14, 165, 233' : '125, 211, 252';
-                    spotlight.style.background = `radial-gradient(circle at ${e.clientX}px ${e.clientY}px, rgba(${accentColor}, 0.05), transparent 300px)`;
-                });
-            }
-
-            // Scroll Animations
+        document.addEventListener('DOMContentLoaded', function() {
+            // --- Intersection Observer for Animations ---
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
-                        entry.target.classList.add('fade-in-section');
+                        entry.target.classList.add('visible');
+                        observer.unobserve(entry.target);
                     }
                 });
             }, { threshold: 0.1 });
 
-            document.querySelectorAll('section').forEach(section => {
-                section.style.opacity = '0';
-                observer.observe(section);
-            });
-
-            // Copy to Clipboard
-            const emailLink = document.getElementById('email-link');
-            const notification = document.getElementById('copy-notification');
-
-            if(emailLink && notification) {
-                emailLink.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    const email = 'sam.ludwig@gmail.com';
-                    const textArea = document.createElement('textarea');
-                    textArea.value = email;
-                    document.body.appendChild(textArea);
-                    textArea.select();
-                    try {
-                        document.execCommand('copy');
-                        notification.classList.add('show');
-                        setTimeout(() => {
-                            notification.classList.remove('show');
-                        }, 2500);
-                    } catch (err) {
-                        console.error('Failed to copy text: ', err);
-                    }
-                    document.body.removeChild(textArea);
-                });
-            }
-
-             // Live Clock
-            const dateElement = document.getElementById('clock-date');
-            const timeElement = document.getElementById('clock-time');
-            
-            function updateClock() {
-                if(dateElement && timeElement){
-                    const now = new Date();
-                    const dateOptions = { weekday: 'short', day: 'numeric', month: 'short' };
-                    const timeOptions = { hour: '2-digit', minute:'2-digit', hour12: true };
-                    
-                    dateElement.textContent = `AEST ${now.toLocaleDateString('en-AU', dateOptions)}`;
-                    
-                    const timeString = now.toLocaleTimeString('en-AU', timeOptions);
-                    const [time, period] = timeString.split(' ');
-                    const [hour, minute] = time.split(':');
-
-                    timeElement.innerHTML = `${hour}<span class="colon">:</span>${minute} ${period}`;
-                }
-            }
-            updateClock();
-            setInterval(updateClock, 1000);
-
+            document.querySelectorAll('.fade-in-up').forEach(el => observer.observe(el));
         });
     </script>
 </body>
