@@ -4,10 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sam Ludwig - Interactive Resume</title>
-    <!-- Chosen Palette: Slate & Cyan -->
-    <!-- Application Structure Plan: A single-page, vertically scrolling layout presenting the resume in a narrative flow: Header -> Summary -> Skills -> Experience -> Education. This traditional structure is professional and intuitive. Client engagements are now integrated directly within the relevant roles in the experience timeline, providing better context and a less clinical feel than a separate dashboard. -->
-    <!-- Visualization & Content Choices: Key client names are presented as styled tags within each job experience card. This grounds the experience in real-world, high-profile projects. The skills section uses a clean grid for scannability. The experience section is a chronological timeline. All visuals are created using styled HTML with Tailwind CSS, ensuring a clean and modern aesthetic. -->
-    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -88,7 +84,6 @@
 
     <div class="max-w-4xl mx-auto p-4 sm:p-8">
 
-        <!-- Header -->
         <header class="text-center py-10 fade-in-up">
             <h1 class="text-5xl md:text-6xl font-extrabold text-gradient">SAM LUDWIG</h1>
             <div class="mt-6 flex justify-center items-center flex-wrap gap-x-6 gap-y-2 text-slate-400">
@@ -98,9 +93,13 @@
                 <span>&bull;</span>
                 <a href="https://linkedin.com/in/sam-ludwig" target="_blank" class="hover:text-cyan-400 transition-colors">linkedin.com/in/sam-ludwig</a>
             </div>
+            <div class="mt-8">
+                <a href="Download/SamLudwigCV.pdf" download="SamLudwigCV.pdf" class="inline-block bg-cyan-500 hover:bg-cyan-600 text-slate-900 font-bold py-3 px-6 rounded-full transition-transform transform hover:scale-105 shadow-lg focus:outline-none focus:ring-4 focus:ring-cyan-300">
+                    Download Resume
+                </a>
+            </div>
         </header>
 
-        <!-- Professional Summary -->
         <section class="my-12 fade-in-up">
             <h2 class="text-3xl font-bold text-slate-100 section-title">Summary</h2>
             <p class="text-lg leading-relaxed">
@@ -108,7 +107,6 @@
             </p>
         </section>
 
-        <!-- Key Skills -->
         <section class="my-16 fade-in-up">
             <h2 class="text-3xl font-bold text-slate-100 section-title">Technical Skills</h2>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -145,7 +143,6 @@
             </div>
         </section>
 
-        <!-- Professional Experience -->
         <section class="my-16 fade-in-up">
             <h2 class="text-3xl font-bold text-slate-100 section-title">Professional Experience</h2>
             <div class="relative pl-8">
@@ -159,11 +156,11 @@
                         <li>Employ cutting-edge IT service management software to efficiently log, manage, and resolve incidents.</li>
                     </ul>
                      <div class="mt-4">
-                        <h4 class="font-semibold text-slate-400 mb-2">Key Clients:</h4>
-                        <div class="flex flex-wrap gap-2">
-                            <span class="bg-slate-700 text-cyan-300 text-xs font-semibold py-1 px-3 rounded-full">Department of Education</span>
-                        </div>
-                    </div>
+                         <h4 class="font-semibold text-slate-400 mb-2">Key Clients:</h4>
+                         <div class="flex flex-wrap gap-2">
+                             <span class="bg-slate-700 text-cyan-300 text-xs font-semibold py-1 px-3 rounded-full">Department of Education</span>
+                         </div>
+                     </div>
                 </div>
                 <div class="timeline-item mb-12">
                     <div class="timeline-line"></div>
@@ -203,7 +200,6 @@
             </div>
         </section>
 
-        <!-- Education -->
         <section class="my-12 text-center fade-in-up">
              <h2 class="text-3xl font-bold text-slate-100 section-title">Education</h2>
             <p class="text-xl font-semibold text-slate-300">Coder Academy, Melbourne</p>
