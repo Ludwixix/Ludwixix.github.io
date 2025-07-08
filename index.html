@@ -10,32 +10,37 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
+        /* --- Palette & Style Overhaul --- */
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #0f172a; /* slate-900 */
-            color: #94a3b8; /* slate-400 */
+            /* Palette Change: Light background for a more open, airy feel */
+            background-color: #f8fafc; /* slate-50 */
+            color: #475569; /* slate-600 */
         }
         .text-gradient {
-            background: linear-gradient(to right, #67e8f9, #22d3ee); /* cyan-300 to cyan-400 */
+            /* Palette Change: A fresh gradient from a vibrant teal to a professional blue */
+            background: linear-gradient(to right, #2dd4bf, #38bdf8); /* teal-400 to sky-400 */
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
         .card {
-            background-color: rgba(30, 41, 59, 0.5); /* slate-800 with opacity */
-            backdrop-filter: blur(10px);
-            border: 1px solid #334155; /* slate-700 */
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            /* Opacity & Style Change: "Glassmorphism" effect with a semi-transparent background */
+            background-color: rgba(255, 255, 255, 0.6); /* white with 60% opacity */
+            backdrop-filter: blur(12px);
+            border: 1px solid #e2e8f0; /* slate-200 */
+            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
         }
         .card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(14, 165, 233, 0.1);
-            border-color: #0ea5e9;
+            /* Palette Change: Hover shadow and border use the new accent color */
+            box-shadow: 0 10px 20px rgba(20, 184, 166, 0.1); /* teal-500 with 10% opacity */
+            border-color: #5eead4; /* teal-300 */
         }
         .section-title {
             position: relative;
             padding-bottom: 0.5rem;
             margin-bottom: 1.5rem;
-            border-bottom: 1px solid #334155;
+            border-bottom: 1px solid #e2e8f0; /* slate-200 */
         }
         .section-title::after {
             content: '';
@@ -44,7 +49,8 @@
             left: 0;
             width: 50px;
             height: 2px;
-            background-color: #22d3ee;
+            /* Palette Change: Accent line now uses the vibrant teal */
+            background-color: #2dd4bf; /* teal-400 */
         }
         .timeline-item::before {
             content: '';
@@ -54,8 +60,9 @@
             width: 20px;
             height: 20px;
             border-radius: 50%;
-            background-color: #1e293b; /* slate-800 */
-            border: 3px solid #0ea5e9; /* sky-500 */
+            /* Palette Change: Using body background for a clean look */
+            background-color: #f8fafc; /* slate-50 */
+            border: 3px solid #38bdf8; /* sky-400 */
             z-index: 1;
         }
         .timeline-line {
@@ -64,7 +71,7 @@
             top: 10px;
             bottom: 0;
             width: 2px;
-            background-color: #334155; /* slate-700 */
+            background-color: #e2e8f0; /* slate-200 */
         }
         .timeline-item:last-child .timeline-line {
             display: none;
@@ -86,32 +93,32 @@
 
         <header class="text-center py-10 fade-in-up">
             <h1 class="text-5xl md:text-6xl font-extrabold text-gradient">SAM LUDWIG</h1>
-            <div class="mt-6 flex justify-center items-center flex-wrap gap-x-6 gap-y-2 text-slate-400">
-                <a href="mailto:sam.ludwig@gmail.com" class="hover:text-cyan-400 transition-colors">sam.ludwig@gmail.com</a>
-                <span>&bull;</span>
-                <span>0405 993 245</span>
-                <span>&bull;</span>
-                <a href="https://linkedin.com/in/sam-ludwig" target="_blank" class="hover:text-cyan-400 transition-colors">linkedin.com/in/sam-ludwig</a>
+            <div class="mt-6 flex justify-center items-center flex-wrap gap-x-6 gap-y-2 text-slate-500">
+                <a href="mailto:sam.ludwig@gmail.com" class="hover:text-teal-500 transition-colors opacity-80 hover:opacity-100">sam.ludwig@gmail.com</a>
+                <span class="opacity-50">&bull;</span>
+                <span class="opacity-80">0405 993 245</span>
+                <span class="opacity-50">&bull;</span>
+                <a href="https://linkedin.com/in/sam-ludwig" target="_blank" class="hover:text-teal-500 transition-colors opacity-80 hover:opacity-100">linkedin.com/in/sam-ludwig</a>
             </div>
             <div class="mt-8">
-                <a href="Download/SamLudwigCV.pdf" download="SamLudwigCV.pdf" class="inline-block bg-cyan-500 hover:bg-cyan-600 text-slate-900 font-bold py-3 px-6 rounded-full transition-transform transform hover:scale-105 shadow-lg focus:outline-none focus:ring-4 focus:ring-cyan-300">
+                <a href="Download/SamLudwigCV.pdf" download="SamLudwigCV.pdf" class="inline-block text-teal-500 font-semibold py-2 px-5 border-2 border-teal-400 rounded-full transition-all duration-300 hover:bg-teal-400 hover:text-white hover:shadow-lg hover:shadow-teal-400/20 transform hover:scale-105">
                     Download Resume
                 </a>
             </div>
         </header>
 
         <section class="my-12 fade-in-up">
-            <h2 class="text-3xl font-bold text-slate-100 section-title">Summary</h2>
-            <p class="text-lg leading-relaxed">
+            <h2 class="text-3xl font-bold text-slate-800 section-title">Summary</h2>
+            <p class="text-lg leading-relaxed text-slate-700">
                 A results-driven Senior Application Support Engineer with over 6 years of experience providing Level 2 and Level 3 support in high-stakes technical environments. Specializes in troubleshooting, maintaining, and automating solutions using a wide range of modern technologies. Proven ability to enhance system functionality and streamline processes to ensure system stability.
             </p>
         </section>
 
         <section class="my-16 fade-in-up">
-            <h2 class="text-3xl font-bold text-slate-100 section-title">Technical Skills</h2>
+            <h2 class="text-3xl font-bold text-slate-800 section-title">Technical Skills</h2>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                 <div class="card p-6">
-                    <h3 class="text-xl font-bold text-cyan-400 mb-3">Development</h3>
+                    <h3 class="text-xl font-bold text-sky-500 mb-3">Development</h3>
                     <ul class="space-y-2">
                         <li>React, JavaScript, TypeScript</li>
                         <li>HTML5, CSS, SASS/SCSS</li>
@@ -120,7 +127,7 @@
                     </ul>
                 </div>
                 <div class="card p-6">
-                    <h3 class="text-xl font-bold text-cyan-400 mb-3">DevOps & Automation</h3>
+                    <h3 class="text-xl font-bold text-sky-500 mb-3">DevOps & Automation</h3>
                     <ul class="space-y-2">
                         <li>Azure DevOps, CI/CD Pipelines</li>
                         <li>PowerShell, Power Automate</li>
@@ -129,7 +136,7 @@
                     </ul>
                 </div>
                 <div class="card p-6">
-                    <h3 class="text-xl font-bold text-cyan-400 mb-3">Platform & Admin</h3>
+                    <h3 class="text-xl font-bold text-sky-500 mb-3">Platform & Admin</h3>
                     <ul class="space-y-2">
                         <li>Microsoft Power Platform</li>
                         <li>SharePoint & Teams Admin</li>
@@ -139,61 +146,61 @@
                 </div>
             </div>
             <div class="card p-4 mt-6">
-                 <p class="text-center font-semibold text-slate-300">Certifications: Certified SCRUM Master, Azure Fundamentals (AZ-900)</p>
+                 <p class="text-center font-semibold text-slate-600">Certifications: Certified SCRUM Master, Azure Fundamentals (AZ-900)</p>
             </div>
         </section>
 
         <section class="my-16 fade-in-up">
-            <h2 class="text-3xl font-bold text-slate-100 section-title">Professional Experience</h2>
+            <h2 class="text-3xl font-bold text-slate-800 section-title">Professional Experience</h2>
             <div class="relative pl-8">
                 <div class="timeline-item mb-12">
                     <div class="timeline-line"></div>
-                    <h3 class="text-2xl font-bold text-slate-100">Senior Application Support Consultant</h3>
-                    <p class="text-md text-cyan-400">CapGemini, Melbourne | Dec 2021 - Present</p>
+                    <h3 class="text-2xl font-bold text-slate-800">Senior Application Support Consultant</h3>
+                    <p class="text-md font-semibold text-sky-500">CapGemini, Melbourne | Dec 2021 - Present</p>
                     <ul class="list-disc list-inside mt-3 space-y-2 text-lg">
                         <li>Proactively maintain and troubleshoot existing solutions, ensuring impeccable functionality and user experience.</li>
                         <li>Foster strong collaborations with external stakeholders, offering on-site support for swift bug fixing and seamless deployment.</li>
                         <li>Employ cutting-edge IT service management software to efficiently log, manage, and resolve incidents.</li>
                     </ul>
                      <div class="mt-4">
-                         <h4 class="font-semibold text-slate-400 mb-2">Key Clients:</h4>
+                         <h4 class="font-semibold text-slate-500 mb-2">Key Clients:</h4>
                          <div class="flex flex-wrap gap-2">
-                             <span class="bg-slate-700 text-cyan-300 text-xs font-semibold py-1 px-3 rounded-full">Department of Education</span>
+                             <span class="bg-teal-100 text-teal-800 text-xs font-semibold py-1 px-3 rounded-full">Department of Education</span>
                          </div>
                      </div>
                 </div>
                 <div class="timeline-item mb-12">
                     <div class="timeline-line"></div>
-                    <h3 class="text-2xl font-bold text-slate-100">Application Support Engineer</h3>
-                    <p class="text-md text-cyan-400">Knosys, Melbourne | Dec 2020 - Dec 2021</p>
+                    <h3 class="text-2xl font-bold text-slate-800">Application Support Engineer</h3>
+                    <p class="text-md font-semibold text-sky-500">Knosys, Melbourne | Dec 2020 - Dec 2021</p>
                     <ul class="list-disc list-inside mt-3 space-y-2 text-lg">
                         <li>Provided 2nd & 3rd level application support for GreenOrbit, ensuring smooth operations and user satisfaction.</li>
                         <li>Developed and implemented automated tools, improving efficiency for future updates and tasks.</li>
                         <li>Troubleshot web-based applications and supported knowledge management solutions.</li>
                     </ul>
                     <div class="mt-4">
-                        <h4 class="font-semibold text-slate-400 mb-2">Key Clients:</h4>
+                        <h4 class="font-semibold text-slate-500 mb-2">Key Clients:</h4>
                         <div class="flex flex-wrap gap-2">
-                            <span class="bg-slate-700 text-cyan-300 text-xs font-semibold py-1 px-3 rounded-full">Cotton On</span>
-                            <span class="bg-slate-700 text-cyan-300 text-xs font-semibold py-1 px-3 rounded-full">Harvey Norman</span>
-                            <span class="bg-slate-700 text-cyan-300 text-xs font-semibold py-1 px-3 rounded-full">Healthscope</span>
+                            <span class="bg-teal-100 text-teal-800 text-xs font-semibold py-1 px-3 rounded-full">Cotton On</span>
+                            <span class="bg-teal-100 text-teal-800 text-xs font-semibold py-1 px-3 rounded-full">Harvey Norman</span>
+                            <span class="bg-teal-100 text-teal-800 text-xs font-semibold py-1 px-3 rounded-full">Healthscope</span>
                         </div>
                     </div>
                 </div>
                 <div class="timeline-item">
-                    <h3 class="text-2xl font-bold text-slate-100">SharePoint Developer</h3>
-                    <p class="text-md text-cyan-400">Engage Squared, Melbourne | Mar 2018 - Dec 2020</p>
+                    <h3 class="text-2xl font-bold text-slate-800">SharePoint Developer</h3>
+                    <p class="text-md font-semibold text-sky-500">Engage Squared, Melbourne | Mar 2018 - Dec 2020</p>
                     <ul class="list-disc list-inside mt-3 space-y-2 text-lg">
                         <li>Designed and implemented responsive solutions using React, JavaScript, TypeScript, and SPFx.</li>
                         <li>Leveraged Azure DevOps, Git, and CI/CD pipelines for efficient deployment automation.</li>
                         <li>Successfully conducted client workshops, showcasing products and cutting-edge technologies.</li>
                     </ul>
                     <div class="mt-4">
-                        <h4 class="font-semibold text-slate-400 mb-2">Key Clients:</h4>
+                        <h4 class="font-semibold text-slate-500 mb-2">Key Clients:</h4>
                         <div class="flex flex-wrap gap-2">
-                            <span class="bg-slate-700 text-cyan-300 text-xs font-semibold py-1 px-3 rounded-full">Victoria Police</span>
-                            <span class="bg-slate-700 text-cyan-300 text-xs font-semibold py-1 px-3 rounded-full">Transurban</span>
-                            <span class="bg-slate-700 text-cyan-300 text-xs font-semibold py-1 px-3 rounded-full">Cimic Group</span>
+                            <span class="bg-teal-100 text-teal-800 text-xs font-semibold py-1 px-3 rounded-full">Victoria Police</span>
+                            <span class="bg-teal-100 text-teal-800 text-xs font-semibold py-1 px-3 rounded-full">Transurban</span>
+                            <span class="bg-teal-100 text-teal-800 text-xs font-semibold py-1 px-3 rounded-full">Cimic Group</span>
                         </div>
                     </div>
                 </div>
@@ -201,8 +208,8 @@
         </section>
 
         <section class="my-12 text-center fade-in-up">
-             <h2 class="text-3xl font-bold text-slate-100 section-title">Education</h2>
-            <p class="text-xl font-semibold text-slate-300">Coder Academy, Melbourne</p>
+             <h2 class="text-3xl font-bold text-slate-800 section-title">Education</h2>
+            <p class="text-xl font-semibold text-slate-700">Coder Academy, Melbourne</p>
             <p>Web Development, Fast Track Bootcamp Graduate | Feb 2018</p>
         </section>
 
@@ -210,7 +217,6 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // --- Intersection Observer for Animations ---
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
