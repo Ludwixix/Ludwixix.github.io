@@ -20,8 +20,6 @@
             --card-bg-dark: rgba(55, 65, 81, 0.7);
             --glow-dark: rgba(125, 211, 252, 0.15);
             --particle-color-dark: 'rgba(125, 211, 252, 0.2)';
-            --border-gradient-dark: linear-gradient(90deg, rgba(56,189,248,0.2), rgba(56,189,248,0), rgba(56,189,248,0.2));
-
 
             /* Light Theme Colors */
             --bg-light: #f4f7fa; /* A subtle, cool off-white */
@@ -32,7 +30,6 @@
             --card-bg-light: #f9fafb; /* gray-50 */
             --glow-light: rgba(14, 165, 233, 0.1);
             --particle-color-light: 'rgba(56, 189, 248, 0.3)';
-            --border-gradient-light: linear-gradient(90deg, rgba(14,165,233,0.1), rgba(14,165,233,0), rgba(14,165,233,0.1));
         }
         @keyframes animated-gradient {
             0% { background-position: 0% 50%; }
@@ -164,39 +161,50 @@
             50% { opacity: 0.5; }
         }
 
-        @media print {
-            body, html {
-                background: #ffffff !important;
-                color: #000000 !important;
-                -webkit-print-color-adjust: exact;
-                color-adjust: exact;
-            }
-            .resume-container {
-                margin: 0 !important;
-                box-shadow: none !important;
-                border: none !important;
-                backdrop-filter: none !important;
-                background-color: #ffffff !important;
-            }
-            .section-card, .experience-item {
-                background-color: #ffffff !important;
-                border: 1px solid #e5e7eb !important;
-                box-shadow: none !important;
-            }
-            #particle-canvas, #spotlight, .theme-toggler, .btn, #clock-container {
-                display: none !important;
-            }
-            h1, h2, h3, p, li, a, span, div {
-                color: #000000 !important;
-                text-shadow: none !important;
-            }
-            .bg-clip-text {
-                color: transparent !important;
-                -webkit-text-fill-color: #000000 !important;
-            }
-            .section-heading, .skill-icon {
-                color: #0ea5e9 !important;
-            }
+        /* PDF Generation Styles */
+        body.is-generating-pdf {
+            animation: none !important;
+            background: #ffffff !important;
+        }
+        body.is-generating-pdf .resume-container {
+            margin: 0 !important;
+            padding: 2rem !important;
+            box-shadow: none !important;
+            border: none !important;
+            backdrop-filter: none !important;
+            background-color: #ffffff !important;
+        }
+        body.is-generating-pdf .section-card,
+        body.is-generating-pdf .experience-item {
+            background-color: #ffffff !important;
+            border: 1px solid #e5e7eb !important;
+            box-shadow: none !important;
+        }
+        body.is-generating-pdf #particle-canvas,
+        body.is-generating-pdf #spotlight,
+        body.is-generating-pdf .theme-toggler,
+        body.is-generating-pdf .btn,
+        body.is-generating-pdf #clock-container {
+            display: none !important;
+        }
+        body.is-generating-pdf h1,
+        body.is-generating-pdf h2,
+        body.is-generating-pdf h3,
+        body.is-generating-pdf p,
+        body.is-generating-pdf li,
+        body.is-generating-pdf a,
+        body.is-generating-pdf span,
+        body.is-generating-pdf div {
+            color: #000000 !important;
+            text-shadow: none !important;
+        }
+        body.is-generating-pdf .bg-clip-text {
+            color: transparent !important;
+            -webkit-text-fill-color: #000000 !important;
+        }
+        body.is-generating-pdf .section-heading,
+        body.is-generating-pdf .skill-icon {
+            color: #0ea5e9 !important;
         }
     </style>
 </head>
@@ -329,15 +337,20 @@
     <script>
         function downloadPDF(){
             const element = document.getElementById('resume-content');
+            const body = document.body;
+            body.classList.add('is-generating-pdf');
+
             const opt = {
               margin:       0.5,
               filename:     'Sam_Ludwig_Resume.pdf',
               image:        { type: 'jpeg', quality: 0.98 },
-              html2canvas:  { scale: 2, useCORS: true },
+              html2canvas:  { scale: 2, useCORS: true, logging: false },
               jsPDF:        { unit: 'in', format: 'a4', orientation: 'portrait' }
             };
-            // New Promise-based usage:
-            html2pdf().set(opt).from(element).save();
+            
+            html2pdf().set(opt).from(element).save().then(() => {
+                body.classList.remove('is-generating-pdf');
+            });
         }
 
         document.addEventListener('DOMContentLoaded', () => {
