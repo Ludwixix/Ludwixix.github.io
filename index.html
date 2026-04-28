@@ -3,300 +3,345 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sam Ludwig | Senior M365 & SharePoint Engineer</title>
-    <meta name="description" content="Senior M365 & SharePoint Engineer. PowerShell automation, enterprise escalation, SPFx development. Melbourne, VIC.">
-    <meta name="author" content="Sam Ludwig">
-    <meta property="og:title" content="Sam Ludwig | Senior M365 & SharePoint Engineer">
-    <meta property="og:description" content="Managing the largest SharePoint farm in the Southern Hemisphere. 660k+ users. PowerShell & Python automation.">
-    <meta property="og:url" content="https://samludwig.au/">
+    <title>Sam Ludwig | NEXT-GEN M365 ENGINEER</title>
+    <meta name="description" content="Senior M365 & SharePoint Engineer. PowerShell automation, enterprise escalation, SPFx development.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,600;0,9..144,700;1,9..144,300;1,9..144,400&family=DM+Mono:wght@400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 rx=%2220%22 fill=%22%230f172a%22/><text x=%2250%%22 y=%2250%%22 font-family=%22Georgia%22 font-size=%2245%22 font-weight=%22bold%22 fill=%22white%22 dominant-baseline=%22central%22 text-anchor=%22middle%22>SL</text></svg>">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;700;800&family=Space+Grotesk:wght@300;400;600;700&family=Outfit:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
-:root{
-    --cli-bg:#0a0e17;--cli-surface:#0f1623;--cli-border:#1e2d45;
-    --cli-text:#cdd6f4;--cli-dim:#6c7a9a;
-    --cli-green:#a6e3a1;--cli-blue:#89b4fa;--cli-yellow:#f9e2af;
-    --cli-red:#f38ba8;--cli-cyan:#89dceb;--cli-purple:#cba6f7;
-    --gui-ink:#0f172a;--gui-ink2:#334155;--gui-ink3:#64748b;
-    --gui-paper:#fafaf7;--gui-paper2:#f1f0eb;--gui-rule:#d4d0c4;
-    --gui-accent:#0052cc;--gui-accent-light:#e8f0fe;
-    --mono:'DM Mono','Consolas',monospace;
-    --serif:'Fraunces',Georgia,serif;
-    --sans:'DM Sans',sans-serif;
-}
-body{font-family:var(--mono);background:var(--cli-bg);color:var(--cli-text);-webkit-font-smoothing:antialiased;overflow-x:hidden;min-height:100vh}
-::selection{background:var(--cli-blue);color:var(--cli-bg)}
+/* =========================================
+   CORE VARIABLES & THEMES
+   ========================================= */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; background: var(--void); }
 
-/* MODE TOGGLE */
-.mode-toggle{
-    position:fixed;top:1.25rem;right:1.5rem;z-index:1000;
-    display:flex;align-items:center;gap:0.6rem;
-    background:rgba(15,22,35,0.92);border:1px solid var(--cli-border);
-    padding:0.4rem 0.9rem 0.4rem 0.6rem;border-radius:4px;
-    cursor:pointer;backdrop-filter:blur(8px);transition:border-color 0.2s;
-    font-family:var(--mono);
-}
-.mode-toggle:hover{border-color:var(--cli-blue)}
-.mode-dot{width:8px;height:8px;border-radius:50%;background:var(--cli-green);box-shadow:0 0 6px var(--cli-green);animation:pdot 2s infinite}
-@keyframes pdot{0%,100%{opacity:1}50%{opacity:0.35}}
-.mode-label{font-size:0.65rem;letter-spacing:0.1em;color:var(--cli-dim);text-transform:uppercase}
-.mode-label span{color:var(--cli-blue)}
-body.gui-mode .mode-toggle{background:rgba(250,250,247,0.95);border-color:var(--gui-rule)}
-body.gui-mode .mode-toggle:hover{border-color:var(--gui-accent)}
-body.gui-mode .mode-dot{background:var(--gui-accent);box-shadow:0 0 6px var(--gui-accent);animation:none}
-body.gui-mode .mode-label{color:var(--gui-ink3)}
-body.gui-mode .mode-label span{color:var(--gui-accent)}
-
-/* CLI LAYER */
-#cli-layer{min-height:100vh;display:flex;flex-direction:column;padding:2rem;transition:opacity 0.45s,transform 0.45s}
-body.gui-mode #cli-layer{opacity:0;pointer-events:none;position:fixed;inset:0;transform:scale(0.97)}
-.cli-titlebar{display:flex;align-items:center;gap:0.5rem;margin-bottom:2rem;padding-bottom:1rem;border-bottom:1px solid var(--cli-border)}
-.cdot{width:12px;height:12px;border-radius:50%}
-.cdot-r{background:#ff5f57}.cdot-y{background:#febc2e}.cdot-g{background:#28c840}
-.cli-wintitle{margin-left:0.75rem;font-size:0.7rem;color:var(--cli-dim);letter-spacing:0.06em}
-#cli-output{flex:1;white-space:pre-wrap;line-height:1.65;font-size:0.82rem;overflow-y:auto;padding-bottom:1rem}
-.cli-input-row{display:flex;align-items:center;gap:0.5rem;padding-top:0.5rem;border-top:1px solid var(--cli-border);margin-top:auto}
-.cli-ps{color:var(--cli-blue);font-size:0.82rem;white-space:nowrap}
-#cli-input{flex:1;background:transparent;border:none;color:var(--cli-text);font-family:var(--mono);font-size:0.82rem;outline:none;caret-color:var(--cli-green)}
-.c-dim{color:var(--cli-dim)}.c-green{color:var(--cli-green)}.c-blue{color:var(--cli-blue)}
-.c-yellow{color:var(--cli-yellow)}.c-red{color:var(--cli-red)}.c-cyan{color:var(--cli-cyan)}
-.c-purple{color:var(--cli-purple)}.c-white{color:#fff}.c-bold{font-weight:500}
-
-/* GUI LAYER */
-#gui-layer{
-    position:fixed;inset:0;overflow-y:auto;
-    background:var(--gui-paper);color:var(--gui-ink);font-family:var(--sans);
-    opacity:0;pointer-events:none;transform:scale(1.02);
-    transition:opacity 0.45s,transform 0.45s;z-index:500;
-}
-body.gui-mode #gui-layer{opacity:1;pointer-events:all;transform:scale(1)}
-
-/* GUI NAV */
-.gnav{position:sticky;top:0;z-index:50;background:rgba(250,250,247,0.94);backdrop-filter:blur(12px);border-bottom:1px solid var(--gui-rule);padding:0 2rem;height:60px;display:flex;align-items:center;justify-content:space-between}
-.gnav-logo{font-family:var(--serif);font-weight:600;font-size:1.1rem;color:var(--gui-ink);text-decoration:none;letter-spacing:-0.02em}
-.gnav-logo span{color:var(--gui-accent)}
-.gnav-links{display:flex;gap:4rem;list-style:none}
-.gnav-links a{font-family:var(--mono);font-size:0.68rem;color:var(--gui-ink3);text-decoration:none;letter-spacing:0.06em;text-transform:uppercase;transition:color 0.2s}
-.gnav-links a:hover{color:var(--gui-accent)}
-@media(max-width:768px){.gnav-links{display:none}}
-
-/* GUI HERO */
-.ghero{max-width:1100px;margin:0 auto;padding:7rem 2rem 4rem;display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:start}
-@media(max-width:820px){.ghero{grid-template-columns:1fr;padding:6rem 2rem 3rem;gap:2.5rem}}
-.ghero-eyebrow{font-family:var(--mono);font-size:0.68rem;color:var(--gui-accent);letter-spacing:0.12em;text-transform:uppercase;margin-bottom:1.25rem;display:flex;align-items:center;gap:0.75rem}
-.ghero-eyebrow::before{content:'';display:block;width:28px;height:1.5px;background:var(--gui-accent)}
-.ghero-name{font-family:var(--serif);font-size:clamp(3rem,7vw,5.5rem);font-weight:700;line-height:0.95;letter-spacing:-0.03em;color:var(--gui-ink);margin-bottom:1.25rem}
-.ghero-name em{font-style:italic;font-weight:300;color:var(--gui-ink2)}
-.ghero-role{font-family:var(--serif);font-size:clamp(1rem,2.2vw,1.35rem);font-weight:300;color:var(--gui-ink2);margin-bottom:1.5rem;line-height:1.5}
-.ghero-bio{font-size:0.9rem;line-height:1.8;color:var(--gui-ink2);margin-bottom:2rem;font-weight:300}
-.ghero-actions{display:flex;gap:0.75rem;flex-wrap:wrap}
-.btn-s{font-family:var(--mono);font-size:0.72rem;letter-spacing:0.06em;text-transform:uppercase;background:var(--gui-ink);color:var(--gui-paper);padding:0.8rem 1.5rem;text-decoration:none;border-radius:2px;border:1.5px solid var(--gui-ink);transition:all 0.2s;cursor:pointer;display:inline-block}
-.btn-s:hover{background:var(--gui-accent);border-color:var(--gui-accent)}
-.btn-o{font-family:var(--mono);font-size:0.72rem;letter-spacing:0.06em;text-transform:uppercase;background:transparent;color:var(--gui-ink);padding:0.8rem 1.5rem;text-decoration:none;border-radius:2px;border:1.5px solid var(--gui-rule);transition:all 0.2s;display:inline-block}
-.btn-o:hover{border-color:var(--gui-ink)}
-
-/* METRICS GRID */
-.gmetrics{display:grid;grid-template-columns:1fr 1fr;gap:1.5px;background:var(--gui-rule);border:1.5px solid var(--gui-rule);margin-bottom:1.5px}
-.gmetric{background:var(--gui-paper);padding:1.75rem 1.5rem;transition:background 0.2s}
-.gmetric:hover{background:var(--gui-accent-light)}
-.gmetric-num{font-family:var(--serif);font-size:2.6rem;font-weight:700;color:var(--gui-ink);letter-spacing:-0.05em;line-height:1;margin-bottom:0.35rem}
-.gmetric-num span{color:var(--gui-accent)}
-.gmetric-label{font-family:var(--mono);font-size:0.58rem;color:var(--gui-ink3);letter-spacing:0.1em;text-transform:uppercase;line-height:1.4}
-
-/* Photo slot */
-.gphoto {
-    width: 50%;
-    max-width: 50%;
-    aspect-ratio: 3/4;
-    object-fit: cover;
-    object-position: center top;
-    display: block;
-    border: 1.5px solid var(--gui-rule);
-    filter: grayscale(100%) contrast(1.1);
-    transition: all 0.5s ease;
-    box-shadow: 0 10px 30px rgba(15, 23, 42, 0.05);
-}
-.gphoto:hover {
-    filter: grayscale(0%) contrast(1.05);
-    border-color: var(--gui-accent);
-    transform: translateY(-4px);
-    box-shadow: 0 15px 35px rgba(0, 82, 204, 0.12);
+:root {
+    --void: #030305;
+    --surface: rgba(10, 12, 20, 0.65);
+    --border-dim: rgba(0, 240, 255, 0.15);
+    --neon-cyan: #00f3ff;
+    --neon-purple: #bc13fe;
+    --neon-pink: #ff003c;
+    --matrix-green: #00ff41;
+    --text-main: #e2e8f0;
+    --text-dim: #8b9eb7;
+    
+    --font-mono: 'JetBrains Mono', monospace;
+    --font-display: 'Space Grotesk', sans-serif;
+    --font-body: 'Outfit', sans-serif;
 }
 
-/* SECTIONS */
-.gsec{padding:5rem 2rem;border-top:1px solid var(--gui-rule)}
-.gsec-inner{max-width:1100px;margin:0 auto}
-.gsec-alt{background:var(--gui-paper2)}
-.gsec-hdr{display:flex;align-items:baseline;gap:1rem;margin-bottom:3rem}
-.gsec-num{font-family:var(--mono);font-size:0.62rem;color:var(--gui-accent);letter-spacing:0.1em}
-.gsec-title{font-family:var(--serif);font-size:2rem;font-weight:600;letter-spacing:-0.03em;color:var(--gui-ink)}
-
-/* COMPETENCIES */
-.comp-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5px;background:var(--gui-rule);border:1.5px solid var(--gui-rule)}
-@media(max-width:700px){.comp-grid{grid-template-columns:1fr}}
-.comp-card{background:var(--gui-paper);padding:2.5rem;transition:background 0.2s}
-.comp-card:hover{background:var(--gui-accent-light)}
-.comp-icon{width:32px;height:32px;color:var(--gui-accent);margin-bottom:1.25rem}
-.comp-card h4{font-family:var(--serif);font-size:1.1rem;font-weight:600;margin-bottom:0.65rem;letter-spacing:-0.02em}
-.comp-card p{font-size:0.85rem;line-height:1.7;color:var(--gui-ink2)}
-
-/* SKILLS */
-.skills-grid{display:grid;grid-template-columns:1fr 1fr;gap:3rem}
-@media(max-width:700px){.skills-grid{grid-template-columns:1fr}}
-.sg-label{font-family:var(--mono);font-size:0.62rem;color:var(--gui-ink3);letter-spacing:0.12em;text-transform:uppercase;margin-bottom:0.85rem;padding-bottom:0.65rem;border-bottom:1px solid var(--gui-rule)}
-.stags{display:flex;flex-wrap:wrap;gap:0.4rem}
-.stag{font-family:var(--mono);font-size:0.68rem;color:var(--gui-ink2);background:var(--gui-paper2);border:1px solid var(--gui-rule);padding:0.3rem 0.65rem;border-radius:2px;transition:all 0.15s;cursor:default}
-.stag:hover{border-color:var(--gui-accent);color:var(--gui-accent);background:var(--gui-accent-light)}
-.certs-row{margin-top:3rem;padding-top:2.5rem;border-top:1px solid var(--gui-rule)}
-.certs-label{font-family:var(--mono);font-size:0.62rem;color:var(--gui-ink3);letter-spacing:0.12em;text-transform:uppercase;margin-bottom:0.85rem}
-.certs-list{display:flex;flex-wrap:wrap;gap:0.65rem}
-.cpill{font-family:var(--mono);font-size:0.67rem;background:var(--gui-ink);color:var(--gui-paper);padding:0.35rem 0.85rem;border-radius:100px;display:flex;align-items:center;gap:0.35rem}
-.cpill::before{content:'✓';color:#4ade80;font-size:0.6rem}
-.cpill-wip{background:var(--gui-ink2)}
-.cpill-wip::before{content:'◉';color:#93c5fd}
-
-/* PROJECTS */
-.proj-list{display:flex;flex-direction:column;gap:1.5px;background:var(--gui-rule);border:1.5px solid var(--gui-rule)}
-.proj-card{background:var(--gui-paper);padding:2.25rem;display:grid;grid-template-columns:1fr auto;gap:2rem;align-items:start;transition:background 0.2s}
-.proj-card:hover{background:var(--gui-accent-light)}
-@media(max-width:600px){.proj-card{grid-template-columns:1fr}}
-.ptags{display:flex;gap:0.4rem;flex-wrap:wrap;margin-bottom:0.65rem}
-.ptag{font-family:var(--mono);font-size:0.6rem;letter-spacing:0.06em;text-transform:uppercase;padding:0.15rem 0.5rem;border-radius:2px}
-.tag-js{background:#fef3c7;color:#92400e}.tag-py{background:#dbeafe;color:#1e40af}
-.tag-ps{background:#ede9fe;color:#5b21b6}.tag-api{background:#d1fae5;color:#065f46}
-.proj-card h4{font-family:var(--serif);font-size:1.2rem;font-weight:600;letter-spacing:-0.02em;margin-bottom:0.5rem}
-.proj-card p{font-size:0.85rem;line-height:1.75;color:var(--gui-ink2)}
-.proj-link{font-family:var(--mono);font-size:0.68rem;color:var(--gui-accent);text-decoration:none;letter-spacing:0.05em;white-space:nowrap;padding:0.45rem 0.9rem;border:1px solid var(--gui-accent);border-radius:2px;transition:all 0.2s;align-self:start}
-.proj-link:hover{background:var(--gui-accent);color:white}
-
-/* EXPERIENCE */
-.exp-list{display:flex;flex-direction:column}
-.exp-item{border-bottom:1px solid var(--gui-rule)}
-.exp-trigger{width:100%;background:none;border:none;padding:1.75rem 0;cursor:pointer;display:grid;grid-template-columns:1fr auto;gap:2rem;align-items:center;text-align:left}
-.exp-trigger:hover .exp-role{color:var(--gui-accent)}
-.exp-meta{font-family:var(--mono);font-size:0.62rem;color:var(--gui-ink3);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:0.3rem}
-.exp-role{font-family:var(--serif);font-size:1.15rem;font-weight:600;letter-spacing:-0.02em;color:var(--gui-ink);transition:color 0.2s;margin-bottom:0.2rem}
-.exp-co{font-size:0.85rem;color:var(--gui-ink3)}
-.exp-chev{width:18px;height:18px;color:var(--gui-ink3);transition:transform 0.3s;flex-shrink:0}
-.exp-item.open .exp-chev{transform:rotate(180deg)}
-.exp-item.open .exp-role{color:var(--gui-accent)}
-.exp-body{max-height:0;overflow:hidden;transition:max-height 0.4s cubic-bezier(0.4,0,0.2,1)}
-.exp-body-inner{padding:0 0 1.75rem}
-.exp-body ul{list-style:none;display:flex;flex-direction:column;gap:0.65rem}
-.exp-body li{font-size:0.87rem;line-height:1.7;color:var(--gui-ink2);padding-left:1.25rem;position:relative}
-.exp-body li::before{content:'—';position:absolute;left:0;color:var(--gui-accent);font-family:var(--mono)}
-
-/* CONTACT */
-.gcontact{background:var(--gui-ink)}
-.gcontact .gsec-title{color:white}
-.gcontact .gsec-num{color:#60a5fa}
-.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center}
-@media(max-width:700px){.contact-grid{grid-template-columns:1fr;gap:2rem}}
-.contact-tagline{font-family:var(--serif);font-size:2.2rem;font-weight:600;font-style:italic;line-height:1.2;color:white;margin-bottom:1.25rem;letter-spacing:-0.03em}
-.contact-sub{font-size:0.9rem;color:#94a3b8;line-height:1.7}
-.contact-links{display:flex;flex-direction:column;gap:0.85rem}
-.contact-link{display:flex;align-items:center;gap:1rem;padding:1.1rem 1.25rem;border:1px solid #1e293b;border-radius:4px;text-decoration:none;color:white;transition:all 0.2s}
-.contact-link:hover{border-color:#60a5fa;background:rgba(96,165,250,0.05)}
-.cl-label{font-family:var(--mono);font-size:0.6rem;color:#64748b;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:0.1rem}
-.cl-value{font-size:0.87rem;color:white}
-.cl-icon{color:#60a5fa;flex-shrink:0}
-
-/* FOOTER */
-.gfooter{background:var(--gui-ink);border-top:1px solid #1e293b;padding:1.5rem 2rem}
-.gfooter-inner{max-width:1100px;margin:0 auto;display:flex;justify-content:space-between;align-items:center}
-.gfooter p,.gfooter a{font-family:var(--mono);font-size:0.62rem;color:#475569;letter-spacing:0.06em;text-decoration:none}
-
-/* REVEAL */
-.gr{opacity:0;transform:translateY(20px);transition:opacity 0.65s ease,transform 0.65s ease}
-.gr.v{opacity:1;transform:none}
-
-@media(max-width:480px){
-    #cli-layer{padding:1rem}
-    #cli-output,#cli-input,.cli-ps{font-size:0.72rem}
+body.theme-matrix {
+    --void: #010a01; --surface: rgba(1, 15, 5, 0.7); --border-dim: rgba(0, 255, 65, 0.2);
+    --neon-cyan: #00ff41; --neon-purple: #008f11; --neon-pink: #00ff41;
+    --text-main: #ccffcc; --text-dim: #55aa55;
 }
+
+body.theme-crimson {
+    --void: #0a0101; --surface: rgba(20, 2, 2, 0.7); --border-dim: rgba(255, 0, 60, 0.2);
+    --neon-cyan: #ff003c; --neon-purple: #ff5500; --neon-pink: #ff003c; --matrix-green: #ff003c;
+    --text-main: #ffcccc; --text-dim: #aa5555;
+}
+
+body {
+    font-family: var(--font-body); background: var(--void); color: var(--text-main);
+    -webkit-font-smoothing: antialiased; overflow-x: hidden; min-height: 100vh;
+    transition: background-color 0.5s ease;
+}
+::selection { background: var(--neon-cyan); color: var(--void); }
+
+/* Animated Background Mesh */
+.cyber-bg {
+    position: fixed; inset: 0; z-index: -2;
+    background: radial-gradient(circle at 15% 50%, rgba(var(--neon-cyan), 0.08), transparent 25%),
+                radial-gradient(circle at 85% 30%, rgba(var(--neon-purple), 0.08), transparent 25%);
+    filter: blur(60px); animation: pulseBg 10s ease-in-out infinite alternate; transition: all 0.5s;
+}
+@keyframes pulseBg { 0% { transform: scale(1); } 100% { transform: scale(1.1); } }
+
+/* Matrix Canvas */
+#matrixCanvas { position: fixed; inset: 0; z-index: -1; pointer-events: none; opacity: 0; transition: opacity 1s; mix-blend-mode: screen; }
+#matrixCanvas.active { opacity: 0.4; }
+
+/* CRT Scanlines Overlay */
+.scanlines {
+    position: fixed; inset: 0; z-index: 9998; pointer-events: none;
+    background: linear-gradient(to bottom, rgba(255,255,255,0), rgba(255,255,255,0) 50%, rgba(0,0,0,0.1) 50%, rgba(0,0,0,0.1));
+    background-size: 100% 4px; mix-blend-mode: overlay; opacity: 0.6; transition: all 0.5s;
+}
+
+/* OVERCLOCK MODE (Konami Code) */
+body.overclock-mode .cyber-bg { animation: pulseBg 1s ease-in-out infinite alternate; filter: blur(30px) saturate(200%); }
+body.overclock-mode .scanlines { opacity: 0.9; background-size: 100% 2px; animation: scanScroll 5s linear infinite; }
+@keyframes scanScroll { 0% { background-position: 0 0; } 100% { background-position: 0 100vh; } }
+body.overclock-mode { text-shadow: 2px 0 rgba(255,0,60,0.5), -2px 0 rgba(0,243,255,0.5); }
+
+/* DO NOT PRESS BUTTON & WIPE MODAL */
+.do-not-press { position: fixed; bottom: 0; left: 0; width: 5px; height: 5px; background: transparent; z-index: 9999; cursor: crosshair; }
+#wipeModal {
+    position: fixed; inset: 0; background: #000; z-index: 10000; display: flex; flex-direction: column;
+    justify-content: center; align-items: center; text-align: center; color: var(--neon-pink);
+    font-family: var(--font-mono); font-size: 1.5rem; opacity: 0; pointer-events: none; transition: opacity 0.2s;
+}
+#wipeModal.active { opacity: 1; pointer-events: all; }
+.wipe-bar { width: 300px; height: 20px; border: 2px solid var(--neon-pink); margin-top: 2rem; position: relative; overflow: hidden; }
+.wipe-fill { position: absolute; top: 0; left: 0; height: 100%; background: var(--neon-pink); width: 0%; transition: width 3s linear; }
+
+/* =========================================
+   MODE TOGGLE HUD
+   ========================================= */
+.mode-toggle {
+    position: fixed; top: 1.5rem; right: 1.5rem; z-index: 1000; display: flex; align-items: center; gap: 0.8rem;
+    background: rgba(3, 3, 5, 0.8); border: 1px solid var(--neon-cyan); padding: 0.5rem 1rem; border-radius: 2px;
+    cursor: pointer; backdrop-filter: blur(10px); transition: all 0.3s; font-family: var(--font-mono); outline: none; box-shadow: 0 0 10px rgba(0,243,255,0.2);
+}
+.mode-toggle:hover { background: rgba(0, 243, 255, 0.1); box-shadow: 0 0 20px rgba(0,243,255,0.4); }
+.mode-dot { width: 8px; height: 8px; background: var(--matrix-green); box-shadow: 0 0 8px var(--matrix-green); animation: blink 1.5s infinite; }
+@keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.2; } }
+.mode-label { font-size: 0.7rem; letter-spacing: 0.15em; color: var(--text-dim); text-transform: uppercase; font-weight: 700; }
+.mode-label span { color: var(--neon-cyan); text-shadow: 0 0 5px var(--neon-cyan); }
+body.gui-mode .mode-toggle { border-color: var(--neon-purple); box-shadow: 0 0 10px rgba(188,19,254,0.2); }
+body.gui-mode .mode-toggle:hover { background: rgba(188, 19, 254, 0.1); box-shadow: 0 0 20px rgba(188,19,254,0.4); }
+body.gui-mode .mode-dot { background: var(--neon-purple); box-shadow: 0 0 8px var(--neon-purple); animation: none; }
+body.gui-mode .mode-label span { color: var(--neon-purple); text-shadow: 0 0 5px var(--neon-purple); }
+
+.sys-prompt {
+    position: fixed; bottom: 2rem; right: 2rem; z-index: 990; font-family: var(--font-mono); font-size: 0.7rem; color: var(--neon-cyan);
+    background: rgba(3, 3, 5, 0.9); border: 1px solid var(--border-dim); border-left: 3px solid var(--neon-cyan);
+    padding: 0.8rem 1.2rem; backdrop-filter: blur(5px); opacity: 0; transform: translateY(10px); pointer-events: none;
+    transition: opacity 0.5s, transform 0.5s; text-shadow: 0 0 5px rgba(0,243,255,0.4); max-width: 300px; line-height: 1.5;
+}
+.sys-prompt.show { opacity: 1; transform: translateY(0); }
+
+/* =========================================
+   CLI LAYER (Hacker Terminal)
+   ========================================= */
+#cli-layer {
+    min-height: 100vh; display: flex; flex-direction: column; padding: 2.5rem; font-family: var(--font-mono);
+    transition: opacity 0.4s, transform 0.4s; position: absolute; inset: 0; z-index: 10; text-shadow: 0 0 4px rgba(0, 255, 65, 0.4);
+}
+body.gui-mode #cli-layer { opacity: 0; pointer-events: none; transform: scale(0.95); }
+
+.cli-titlebar { display: flex; align-items: center; gap: 0.8rem; margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px dashed var(--matrix-green); opacity: 0.8; }
+.cdot { width: 10px; height: 10px; border-radius: 0; background: var(--matrix-green); }
+.cli-wintitle { font-size: 0.75rem; color: var(--matrix-green); letter-spacing: 0.1em; text-transform: uppercase; }
+
+#cli-output { flex: 1; white-space: pre-wrap; line-height: 1.7; font-size: 0.9rem; overflow-y: auto; padding-bottom: 2rem; }
+.cli-input-row { display: flex; align-items: center; gap: 1rem; padding-top: 1rem; border-top: 1px dashed var(--matrix-green); }
+.cli-ps { color: var(--neon-cyan); font-weight: 700; white-space: nowrap; text-shadow: 0 0 5px var(--neon-cyan); }
+#cli-input { flex: 1; background: transparent; border: none; color: var(--text-main); font-family: var(--font-mono); font-size: 0.9rem; outline: none; caret-color: var(--neon-pink); }
+
+.c-dim { color: #5c7080; } .c-green { color: var(--matrix-green); } .c-blue { color: #3b82f6; }
+.c-yellow { color: #fbbf24; } .c-red { color: var(--neon-pink); } .c-cyan { color: var(--neon-cyan); }
+.c-purple { color: var(--neon-purple); } .c-white { color: #fff; } .c-bold { font-weight: 700; }
+
+/* =========================================
+   GUI LAYER (Futuristic HUD)
+   ========================================= */
+#gui-layer { position: fixed; inset: 0; overflow-y: auto; opacity: 0; pointer-events: none; transform: scale(1.05); transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1), transform 0.5s cubic-bezier(0.16, 1, 0.3, 1); z-index: 500; }
+body.gui-mode #gui-layer { opacity: 1; pointer-events: all; transform: scale(1); }
+
+.gnav { position: sticky; top: 0; z-index: 50; height: 70px; background: rgba(3, 3, 5, 0.7); backdrop-filter: blur(16px); border-bottom: 1px solid var(--border-dim); display: flex; align-items: center; justify-content: space-between; padding: 0 3rem; }
+.gnav-logo { font-family: var(--font-display); font-weight: 800; font-size: 1.5rem; color: #fff; text-decoration: none; letter-spacing: -0.02em; display: inline-block; }
+.gnav-logo span { color: var(--neon-cyan); text-shadow: 0 0 10px var(--neon-cyan); }
+.gnav-logo:hover { animation: logoGlitch 0.2s infinite alternate-reverse; color: var(--neon-pink); text-shadow: 3px 0 var(--neon-cyan), -3px 0 var(--neon-purple); }
+@keyframes logoGlitch { 0% { transform: skewX(0deg); } 20% { transform: skewX(-15deg); } 40% { transform: skewX(15deg); } 60% { transform: translate(-2px, 2px); } 80% { transform: translate(2px, -2px); } 100% { transform: skewX(0deg); } }
+
+.gnav-links { display: flex; gap: 2.5rem; list-style: none; }
+.gnav-links a { font-family: var(--font-mono); font-size: 0.75rem; color: var(--text-dim); text-decoration: none; letter-spacing: 0.15em; text-transform: uppercase; transition: all 0.3s; }
+.gnav-links a:hover { color: var(--neon-cyan); text-shadow: 0 0 8px var(--neon-cyan); }
+@media(max-width: 800px) { .gnav-links { display: none; } }
+
+.ghero { max-width: 1200px; margin: 0 auto; padding: 10rem 2rem 6rem; display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+@media(max-width: 900px) { .ghero { grid-template-columns: 1fr; padding-top: 8rem; } }
+.ghero-eyebrow { font-family: var(--font-mono); font-size: 0.8rem; color: var(--neon-cyan); letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 1.5rem; display: flex; align-items: center; gap: 1rem; }
+.ghero-eyebrow::before { content: ''; display: block; width: 40px; height: 2px; background: var(--neon-cyan); box-shadow: 0 0 8px var(--neon-cyan); }
+
+.ghero-name { font-family: var(--font-display); font-size: clamp(3.5rem, 8vw, 6.5rem); font-weight: 800; line-height: 0.9; color: #fff; margin-bottom: 1.5rem; text-transform: uppercase; position: relative; }
+.glitch { position: relative; display: inline-block; }
+.glitch::before, .glitch::after { content: attr(data-text); position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: var(--void); }
+.glitch::before { left: 2px; text-shadow: -2px 0 var(--neon-pink); clip: rect(24px, 550px, 90px, 0); animation: glitch-anim 3s infinite linear alternate-reverse; }
+.glitch::after { left: -2px; text-shadow: -2px 0 var(--neon-cyan); clip: rect(85px, 550px, 140px, 0); animation: glitch-anim 2.5s infinite linear alternate-reverse; }
+@keyframes glitch-anim { 0% { clip: rect(10px, 9999px, 31px, 0); } 20% { clip: rect(65px, 9999px, 89px, 0); } 40% { clip: rect(12px, 9999px, 44px, 0); } 60% { clip: rect(80px, 9999px, 120px, 0); } 80% { clip: rect(23px, 9999px, 55px, 0); } 100% { clip: rect(50px, 9999px, 100px, 0); } }
+
+.ghero-role { font-family: var(--font-mono); font-size: clamp(1rem, 2vw, 1.2rem); color: var(--neon-purple); margin-bottom: 2rem; line-height: 1.6; text-shadow: 0 0 10px rgba(188,19,254,0.3); }
+.ghero-bio { font-size: 1.1rem; line-height: 1.8; color: var(--text-dim); margin-bottom: 3rem; font-weight: 300; max-width: 500px; }
+
+.btn-cyber { display: inline-flex; align-items: center; gap: 0.75rem; font-family: var(--font-mono); font-size: 0.8rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 1rem 2rem; text-decoration: none; position: relative; overflow: hidden; background: rgba(0, 243, 255, 0.1); color: var(--neon-cyan); border: 1px solid var(--neon-cyan); transition: all 0.3s; }
+.btn-cyber::before { content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%; background: linear-gradient(90deg, transparent, rgba(0,243,255,0.4), transparent); transition: 0.5s; }
+.btn-cyber:hover { background: var(--neon-cyan); color: var(--void); box-shadow: 0 0 20px rgba(0,243,255,0.6); }
+.btn-cyber:hover::before { left: 100%; }
+.btn-cyber-alt { background: transparent; border-color: var(--text-dim); color: var(--text-main); }
+.btn-cyber-alt:hover { border-color: var(--neon-purple); color: var(--neon-purple); box-shadow: 0 0 20px rgba(188,19,254,0.4); background: rgba(188,19,254,0.05); }
+.ghero-actions { display: flex; gap: 1.5rem; flex-wrap: wrap; }
+
+.gmetrics-container { position: relative; }
+.gmetrics-container::before { content: ''; position: absolute; inset: -2px; background: linear-gradient(45deg, var(--neon-cyan), var(--neon-purple)); z-index: -1; filter: blur(10px); opacity: 0.5; transition: background 0.5s; }
+.gmetrics { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--border-dim); border: 1px solid var(--border-dim); backdrop-filter: blur(10px); }
+.gmetric { background: var(--surface); padding: 2.5rem 2rem; transition: background 0.3s; position: relative; overflow: hidden; }
+.gmetric:hover { background: rgba(0, 243, 255, 0.05); }
+.gmetric::after { content: ''; position: absolute; bottom: 0; left: 0; height: 2px; width: 0; background: var(--neon-cyan); transition: 0.3s; }
+.gmetric:hover::after { width: 100%; }
+.gmetric-num { font-family: var(--font-display); font-size: 3.5rem; font-weight: 700; color: #fff; line-height: 1; margin-bottom: 0.5rem; text-shadow: 0 0 15px rgba(255,255,255,0.2); }
+.gmetric-num span { color: var(--neon-purple); font-size: 2rem; vertical-align: top; }
+.gmetric-label { font-family: var(--font-mono); font-size: 0.7rem; color: var(--text-dim); letter-spacing: 0.15em; text-transform: uppercase; }
+
+.gsec { padding: 8rem 2rem; position: relative; border-top: 1px solid rgba(255,255,255,0.05); }
+.gsec-alt { background: linear-gradient(to bottom, rgba(10,12,20,0.3), rgba(0,0,0,0)); }
+.gsec-inner { max-width: 1200px; margin: 0 auto; position: relative; z-index: 2; }
+.gsec-hdr { display: flex; align-items: flex-end; gap: 1.5rem; margin-bottom: 4rem; border-bottom: 1px solid var(--border-dim); padding-bottom: 1rem; }
+.gsec-num { font-family: var(--font-mono); font-size: 1.5rem; font-weight: 700; color: var(--neon-cyan); text-shadow: 0 0 10px rgba(0,243,255,0.4); }
+.gsec-title { font-family: var(--font-display); font-size: 2.5rem; font-weight: 700; color: #fff; text-transform: uppercase; letter-spacing: 0.05em; }
+
+.comp-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.5rem; }
+.comp-card { background: var(--surface); border: 1px solid var(--border-dim); padding: 3rem 2.5rem; transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s; backdrop-filter: blur(10px); position: relative; overflow: hidden; }
+.comp-card::before { content: ''; position: absolute; top: 0; right: 0; width: 40px; height: 40px; background: linear-gradient(135deg, transparent 50%, var(--border-dim) 50%); }
+.comp-card:hover { transform: translateY(-5px); box-shadow: 0 15px 30px rgba(0,0,0,0.5); border-color: var(--neon-cyan); }
+.comp-icon { width: 40px; height: 40px; color: var(--neon-cyan); margin-bottom: 1.5rem; filter: drop-shadow(0 0 8px rgba(0,243,255,0.6)); }
+.comp-card h4 { font-family: var(--font-display); font-size: 1.3rem; color: #fff; margin-bottom: 1rem; letter-spacing: 0.02em; }
+.comp-card p { font-size: 0.95rem; line-height: 1.8; color: var(--text-dim); font-weight: 300; }
+
+.skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 3rem; }
+.sg-label { font-family: var(--font-mono); font-size: 0.8rem; color: #fff; letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 1.2rem; display: flex; align-items: center; gap: 0.5rem; }
+.sg-label::before { content: '>'; color: var(--neon-pink); font-weight: bold; }
+.stags { display: flex; flex-wrap: wrap; gap: 0.6rem; }
+.stag { font-family: var(--font-mono); font-size: 0.75rem; color: var(--text-main); background: rgba(255,255,255,0.03); border: 1px solid var(--border-dim); padding: 0.4rem 0.8rem; transition: all 0.2s; cursor: crosshair; }
+.stag:hover { border-color: var(--neon-pink); color: var(--neon-pink); background: rgba(255,0,60,0.1); box-shadow: 0 0 10px rgba(255,0,60,0.3); transform: scale(1.05); }
+
+.proj-list { display: flex; flex-direction: column; gap: 1.5rem; }
+.proj-card { background: var(--surface); border: 1px solid var(--border-dim); padding: 2.5rem; display: grid; grid-template-columns: 1fr auto; gap: 2rem; align-items: start; transition: all 0.3s; position: relative; }
+.proj-card:hover { border-color: var(--neon-purple); background: rgba(188,19,254,0.05); box-shadow: -5px 0 0 var(--neon-purple); }
+.ptags { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 1rem; }
+.ptag { font-family: var(--font-mono); font-size: 0.65rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 0.2rem 0.6rem; background: #111; border: 1px solid #333; }
+.tag-high { color: var(--neon-cyan); border-color: rgba(0,243,255,0.3); }
+.tag-mid { color: var(--neon-pink); border-color: rgba(255,0,60,0.3); }
+.proj-card h4 { font-family: var(--font-display); font-size: 1.5rem; color: #fff; margin-bottom: 1rem; }
+.proj-card p { font-size: 1rem; line-height: 1.8; color: var(--text-dim); font-weight: 300; }
+.proj-link { font-family: var(--font-mono); font-size: 0.75rem; color: var(--neon-cyan); text-decoration: none; letter-spacing: 0.1em; text-transform: uppercase; padding: 0.8rem 1.5rem; border: 1px solid var(--neon-cyan); transition: all 0.3s; white-space: nowrap; }
+.proj-link:hover { background: var(--neon-cyan); color: var(--void); box-shadow: 0 0 15px rgba(0,243,255,0.5); }
+
+.exp-list { border-top: 1px solid var(--border-dim); }
+.exp-item { border-bottom: 1px solid var(--border-dim); }
+.exp-trigger { width: 100%; background: transparent; border: none; padding: 2.5rem 1rem; cursor: pointer; display: grid; grid-template-columns: 1fr auto; gap: 2rem; align-items: center; text-align: left; transition: 0.3s; }
+.exp-trigger:hover { background: rgba(255,255,255,0.02); padding-left: 2rem; }
+.exp-meta { font-family: var(--font-mono); font-size: 0.8rem; color: var(--neon-cyan); letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 0.5rem; }
+.exp-role { font-family: var(--font-display); font-size: 1.4rem; font-weight: 700; color: #fff; margin-bottom: 0.3rem; }
+.exp-co { font-size: 1rem; color: var(--text-dim); }
+.exp-chev { width: 24px; height: 24px; color: var(--neon-cyan); transition: transform 0.4s; }
+.exp-item.open .exp-chev { transform: rotate(180deg); color: var(--neon-pink); }
+.exp-item.open .exp-trigger { padding-left: 2rem; border-left: 4px solid var(--neon-pink); }
+.exp-body { max-height: 0; overflow: hidden; transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1); background: rgba(0,0,0,0.2); }
+.exp-body-inner { padding: 0 3rem 2.5rem; }
+.exp-body ul { list-style: none; display: flex; flex-direction: column; gap: 1rem; }
+.exp-body li { font-size: 0.95rem; line-height: 1.8; color: var(--text-dim); padding-left: 1.5rem; position: relative; }
+.exp-body li::before { content: '>'; position: absolute; left: 0; color: var(--neon-cyan); font-family: var(--font-mono); font-weight: bold; }
+
+.contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
+@media(max-width: 800px) { .contact-grid { grid-template-columns: 1fr; gap: 3rem; } }
+.contact-tagline { font-family: var(--font-display); font-size: 3rem; font-weight: 800; line-height: 1.1; color: #fff; margin-bottom: 1.5rem; text-transform: uppercase; }
+.contact-sub { font-size: 1.1rem; color: var(--text-dim); line-height: 1.8; }
+.contact-links { display: flex; flex-direction: column; gap: 1rem; }
+.contact-link { display: flex; align-items: center; gap: 1.5rem; padding: 1.5rem; background: var(--surface); border: 1px solid var(--border-dim); text-decoration: none; color: #fff; transition: all 0.3s; }
+.contact-link:hover { border-color: var(--neon-cyan); background: rgba(0,243,255,0.05); transform: translateX(10px); box-shadow: inset 4px 0 0 var(--neon-cyan); }
+.cl-label { font-family: var(--font-mono); font-size: 0.7rem; color: var(--text-dim); letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 0.3rem; }
+.cl-value { font-size: 1.1rem; font-weight: 500; }
+.cl-icon { color: var(--neon-cyan); flex-shrink: 0; width: 28px; height: 28px; filter: drop-shadow(0 0 5px rgba(0,243,255,0.5)); }
+
+.gfooter { border-top: 1px solid var(--border-dim); padding: 2rem; background: var(--void); }
+.gfooter-inner { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
+.gfooter p { font-family: var(--font-mono); font-size: 0.75rem; color: #555; text-transform: uppercase; letter-spacing: 0.1em; }
+
+.ver-trigger { cursor: pointer; transition: color 0.2s; }
+.ver-trigger:hover { color: var(--neon-cyan); }
+
+.gr { opacity: 0; transform: translateY(30px); transition: opacity 0.8s ease, transform 0.8s ease; filter: blur(4px); }
+.gr.v { opacity: 1; transform: none; filter: blur(0); }
 </style>
 </head>
-<body>
+<body class="gui-mode">
 
-<button class="mode-toggle" id="modeToggle" onclick="toggleMode()" aria-label="Switch between CLI and GUI mode">
+<canvas id="matrixCanvas"></canvas>
+<div class="cyber-bg"></div>
+<div class="scanlines"></div>
+
+<button class="mode-toggle" id="modeToggle" onclick="toggleMode()">
     <div class="mode-dot" id="modeDot"></div>
-    <div class="mode-label" id="modeLabel"><span id="modeSpan">CLI</span> MODE — SWITCH TO <span id="modeAlt">GUI</span></div>
+    <div class="mode-label" id="modeLabel">SYS_MODE: <span id="modeSpan">GUI HUD</span></div>
 </button>
+
+<div id="sysPrompt" class="sys-prompt">
+    <span style="color:var(--neon-pink); font-weight:bold;">[SYS_MSG]</span> Backend root terminal accessible. Engage top-right toggle to override HUD.
+</div>
+
+<div class="do-not-press" id="doNotPress" title="???"></div>
+<div id="wipeModal">
+    <div id="wipeText">[CRITICAL ERROR] SYSTEM PURGE INITIATED...</div>
+    <div class="wipe-bar"><div class="wipe-fill" id="wipeFill"></div></div>
+</div>
 
 <div id="cli-layer">
     <div class="cli-titlebar">
-        <div class="cdot cdot-r"></div>
-        <div class="cdot cdot-y"></div>
-        <div class="cdot cdot-g"></div>
-        <span class="cli-wintitle">Windows PowerShell  —  SamLudwig.Engineering v2.0  —  samludwig.au</span>
+        <div class="cdot"></div><div class="cdot"></div><div class="cdot"></div>
+        <span class="cli-wintitle">ROOT@SAM-LUDWIG-NET ~ SECURE TERMINAL v9.4</span>
     </div>
     <div id="cli-output"></div>
     <div class="cli-input-row">
-        <span class="cli-ps">PS C:\Enterprise\Recruiter&gt;</span>
-        <input type="text" id="cli-input" autocomplete="off" spellcheck="false" aria-label="Terminal input">
+        <span class="cli-ps">C:\ENG\SL&gt;</span>
+        <input type="text" id="cli-input" autocomplete="off" spellcheck="false">
     </div>
 </div>
 
 <div id="gui-layer">
     <nav class="gnav">
-        <a href="#ghero" class="gnav-logo">Sam<span>.</span></a>
+        <a href="#ghero" class="gnav-logo">SL<span>//</span>ENG</a>
         <ul class="gnav-links">
-            <li><a href="#gcomp">Competencies</a></li>
-            <li><a href="#gskills">Skills</a></li>
-            <li><a href="#geng">Engineering</a></li>
-            <li><a href="#gexp">Experience</a></li>
-            <li><a href="#gcontact">Contact</a></li>
+            <li><a href="#gcomp">Specs</a></li>
+            <li><a href="#gskills">Arsenal</a></li>
+            <li><a href="#geng">Deployments</a></li>
+            <li><a href="#gexp">Logs</a></li>
+            <li><a href="#gcontact">Comms</a></li>
         </ul>
     </nav>
 
-    <div id="ghero" style="padding:7rem 2rem 4rem;border-bottom:1px solid var(--gui-rule)">
-        <div style="max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:start" class="ghero-wrap">
-            <div class="gr">
-                <div class="ghero-eyebrow">Melbourne, VIC · Available for Opportunities</div>
-                <h1 class="ghero-name">Sam<br><em>Ludwig</em></h1>
-                <div class="ghero-role">Senior M365 & SharePoint Engineer<br>PowerShell · SPFx · Enterprise Automation</div>
-                <p class="ghero-bio">Highly analytical systems engineer with 5+ years across government, healthcare, and enterprise managed services — including managing the largest SharePoint farm in the Southern Hemisphere, servicing 660,000+ users.</p>
-                <div class="ghero-actions">
-                    <a href="#geng" class="btn-s">Engineering Portfolio</a>
-                    <a href="#gcontact" class="btn-o">Get in Touch</a>
-                </div>
+    <div id="ghero" class="ghero">
+        <div class="gr">
+            <div class="ghero-eyebrow">SYS_LOC: MELBOURNE_VIC // STATUS: ONLINE</div>
+            <h1 class="ghero-name glitch" data-text="SAM LUDWIG">SAM LUDWIG</h1>
+            <div class="ghero-role">SENIOR M365 & SHAREPOINT ENGINEER // ENTERPRISE AUTOMATION</div>
+            <p class="ghero-bio">Highly analytical systems engineer with 5+ years optimizing massive-scale infrastructure. Specialist in PowerShell automation, SPFx architecture, and L3 code-level diagnostics.</p>
+            <div class="ghero-actions">
+                <a href="#geng" class="btn-cyber">Access Archives</a>
+                <a href="#gcontact" class="btn-cyber btn-cyber-alt">Initialize Comms</a>
             </div>
-            <div class="gr" style="transition-delay:0.15s">
-                <div class="gmetrics">
-                    <div class="gmetric"><div class="gmetric-num">660<span>k</span></div><div class="gmetric-label">Active Users Supported</div></div>
-                    <div class="gmetric"><div class="gmetric-num">87<span>%</span></div><div class="gmetric-label">Processing Time Reduction</div></div>
-                    <div class="gmetric"><div class="gmetric-num">7<span>+</span></div><div class="gmetric-label">Years IT Experience</div></div>
-                    <div class="gmetric"><div class="gmetric-num">15<span>%</span></div><div class="gmetric-label">Incident Reduction (DoE)</div></div>
-                </div>
-                
-                <img class="gphoto" src="profile.jpg" alt="Sam Ludwig - Senior M365 Engineer">
-                
+        </div>
+        <div class="gr gmetrics-container" style="transition-delay:0.2s">
+            <div class="gmetrics">
+                <div class="gmetric"><div class="gmetric-num">660<span>K</span></div><div class="gmetric-label">Nodes Supported</div></div>
+                <div class="gmetric"><div class="gmetric-num">87<span>%</span></div><div class="gmetric-label">Latency Reduced</div></div>
+                <div class="gmetric"><div class="gmetric-num">99<span>.9%</span></div><div class="gmetric-label">Uptime Sustained</div></div>
+                <div class="gmetric"><div class="gmetric-num">15<span>%</span></div><div class="gmetric-label">Incident Drop</div></div>
             </div>
         </div>
     </div>
 
     <div class="gsec gsec-alt" id="gcomp">
         <div class="gsec-inner">
-            <div class="gsec-hdr gr"><span class="gsec-num">01</span><h2 class="gsec-title">Core Competencies</h2></div>
+            <div class="gsec-hdr gr"><span class="gsec-num">01.</span><h2 class="gsec-title">Core Protocols</h2></div>
             <div class="comp-grid gr">
                 <div class="comp-card">
-                    <svg class="comp-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
-                    <h4>Custom Software Engineering</h4>
-                    <p>Engineered client-side JavaScript overlays for ServiceNow integrating live M365 presence data, plus an algorithmic workload distribution engine to eliminate manual triage and prevent SLA breaches.</p>
+                    <svg class="comp-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+                    <h4>Algorithm Engineering</h4>
+                    <p>Engineered client-side JavaScript overlays for ServiceNow, integrating live M365 telemetry to construct predictive workload distribution engines and eliminate manual triage drag.</p>
                 </div>
                 <div class="comp-card">
-                    <svg class="comp-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-                    <h4>Advanced Security Automation</h4>
-                    <p>Architected PnP PowerShell solutions to dynamically audit and enforce MFA compliance across 200+ sensitive SharePoint sites, with integrated error-handling and automated compliance reporting.</p>
+                    <svg class="comp-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+                    <h4>Security Automation</h4>
+                    <p>Architected adaptive PnP PowerShell routines to continuously audit and self-heal MFA compliance across 200+ secure data nodes, executing real-time remediation without human input.</p>
                 </div>
                 <div class="comp-card">
-                    <svg class="comp-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
-                    <h4>L3 Code-Level Debugging</h4>
-                    <p>Resolved critical enterprise incidents via deep-dive root cause analysis — inspecting network payloads, analysing API traffic, and executing direct SQL modifications. 15% recurring incident reduction across DoE.</p>
+                    <svg class="comp-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
+                    <h4>Deep-Stack Diagnostics</h4>
+                    <p>Resolved critical enterprise sector faults through deep network payload inspection, API traffic dissection, and direct SQL database manipulation, driving a 15% recurring fault drop.</p>
                 </div>
             </div>
         </div>
@@ -304,35 +349,19 @@ body.gui-mode #gui-layer{opacity:1;pointer-events:all;transform:scale(1)}
 
     <div class="gsec" id="gskills">
         <div class="gsec-inner">
-            <div class="gsec-hdr gr"><span class="gsec-num">02</span><h2 class="gsec-title">Technical Arsenal</h2></div>
+            <div class="gsec-hdr gr"><span class="gsec-num">02.</span><h2 class="gsec-title">Tech Arsenal</h2></div>
             <div class="skills-grid gr">
                 <div>
-                    <div class="sg-label">Languages & Frameworks</div>
-                    <div class="stags"><span class="stag">PowerShell</span><span class="stag">JavaScript (ES6+)</span><span class="stag">TypeScript</span><span class="stag">React</span><span class="stag">SPFx</span><span class="stag">Python</span><span class="stag">REST APIs</span><span class="stag">Selenium</span></div>
+                    <div class="sg-label">Syntax / Frameworks</div>
+                    <div class="stags"><span class="stag">PowerShell 7</span><span class="stag">Python 3</span><span class="stag">JS (ES6+)</span><span class="stag">TypeScript</span><span class="stag">React</span><span class="stag">SPFx</span><span class="stag">REST/Graph API</span></div>
                 </div>
                 <div>
-                    <div class="sg-label">Cloud & Infrastructure</div>
-                    <div class="stags"><span class="stag">Microsoft 365</span><span class="stag">SharePoint Online/Prem</span><span class="stag">Exchange</span><span class="stag">Teams</span><span class="stag">Azure</span><span class="stag">Entra ID</span><span class="stag">Google Workspace</span><span class="stag">AWS</span></div>
+                    <div class="sg-label">Cloud Matrix</div>
+                    <div class="stags"><span class="stag">M365 Gen2</span><span class="stag">SharePoint Env</span><span class="stag">Exchange Hub</span><span class="stag">Azure Core</span><span class="stag">Entra ID</span><span class="stag">AWS</span></div>
                 </div>
                 <div>
-                    <div class="sg-label">Endpoint & Security</div>
-                    <div class="stags"><span class="stag">Intune (MDM/MAM)</span><span class="stag">Windows Autopilot</span><span class="stag">SCCM</span><span class="stag">Defender for Endpoint</span><span class="stag">ACSC Essential 8</span><span class="stag">ISO 27001</span></div>
-                </div>
-                <div>
-                    <div class="sg-label">Tools & Methodologies</div>
-                    <div class="stags"><span class="stag">Git</span><span class="stag">Azure DevOps</span><span class="stag">ServiceNow</span><span class="stag">Splunk</span><span class="stag">ITIL v4</span><span class="stag">Agile / Scrum</span></div>
-                </div>
-            </div>
-            <div class="certs-row gr">
-                <div class="certs-label">Certifications</div>
-                <div class="certs-list">
-                    <span class="cpill">AZ-900 Azure Fundamentals</span>
-                    <span class="cpill cpill-wip">AZ-104 Azure Administrator <em style="color:#93c5fd;font-style:normal;margin-left:4px">In Progress</em></span>
-                    <span class="cpill">ITIL 4 Foundation</span>
-                    <span class="cpill">Certified ScrumMaster® (CSM)</span>
-                    <span class="cpill">ISO 27001</span>
-                    <span class="cpill">ACMA Open Rule Cabling</span>
-                    <span class="cpill">Diploma of Web Development</span>
+                    <div class="sg-label">Endpoint Security</div>
+                    <div class="stags"><span class="stag">Intune MDM</span><span class="stag">Autopilot</span><span class="stag">Defender EDR</span><span class="stag">ACSC Ess 8</span><span class="stag">ISO 27001</span></div>
                 </div>
             </div>
         </div>
@@ -340,19 +369,23 @@ body.gui-mode #gui-layer{opacity:1;pointer-events:all;transform:scale(1)}
 
     <div class="gsec gsec-alt" id="geng">
         <div class="gsec-inner">
-            <div class="gsec-hdr gr"><span class="gsec-num">03</span><h2 class="gsec-title">Featured Engineering</h2></div>
+            <div class="gsec-hdr gr"><span class="gsec-num">03.</span><h2 class="gsec-title">Active Deployments</h2></div>
             <div class="proj-list gr">
                 <div class="proj-card">
-                    <div><div class="ptags"><span class="ptag tag-js">JavaScript</span><span class="ptag tag-api">SharePoint REST API</span></div><h4>ServiceNow UI & Assignment Engine</h4><p>A suite of client-side browser extensions that radically optimise the ServiceNow ITSM experience. Uses async REST API calls to merge live M365/SharePoint presence data with active ticket queues, visually flagging unavailable engineers. An algorithmic workload recommendation engine cross-references dashboard metrics against active directory groups to eliminate manual triage overhead.</p></div>
-                    <a href="https://github.com/Ludwixix/YellowSnow-main" target="_blank" class="proj-link">GitHub →</a>
+                    <div>
+                        <div class="ptags"><span class="ptag tag-high">SYS: JS</span><span class="ptag tag-mid">API: Graph</span></div>
+                        <h4>YellowSnow Engine</h4>
+                        <p>A high-performance asynchronous suite that intercepts ServiceNow ITSM queues. It cross-references live M365 telemetry to visually flag unavailable units and uses algorithmic prediction to auto-assign complex routing tasks.</p>
+                    </div>
+                    <a href="https://github.com/Ludwixix/YellowSnow-main" target="_blank" class="proj-link">Access Repo_</a>
                 </div>
                 <div class="proj-card">
-                    <div><div class="ptags"><span class="ptag tag-py">Python 3.12</span><span class="ptag tag-ps">PowerShell 7</span></div><h4>M365 Diagnostic GUI (PySPO)</h4><p>A Python-based GUI that acts as a "shift-left" operational wrapper, allowing Tier-1 support staff to safely run advanced PowerShell diagnostics against Exchange Online and Teams accounts — reducing L3 escalation volumes and freeing senior engineers for complex work.</p></div>
-                    <a href="https://github.com/Ludwixix/pyspo-tool" target="_blank" class="proj-link">GitHub →</a>
-                </div>
-                <div class="proj-card">
-                    <div><div class="ptags"><span class="ptag tag-py">Python / Selenium</span><span class="ptag tag-api">Web Scraping</span></div><h4>Browser Automation Engine (JobGobblin)</h4><p>A robust web-scraping engine that programmatically navigates job boards to bypass API restrictions, extracts high-value requisition data based on custom Boolean parameters, and persists findings — demonstrating practical automation architecture and systematic problem-solving.</p></div>
-                    <a href="https://github.com/Ludwixix/JobGobblin" target="_blank" class="proj-link">GitHub →</a>
+                    <div>
+                        <div class="ptags"><span class="ptag tag-high">SYS: Python</span><span class="ptag tag-high">SYS: PowerShell</span></div>
+                        <h4>PySPO Operations Interface</h4>
+                        <p>A shift-left diagnostic HUD. Wraps volatile PowerShell routines into a hardened Python GUI, empowering Tier-1 units to safely execute advanced telemetry scans against Exchange/Teams without L3 escalation overhead.</p>
+                    </div>
+                    <a href="https://github.com/Ludwixix/pyspo-tool" target="_blank" class="proj-link">Access Repo_</a>
                 </div>
             </div>
         </div>
@@ -360,104 +393,61 @@ body.gui-mode #gui-layer{opacity:1;pointer-events:all;transform:scale(1)}
 
     <div class="gsec" id="gexp">
         <div class="gsec-inner">
-            <div class="gsec-hdr gr"><span class="gsec-num">04</span><h2 class="gsec-title">Professional Experience</h2></div>
+            <div class="gsec-hdr gr"><span class="gsec-num">04.</span><h2 class="gsec-title">Operation Logs</h2></div>
             <div class="exp-list gr">
                 <div class="exp-item">
                     <button class="exp-trigger" onclick="toggleExp(this)">
-                        <div><div class="exp-meta">Present</div><div class="exp-role">IT Support Specialist (MyITHub)</div><div class="exp-co">Australia Post · via Capgemini</div></div>
+                        <div><div class="exp-meta">Present // Active</div><div class="exp-role">IT Support Specialist</div><div class="exp-co">AusPost via Capgemini</div></div>
                         <svg class="exp-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
                     </button>
                     <div class="exp-body"><div class="exp-body-inner"><ul>
-                        <li>Delivered L1/L2 face-to-face and remote technical support within the MyITHub service centre at Australia Post's Burnley site — a walk-in hub covering device repair, OS reimaging, loan device management, new employee provisioning, and accessories fulfillment.</li>
-                        <li>Engineered custom keystroke injection automation (macro-level scripting) to circumvent stringent system access controls within ServiceNow, fully automating repetitive ITSM ticket creation and modification workflows and eliminating significant manual data-entry overhead.</li>
-                        <li>Managed end-to-end endpoint lifecycle tasks including OS migrations, device imaging, Autopilot/UEM enrolment, and compliant equipment disposal — ensuring every device left the hub deployment-ready.</li>
-                        <li>Maintained the hub's spares and accessories inventory, reviewing stock watermarks monthly and contributing to a ServiceNow Stock Accessories module implementation to improve SLA visibility.</li>
-                        <li>Supported rollout of a self-help kiosk programme enabling staff to independently access the Knowledge Base, perform password resets, log tickets, and book hub appointments.</li>
-                        <li>Acted as escalation point for complex infrastructure faults, collaborating with L3 teams to drive incidents to resolution while maintaining accurate ServiceNow documentation and SLA compliance.</li>
+                        <li>Engineered aggressive keystroke-injection macros to bypass strict ServiceNow UI limits, automating bulk data entry and saving hundreds of operational hours.</li>
+                        <li>Executing full endpoint lifecycle operations: OS imaging, Autopilot telemetry enrollment, and secure data wiping in a high-throughput physical hub.</li>
+                        <li>Serving as the L3 escalation bridge for critical infrastructure anomalies, translating end-user hardware faults into actionable enterprise incident reports.</li>
                     </ul></div></div>
                 </div>
                 <div class="exp-item">
                     <button class="exp-trigger" onclick="toggleExp(this)">
-                        <div><div class="exp-meta">Oct 2025 – Present</div><div class="exp-role">Windows 11 Deployment Engineer</div><div class="exp-co">St John of God Health Care · via Capgemini</div></div>
+                        <div><div class="exp-meta">Oct 2025 – Present</div><div class="exp-role">Win 11 Deployment Engineer</div><div class="exp-co">St John of God via Capgemini</div></div>
                         <svg class="exp-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
                     </button>
                     <div class="exp-body"><div class="exp-body-inner"><ul>
-                        <li>Led the execution of a Windows 11 enterprise migration across 100+ clinical endpoints, maintaining 100% adherence to Autopilot provisioning workflows and strict SOE standards throughout a live healthcare environment.</li>
-                        <li>Managed the full endpoint lifecycle — hardware preparation, Autopilot enrolment, Intune policy application, and post-deployment validation — ensuring clinical software compatibility before handoff.</li>
-                        <li>Served as primary liaison between clinical end-users and the engineering team, translating complex technical issues into actionable feedback that informed SOE refinements.</li>
-                        <li>Provided hypercare support to medical staff post-migration, diagnosing and resolving compatibility issues with clinical applications (EMR systems, diagnostic tools) to minimise disruption to patient care.</li>
-                        <li>Proactively identified patterns in recurring user-reported issues and escalated systemic findings, contributing to a reduction in repeat support requests across later deployment waves.</li>
+                        <li>Commanding a mass Win 11 migration matrix across 100+ clinical endpoints, maintaining strict zero-downtime tolerance in live healthcare sectors.</li>
+                        <li>Enforcing Intune compliance policies and Autopilot configurations while verifying real-time compatibility with critical EMR diagnostics tools.</li>
                     </ul></div></div>
                 </div>
                 <div class="exp-item">
                     <button class="exp-trigger" onclick="toggleExp(this)">
-                        <div><div class="exp-meta">Dec 2021 – Sep 2025</div><div class="exp-role">Managed Services Engineer</div><div class="exp-co">Capgemini · Consultant to Dept. of Education VIC</div></div>
+                        <div><div class="exp-meta">Dec 2021 – Sep 2025</div><div class="exp-role">Managed Services Engineer</div><div class="exp-co">Capgemini -> Dept. of Education VIC</div></div>
                         <svg class="exp-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
                     </button>
                     <div class="exp-body"><div class="exp-body-inner"><ul>
-                        <li>Managed and maintained the largest SharePoint farm in the Southern Hemisphere — 660,000+ active users across 1,000+ sites — executing critical CRs and security patching achieving 99.9% uptime.</li>
-                        <li>Acted as the ultimate Tier-3 escalation point across M365/SharePoint Online and Google Workspace, leading RCA to permanently eliminate recurring faults — resulting in a documented 15% reduction in repeat incidents.</li>
-                        <li>Engineered PnP PowerShell automation to dynamically audit and enforce MFA compliance across 200+ sensitive SharePoint sites, generating automated compliance reports for stakeholder review.</li>
-                        <li>Administered Exchange Hybrid environments alongside Microsoft Teams, resolving complex mail-flow, calendar, and federation issues across the entire organisation.</li>
-                        <li>Oversaw synchronisation of On-Premise Active Directory, Entra ID (Azure AD), and Google Workspace, resolving identity conflicts and authentication failures to maintain seamless SSO.</li>
-                        <li>Spearheaded Azure cloud adoption and legacy application remediation, aligning hybrid-cloud infrastructure with ACSC Essential 8 and modern enterprise security baselines.</li>
-                        <li>Produced detailed as-built documentation and RCA reports, creating a knowledge base that reduced resolution time for recurring incidents and improved team onboarding.</li>
-                    </ul></div></div>
-                </div>
-                <div class="exp-item">
-                    <button class="exp-trigger" onclick="toggleExp(this)">
-                        <div><div class="exp-meta">Dec 2020 – Dec 2021</div><div class="exp-role">Application Support Engineer</div><div class="exp-co">Knosys</div></div>
-                        <svg class="exp-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
-                    </button>
-                    <div class="exp-body"><div class="exp-body-inner"><ul>
-                        <li>Delivered expert L3 application support for Knosys's enterprise intranet platform (GreenOrbit), achieving a 95% issue resolution rate within SLA for clients including Cotton On and Harvey Norman.</li>
-                        <li>Engineered PowerShell automation to replace manual data compilation during cloud migrations — reducing processing time by 87% (2 hours → 15 minutes) and saving 10+ hours of overhead per month.</li>
-                        <li>Developed Python and PowerShell scripts to streamline system patching procedures, reducing manual patching effort by 20% and improving patch-cycle consistency.</li>
-                        <li>Contributed to a complex platform upgrade and AWS migration, authoring RCA documentation that permanently resolved recurring version conflicts and became the reference guide for future cycles.</li>
-                        <li>Diagnosed deep application-layer issues including database query failures, API integration errors, and front-end rendering defects, frequently engaging the development team to engineer code-level fixes.</li>
-                    </ul></div></div>
-                </div>
-                <div class="exp-item">
-                    <button class="exp-trigger" onclick="toggleExp(this)">
-                        <div><div class="exp-meta">Mar 2018 – Dec 2020</div><div class="exp-role">SharePoint Developer / Consultant</div><div class="exp-co">Engage Squared</div></div>
-                        <svg class="exp-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
-                    </button>
-                    <div class="exp-body"><div class="exp-body-inner"><ul>
-                        <li>Architected and delivered 5+ bespoke SharePoint Online intranet solutions for major enterprise clients — including Victoria Police and Transurban — using custom SPFx components built with React and TypeScript.</li>
-                        <li>Implemented full CI/CD pipelines using Azure DevOps and Git, automating build, test, and release processes and reducing deployment cycle times by 25%.</li>
-                        <li>Led end-to-end migration of legacy on-premise SharePoint intranets to M365, architecting governance frameworks and permission structures to ensure ISO 27001 compliance from day one.</li>
-                        <li>Facilitated client-facing technical workshops and product demonstrations, driving a 20% increase in enterprise adoption of new M365 platform features.</li>
-                        <li>Collaborated with UX designers and project managers in an Agile/Scrum delivery model, contributing to sprint planning, backlog refinement, and retrospectives.</li>
+                        <li>Administered the southern hemisphere's largest SharePoint array (660k+ nodes, 1000+ clusters) sustaining 99.9% uptime via automated patching logic.</li>
+                        <li>Eliminated 15% of recurring systemic faults through exhaustive RCA root-cause dissection across M365 and Google Workspace bridges.</li>
+                        <li>Authored autonomous PnP PowerShell scripts enforcing MFA and zero-trust policies across massive data lakes without manual oversight.</li>
+                        <li>Architected massive-scale identity sync protocols across On-Prem AD, Entra ID, and Google environments to prevent authentication cascading failures.</li>
                     </ul></div></div>
                 </div>
             </div>
         </div>
     </div>
 
-    <div class="gsec gcontact" id="gcontact">
+    <div class="gsec" id="gcontact">
         <div class="gsec-inner">
-            <div class="gsec-hdr gr"><span class="gsec-num">05</span><h2 class="gsec-title">Get in Touch</h2></div>
+            <div class="gsec-hdr gr"><span class="gsec-num">05.</span><h2 class="gsec-title">Establish Link</h2></div>
             <div class="contact-grid gr">
                 <div>
-                    <p class="contact-tagline">Open to the right opportunity.</p>
-                    <p class="contact-sub">Based in Melbourne and open to senior engineering roles across enterprise M365, SharePoint, and automation-focused environments. Happy to discuss contract or permanent positions.</p>
+                    <p class="contact-tagline">Open secure channel.</p>
+                    <p class="contact-sub">Available for high-level engineering contracts. Specializing in un-fucking enterprise architecture and building systems that run themselves. Transmit coordinates below.</p>
                 </div>
                 <div class="contact-links">
-                    <a href="tel:0405993245" class="contact-link">
-                        <svg class="cl-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.18 2 2 0 0 1 3.6 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.56a16 16 0 0 0 6.29 6.29l.87-.87a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-                        <div><div class="cl-label">Phone</div><div class="cl-value">0405 993 245</div></div>
-                    </a>
                     <a href="mailto:sam.ludwig@gmail.com" class="contact-link">
-                        <svg class="cl-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
-                        <div><div class="cl-label">Email</div><div class="cl-value">sam.ludwig@gmail.com</div></div>
+                        <svg class="cl-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+                        <div><div class="cl-label">Secure Mail</div><div class="cl-value">sam.ludwig@gmail.com</div></div>
                     </a>
                     <a href="https://linkedin.com/in/sam-ludwig" target="_blank" class="contact-link">
-                        <svg class="cl-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
-                        <div><div class="cl-label">LinkedIn</div><div class="cl-value">linkedin.com/in/sam-ludwig</div></div>
-                    </a>
-                    <a href="https://github.com/Ludwixix" target="_blank" class="contact-link">
-                        <svg class="cl-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
-                        <div><div class="cl-label">GitHub</div><div class="cl-value">github.com/Ludwixix</div></div>
+                        <svg class="cl-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
+                        <div><div class="cl-label">Network Hub</div><div class="cl-value">linkedin.com/in/sam-ludwig</div></div>
                     </a>
                 </div>
             </div>
@@ -466,182 +456,233 @@ body.gui-mode #gui-layer{opacity:1;pointer-events:all;transform:scale(1)}
 
     <div class="gfooter">
         <div class="gfooter-inner">
-            <p>© <script>document.write(new Date().getFullYear())</script> Sam Ludwig · Melbourne, VIC</p>
-            <p>Built for high-performance enterprise environments</p>
+            <p id="easterEggTrigger" class="ver-trigger">SYS_VER: 2026.4.28 // SAM LUDWIG</p>
+            <p>BUILT FOR EXTREME ENTERPRISE ENVIRONMENTS</p>
         </div>
     </div>
-</div><script>
-// ── MODE TOGGLE ──────────────────────────────────────────
-let guiMode = false;
+</div>
+
+<script>
+// ── EASTER EGG 1: HACKER CONSOLE LOG ─────────────────────
+console.log("%c[SYS_WARNING] Unregistered biometric scan detected.", "color: #ff003c; font-size: 14px; font-weight: bold;");
+console.log("%c> CSS environmental controls locked. Manual override requires 3 rapid strikes on the system version identifier.", "color: #00f3ff;");
+console.log("%c> Terminal access granted. Proceed with caution.", "color: #6c7a9a;");
+
+// ── STATE MANAGEMENT & THEMES ────────────────────────────
+let guiMode = true;
+let cliBooted = false;
+let matrixActive = false;
+const themes = ['', 'theme-matrix', 'theme-crimson'];
+let currentTheme = 0;
+
+function cycleTheme() {
+    currentTheme = (currentTheme + 1) % themes.length;
+    document.body.className = guiMode ? 'gui-mode' : '';
+    if (themes[currentTheme]) document.body.classList.add(themes[currentTheme]);
+    document.body.style.filter = 'invert(1) hue-rotate(180deg)';
+    setTimeout(() => document.body.style.filter = 'none', 150);
+}
+
+let clickCount = 0;
+document.getElementById('easterEggTrigger').addEventListener('click', () => {
+    clickCount++;
+    if (clickCount >= 3) { cycleTheme(); clickCount = 0; }
+});
+
+// ── EASTER EGG 2: THE KONAMI CODE (OVERCLOCK) ────────────
+const konamiCode = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'];
+let konamiIndex = 0;
+document.addEventListener('keydown', (e) => {
+    if (e.key === konamiCode[konamiIndex]) {
+        konamiIndex++;
+        if (konamiIndex === konamiCode.length) {
+            document.body.classList.toggle('overclock-mode');
+            console.log("%c[SYS_ALERT] OVERCLOCK MODE INITIATED.", "color: #ff003c; font-weight: bold; font-size: 16px;");
+            konamiIndex = 0;
+        }
+    } else { konamiIndex = 0; }
+});
+
+// ── EASTER EGG 3: DO NOT PRESS BUTTON (SYSTEM WIPE) ──────
+document.getElementById('doNotPress').addEventListener('click', () => {
+    const modal = document.getElementById('wipeModal');
+    const fill = document.getElementById('wipeFill');
+    const text = document.getElementById('wipeText');
+    
+    modal.classList.add('active');
+    setTimeout(() => { fill.style.width = '100%'; }, 100);
+    
+    setTimeout(() => {
+        text.innerHTML = "Just kidding.<br><br><span style='color:#00f3ff'>Hire me.</span>";
+        fill.parentElement.style.display = 'none';
+        setTimeout(() => { modal.classList.remove('active'); setTimeout(() => {
+            fill.style.width = '0%'; text.innerHTML = "[CRITICAL ERROR] SYSTEM PURGE INITIATED..."; fill.parentElement.style.display = 'block';
+        }, 500); }, 2500);
+    }, 3100);
+});
+
+// ── EASTER EGG 4: MATRIX DIGITAL RAIN ────────────────────
+const canvas = document.getElementById('matrixCanvas');
+const ctx = canvas.getContext('2d');
+canvas.width = window.innerWidth; canvas.height = window.innerHeight;
+const matrixChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789$+-*/=%\"'#&_(),.;:?!\\|{}<>[]^~";
+const fontSize = 14; const columns = canvas.width / fontSize;
+const drops = []; for(let x = 0; x < columns; x++) drops[x] = 1;
+
+function drawMatrix() {
+    if(!matrixActive) return;
+    ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    ctx.fillStyle = "#0F0"; ctx.font = fontSize + "px monospace";
+    for(let i = 0; i < drops.length; i++) {
+        const text = matrixChars.charAt(Math.floor(Math.random() * matrixChars.length));
+        ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+        if(drops[i] * fontSize > canvas.height && Math.random() > 0.975) drops[i] = 0;
+        drops[i]++;
+    }
+    requestAnimationFrame(drawMatrix);
+}
+
+window.addEventListener('resize', () => {
+    canvas.width = window.innerWidth; canvas.height = window.innerHeight;
+});
+
+// ── MODE TOGGLE HUD ──────────────────────────────────────
 const guiLayer = document.getElementById('gui-layer');
 const modeSpan = document.getElementById('modeSpan');
-const modeAlt  = document.getElementById('modeAlt');
+const cliInput = document.getElementById('cli-input');
 
 function toggleMode() {
     guiMode = !guiMode;
-    document.body.classList.toggle('gui-mode', guiMode);
-    modeSpan.textContent = guiMode ? 'GUI' : 'CLI';
-    modeAlt.textContent  = guiMode ? 'CLI' : 'GUI';
-    if (guiMode) { guiLayer.scrollTop = 0; setTimeout(triggerReveals, 120); }
-    else { cliInput.focus(); }
+    if(guiMode) {
+        document.body.classList.add('gui-mode');
+        modeSpan.textContent = 'GUI HUD';
+        guiLayer.scrollTop = 0; 
+    } else {
+        document.body.classList.remove('gui-mode');
+        modeSpan.textContent = 'CLI TERM';
+        if (!cliBooted) boot(); else cliInput.focus(); 
+        document.getElementById('sysPrompt').classList.remove('show');
+    }
 }
 
 function triggerReveals() {
     const obs = new IntersectionObserver(entries => {
         entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('v'); obs.unobserve(e.target); } });
-    }, { threshold: 0.08, root: guiLayer });
+    }, { threshold: 0.1, root: guiLayer });
     guiLayer.querySelectorAll('.gr').forEach(el => obs.observe(el));
 }
 
-// GUI hero grid responsive fix
-function fixHeroGrid() {
-    const wrap = document.querySelector('.ghero-wrap');
-    if (!wrap) return;
-    if (window.innerWidth <= 820) wrap.style.gridTemplateColumns = '1fr';
-    else wrap.style.gridTemplateColumns = '1fr 1fr';
-}
-window.addEventListener('resize', fixHeroGrid);
-fixHeroGrid();
+document.addEventListener('DOMContentLoaded', () => {
+    triggerReveals(); 
+    setTimeout(() => { if (guiMode) document.getElementById('sysPrompt').classList.add('show'); }, 2500);
+    setTimeout(() => { document.getElementById('sysPrompt').classList.remove('show'); }, 10000);
+});
 
-// ── GUI ACCORDION ────────────────────────────────────────
 function toggleExp(btn) {
     const item = btn.closest('.exp-item');
     const body = item.querySelector('.exp-body');
     const isOpen = item.classList.contains('open');
-    guiLayer.querySelectorAll('.exp-item.open').forEach(i => {
-        i.classList.remove('open');
-        i.querySelector('.exp-body').style.maxHeight = null;
-    });
+    guiLayer.querySelectorAll('.exp-item.open').forEach(i => { i.classList.remove('open'); i.querySelector('.exp-body').style.maxHeight = null; });
     if (!isOpen) { item.classList.add('open'); body.style.maxHeight = body.scrollHeight + 'px'; }
 }
 
-// ── CLI ENGINE ───────────────────────────────────────────
+// ── CLI ENGINE (Hacker Mode) ─────────────────────────────
 const cliOut  = document.getElementById('cli-output');
-const cliInput = document.getElementById('cli-input');
 let isTyping = false, cmdHistory = [], histIdx = -1;
 
 const BOOT = [
-    {t:'Windows PowerShell\n',c:'c-white c-bold'},
-    {t:'Copyright (C) Microsoft Corporation. All rights reserved.\n\n',c:'c-dim'},
-    {t:'Importing module ',c:'c-dim'},{t:"'SamLudwig.Engineering'",c:'c-yellow'},{t:'...',c:'c-dim',d:500},{t:' Done\n',c:'c-green'},
-    {t:'Loading profile ',c:'c-dim'},{t:'samludwig.au',c:'c-blue'},{t:'...',c:'c-dim',d:300},{t:' Done\n\n',c:'c-green'},
-    {t:'  ╔═══════════════════════════════════════════════════════╗\n',c:'c-blue'},
-    {t:'  ║  ',c:'c-blue'},{t:'SAM LUDWIG',c:'c-white c-bold'},{t:'  ·  Senior M365 & SharePoint Engineer  ║\n',c:'c-blue'},
-    {t:'  ║  ',c:'c-blue'},{t:'Melbourne, VIC  ·  samludwig.au  · 5+ Years Enterprise IT',c:'c-dim'},{t:'  ║\n',c:'c-blue'},
-    {t:'  ╚═══════════════════════════════════════════════════════╝\n\n',c:'c-blue'},
-    {t:'  660,000+ ',c:'c-green'},{t:'users supported   ',c:'c-dim'},
-    {t:'87% ',c:'c-green'},{t:'processing time saved   ',c:'c-dim'},
-    {t:'99.9% ',c:'c-green'},{t:'uptime achieved\n\n',c:'c-dim'},
-    {t:'Type ',c:'c-dim'},{t:'Get-Help',c:'c-cyan'},{t:' for available commands  ·  ',c:'c-dim'},
-    {t:'gui',c:'c-purple'},{t:' to switch to visual mode\n\n',c:'c-dim'},
+    {t:'INITIALIZING NEURAL LINK...\n',c:'c-green c-bold', d:200},
+    {t:'[SYS] Kernal loaded. Bypassing mainframe security protocols...\n',c:'c-dim'},
+    {t:'[SYS] Accessing user registry: ',c:'c-dim'},{t:'SAM_LUDWIG\n',c:'c-cyan c-bold', d:300},
+    {t:'[SYS] Decrypting operational history...\n\n',c:'c-dim', d:400},
+    {t:'  ███████╗██╗      ███████╗███╗   ██╗██████╗ \n',c:'c-green'},
+    {t:'  ██╔════╝██║      ██╔════╝████╗  ██║██╔══██╗\n',c:'c-green'},
+    {t:'  ███████╗██║      █████╗  ██╔██╗ ██║██║  ██║\n',c:'c-green'},
+    {t:'  ╚════██║██║      ██╔══╝  ██║╚██╗██║██║  ██║\n',c:'c-green'},
+    {t:'  ███████║███████╗ ███████╗██║ ╚████║██████╔╝\n',c:'c-green'},
+    {t:'  ╚══════╝╚══════╝ ╚══════╝╚═╝  ╚═══╝╚═════╝ \n\n',c:'c-green'},
+    {t:'> SENIOR M365 ENGINEER // ENTERPRISE ARCHITECT\n',c:'c-cyan c-bold'},
+    {t:'> ACTIVE NODES: ',c:'c-dim'},{t:'660,000+ (DEPT OF ED VIC)\n',c:'c-white'},
+    {t:'> AUTOMATION YIELD: ',c:'c-dim'},{t:'87% LATENCY REDUCTION\n\n',c:'c-white'},
+    {t:'Type ',c:'c-dim'},{t:'help',c:'c-cyan c-bold'},{t:' to list commands, or run ',c:'c-dim'},
+    {t:'gui',c:'c-purple c-bold'},{t:' to return to visual HUD.\n\n',c:'c-dim'},
 ];
 
 const CMDS = {
-    'get-help': () => [
-        {t:'\nAVAILABLE COMMANDS\n',c:'c-white c-bold'},
-        {t:'──────────────────────────────────────────────────────────\n',c:'c-dim'},
-        {t:'  Get-Skills      ',c:'c-cyan'},{t:'Returns technical stack and competencies\n',c:'c-dim'},
-        {t:'  Get-Experience  ',c:'c-cyan'},{t:'Returns chronological work history\n',c:'c-dim'},
-        {t:'  Get-Portfolio   ',c:'c-cyan'},{t:'Returns engineering project repositories\n',c:'c-dim'},
-        {t:'  Get-Metrics     ',c:'c-cyan'},{t:'Returns key performance achievements\n',c:'c-dim'},
-        {t:'  Get-Certs       ',c:'c-cyan'},{t:'Returns certifications and qualifications\n',c:'c-dim'},
-        {t:'  Invoke-Hire     ',c:'c-green'},{t:'Opens email client — start a conversation\n',c:'c-dim'},
-        {t:'  gui             ',c:'c-purple'},{t:'Switch to visual GUI mode\n',c:'c-dim'},
-        {t:'  Clear-Host      ',c:'c-dim'},{t:'Clears the terminal\n\n',c:'c-dim'},
+    'help': () => [
+        {t:'\n[AVAILABLE COMMANDS]\n',c:'c-cyan c-bold'},
+        {t:'------------------------------------------------------\n',c:'c-dim'},
+        {t:'  get-skills      ',c:'c-green'},{t:'Extract tech stack matrix\n',c:'c-dim'},
+        {t:'  get-history     ',c:'c-green'},{t:'Read deployment logs (Experience)\n',c:'c-dim'},
+        {t:'  get-projects    ',c:'c-green'},{t:'Access classified repo data\n',c:'c-dim'},
+        {t:'  theme override  ',c:'c-purple c-bold'},{t:'[LOCKED] Cycle CSS environmental variables\n',c:'c-dim'},
+        {t:'  gui             ',c:'c-purple c-bold'},{t:'Override terminal -> Load Visual HUD\n',c:'c-dim'},
+        {t:'  clear           ',c:'c-dim'},{t:'Wipe screen buffer\n\n',c:'c-dim'},
     ],
     'get-skills': () => [
-        {t:'\n[LANGUAGES]   ',c:'c-yellow'},{t:'PowerShell · Python · JavaScript ES6+ · TypeScript · React · SPFx\n',c:'c-white'},
-        {t:'[CLOUD]       ',c:'c-yellow'},{t:'M365 · Azure · Entra ID · Exchange Hybrid · SharePoint Online/Prem · Google Workspace · AWS\n',c:'c-white'},
-        {t:'[SECURITY]    ',c:'c-yellow'},{t:'Intune MDM/MAM · Windows Autopilot · Defender for Endpoint · ACSC Essential 8 · ISO 27001\n',c:'c-white'},
-        {t:'[TOOLS]       ',c:'c-yellow'},{t:'ServiceNow · Azure DevOps · Git · Splunk · PnP PowerShell\n',c:'c-white'},
-        {t:'[METHODOLOGY] ',c:'c-yellow'},{t:'ITIL v4 · Agile/Scrum · CI/CD · RCA\n\n',c:'c-white'},
+        {t:'\n> FETCHING WEAPONRY...\n',c:'c-dim'},
+        {t:'[LANGUAGES]   ',c:'c-cyan'},{t:'PowerShell 7 · Python 3 · JS (ES6+) · TS · React\n',c:'c-white'},
+        {t:'[INFRA]       ',c:'c-cyan'},{t:'M365 · Azure · Entra ID · SharePoint · AWS\n',c:'c-white'},
+        {t:'[CYBER]       ',c:'c-cyan'},{t:'Intune MDM · Autopilot · Defender · ACSC Essential 8\n\n',c:'c-white'},
     ],
-    'get-experience': () => [
-        {t:'\n',c:''},
-        {t:'STATUS     TENURE              ROLE                                ORGANISATION\n',c:'c-dim'},
-        {t:'──────     ──────              ────                                ────────────\n',c:'c-dim'},
-        {t:'[ACTIVE]   ',c:'c-green'},{t:'Present             IT Support Specialist (MyITHub)     Australia Post · Capgemini\n',c:'c-white'},
-        {t:'[ACTIVE]   ',c:'c-green'},{t:'Oct 2025–Present    Win 11 Deployment Engineer           St John of God · Capgemini\n',c:'c-white'},
-        {t:'[CLOSED]   ',c:'c-dim'}, {t:'Dec 2021–Sep 2025   Managed Services Engineer            Capgemini → Dept. of Education VIC\n',c:'c-white'},
-        {t:'[CLOSED]   ',c:'c-dim'}, {t:'Dec 2020–Dec 2021   Application Support Engineer          Knosys\n',c:'c-white'},
-        {t:'[CLOSED]   ',c:'c-dim'}, {t:'Mar 2018–Dec 2020   SharePoint Developer / Consultant    Engage Squared\n',c:'c-white'},
-        {t:'\n→ Run ',c:'c-dim'},{t:'gui',c:'c-purple'},{t:' for full role descriptions and bullet points.\n\n',c:'c-dim'},
+    'get-history': () => [
+        {t:'\n> EXTRACTING LOGS...\n',c:'c-dim'},
+        {t:'[ACTIVE]  ',c:'c-green'},{t:'AusPost via Capgemini     // IT Support Spec\n',c:'c-white'},
+        {t:'[ACTIVE]  ',c:'c-green'},{t:'St John of God            // Win 11 Deploy Eng\n',c:'c-white'},
+        {t:'[ARCHIVE] ',c:'c-dim'}, {t:'Dept of Education VIC     // Managed Services Eng\n',c:'c-white'},
+        {t:'\n> Execute ',c:'c-dim'},{t:'gui',c:'c-purple c-bold'},{t:' for deep-dive bullet logs.\n\n',c:'c-dim'},
     ],
-    'get-portfolio': () => [
-        {t:'\n',c:''},
-        {t:'PROJECT        STACK                      DESCRIPTION\n',c:'c-dim'},
-        {t:'───────        ─────                      ───────────\n',c:'c-dim'},
-        {t:'YellowSnow     ',c:'c-cyan'},{t:'JS / Tampermonkey          ServiceNow UX & Algorithmic Assignment Engine\n',c:'c-white'},
-        {t:'PySPO-Tool     ',c:'c-cyan'},{t:'Python 3.12 / PS 7         Shift-Left M365 Diagnostic GUI\n',c:'c-white'},
-        {t:'JobGobblin     ',c:'c-cyan'},{t:'Python / Selenium          Browser Automation & Recon Engine\n',c:'c-white'},
-        {t:'\n→ ',c:'c-dim'},{t:'https://github.com/Ludwixix\n\n',c:'c-blue'},
+    'get-projects': () => [
+        {t:'\n> BYPASSING FIREWALLS...\n',c:'c-dim'},
+        {t:'[01] YellowSnow Engine   ',c:'c-cyan'},{t:'ServiceNow UX & Algorithmic Assignment\n',c:'c-white'},
+        {t:'[02] PySPO-Tool          ',c:'c-cyan'},{t:'Shift-Left M365 Diagnostic Python HUD\n',c:'c-white'},
+        {t:'\n> GITHUB REPO: ',c:'c-dim'},{t:'https://github.com/Ludwixix\n\n',c:'c-blue'},
     ],
-    'get-metrics': () => [
-        {t:'\n',c:''},
-        {t:'METRIC                        VALUE        CONTEXT\n',c:'c-dim'},
-        {t:'──────                        ─────        ───────\n',c:'c-dim'},
-        {t:'Active Users Supported        ',c:'c-white'},{t:'660,000+     ',c:'c-green'},{t:'DoE VIC — largest SP farm in Southern Hemisphere\n',c:'c-dim'},
-        {t:'Uptime Maintained             ',c:'c-white'},{t:'99.9%        ',c:'c-green'},{t:'DoE VIC SharePoint farm across 1,000+ sites\n',c:'c-dim'},
-        {t:'Processing Time Reduction     ',c:'c-white'},{t:'87%          ',c:'c-green'},{t:'Knosys — PowerShell automation (2hr → 15min)\n',c:'c-dim'},
-        {t:'Incident Reduction            ',c:'c-white'},{t:'15%          ',c:'c-green'},{t:'DoE VIC — RCA-driven fault elimination\n',c:'c-dim'},
-        {t:'Sites MFA-Enforced            ',c:'c-white'},{t:'200+         ',c:'c-green'},{t:'PnP PowerShell compliance automation\n',c:'c-dim'},
-        {t:'SLA Resolution Rate           ',c:'c-white'},{t:'95%          ',c:'c-green'},{t:'Knosys — L3 application support\n',c:'c-dim'},
-        {t:'\n',c:''},
-    ],
-    'get-certs': () => [
-        {t:'\n',c:''},
-        {t:'[✓] ',c:'c-green'},{t:'Microsoft Azure Fundamentals (AZ-900)\n',c:'c-white'},
-        {t:'[◉] ',c:'c-blue'}, {t:'Microsoft Azure Administrator (AZ-104)  ',c:'c-white'},{t:'← In Progress\n',c:'c-yellow'},
-        {t:'[✓] ',c:'c-green'},{t:'ITIL 4 Foundation\n',c:'c-white'},
-        {t:'[✓] ',c:'c-green'},{t:'Certified ScrumMaster® (CSM)\n',c:'c-white'},
-        {t:'[✓] ',c:'c-green'},{t:'ISO 27001\n',c:'c-white'},
-        {t:'[✓] ',c:'c-green'},{t:'ACMA Open Rule Cabling\n',c:'c-white'},
-        {t:'[✓] ',c:'c-green'},{t:'Diploma of Web Development — Coder Academy\n',c:'c-white'},
-        {t:'\n',c:''},
-    ],
-    'invoke-hire': () => {
-        setTimeout(() => { window.location.href = "mailto:sam.ludwig@gmail.com?subject=Opportunity%20for%20Sam%20Ludwig"; }, 900);
+    'theme override': () => {
+        cycleTheme();
+        let activeTheme = themes[currentTheme] ? themes[currentTheme].replace('theme-', '').toUpperCase() : 'NEON CYBER (DEFAULT)';
         return [
-            {t:'\nInitializing SMTP tunnel',c:'c-dim'},{t:'...',c:'c-dim'},{t:' OK\n',c:'c-green'},
-            {t:'Routing to: ',c:'c-dim'},{t:'sam.ludwig@gmail.com\n',c:'c-cyan'},
-            {t:'Opening mail client',c:'c-dim'},{t:'...\n\n',c:'c-dim'},
+            {t:'\n> EXECUTING PROTOCOL OMEGA...\n',c:'c-purple c-bold'},
+            {t:'> INJECTING NEW CSS VARIABLES: ',c:'c-dim'},{t:`[ ${activeTheme} ]\n\n`,c:'c-green'}
         ];
     },
-    'gui': () => {
-        setTimeout(toggleMode, 700);
-        return [{t:'\nSwitching to GUI mode',c:'c-dim'},{t:'...',c:'c-dim'},{t:' Done\n\n',c:'c-green'}];
+    'whoami': () => [
+        {t:'\n> QUERYING INTEL DATABASE...\n',c:'c-dim'},
+        {t:'SUBJECT: ',c:'c-dim'},{t:'SAM_LUDWIG\n',c:'c-white c-bold'},
+        {t:'STATUS: ',c:'c-dim'},{t:'GHOST / ACTIVE\n',c:'c-white'},
+        {t:'LAST KNOWN LOCATION: ',c:'c-dim'},{t:'MELBOURNE_SECTOR\n',c:'c-white'},
+        {t:'THREAT LEVEL: ',c:'c-dim'},{t:'EXTREME (AUTOMATION SPECIALIST)\n\n',c:'c-red c-bold'},
+    ],
+    'matrix': () => {
+        matrixActive = !matrixActive;
+        if(matrixActive) {
+            document.getElementById('matrixCanvas').classList.add('active');
+            requestAnimationFrame(drawMatrix);
+            return [{t:'\n> INITIATING VISUAL CORTEX OVERRIDE...\n\n',c:'c-green c-bold'}];
+        } else {
+            document.getElementById('matrixCanvas').classList.remove('active');
+            return [{t:'\n> TERMINATING MATRIX PROTOCOL...\n\n',c:'c-dim'}];
+        }
     },
-    'clear-host':'clear','cls':'clear',
+    'sudo rm -rf /': () => [
+        {t:'\n[CRITICAL ERROR] UNAUTHORIZED ACTION.\n',c:'c-red c-bold'},
+        {t:'> INCIDENT LOGGED AND FORWARDED TO CYBER COMMAND.\n',c:'c-red'},
+        {t:'> NICE TRY.\n\n',c:'c-dim'},
+    ],
+    'gui': () => { setTimeout(toggleMode, 600); return [{t:'\n> RESTORING HUD LINK...\n\n',c:'c-purple c-bold'}]; },
+    'clear':'clear','cls':'clear'
 };
 
-function seg(segs) {
-    segs.forEach(s => {
-        const el = document.createElement('span');
-        el.className = s.c || '';
-        el.textContent = s.t;
-        cliOut.appendChild(el);
-    });
-    scrollCLI();
-}
-
-function scrollCLI() {
-    const layer = document.getElementById('cli-layer');
-    layer.scrollTop = layer.scrollHeight;
-}
-
+function seg(segs) { segs.forEach(s => { const el = document.createElement('span'); el.className = s.c || ''; el.textContent = s.t; cliOut.appendChild(el); }); scrollCLI(); }
+function scrollCLI() { document.getElementById('cli-layer').scrollTop = document.getElementById('cli-layer').scrollHeight; }
 function esc(s){ return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
-
 function sleep(ms){ return new Promise(r => setTimeout(r,ms)); }
 
 async function boot() {
-    isTyping = true;
-    for (const s of BOOT) {
-        if (s.d) await sleep(s.d);
-        seg([s]);
-        await sleep(Math.min(s.t.length * 10, 80));
-    }
-    isTyping = false;
-    cliInput.focus();
+    cliBooted = true; isTyping = true;
+    for (const s of BOOT) { if (s.d) await sleep(s.d); seg([s]); await sleep(Math.min(s.t.length * 5, 40)); }
+    isTyping = false; cliInput.focus();
 }
 
 cliInput.addEventListener('keydown', e => {
@@ -654,35 +695,26 @@ cliInput.addEventListener('keydown', e => {
     cliInput.value = '';
 
     const promptSpan = document.createElement('span');
-    promptSpan.innerHTML = `<span class="c-blue">PS C:\\Enterprise\\Recruiter&gt;</span> ${esc(raw)}\n`;
+    promptSpan.innerHTML = `<span class="c-cyan c-bold">C:\\ENG\\SL&gt;</span> ${esc(raw)}\n`;
     cliOut.appendChild(promptSpan);
-    if (!raw) return;
+    if (!raw) return scrollCLI();
 
     cmdHistory.unshift(raw); histIdx = -1;
 
-    if (cmd === 'clear-host' || cmd === 'cls') { cliOut.innerHTML = ''; return; }
+    if (cmd === 'clear' || cmd === 'cls') { cliOut.innerHTML = ''; return; }
 
-    const handler = CMDS[cmd];
+    const handler = CMDS[cmd] || CMDS['get-'+cmd] || (cmd === 'sudo rm -rf /' ? CMDS['sudo rm -rf /'] : null);
+    
     if (handler) {
         const result = typeof handler === 'function' ? handler() : null;
         if (result) seg(result);
     } else {
-        seg([
-            {t:`\n`,c:''},
-            {t:`${esc(raw)}`,c:'c-red'},
-            {t:` : The term '${esc(raw)}' is not recognized. Type `,c:'c-dim'},
-            {t:`Get-Help`,c:'c-cyan'},
-            {t:` for available commands.\n\n`,c:'c-dim'},
-        ]);
+        seg([ {t:`\n[ERR] SYNTAX REFUSED: `,c:'c-red'}, {t:`'${esc(raw)}' is unknown payload. Try `,c:'c-dim'}, {t:`help\n\n`,c:'c-cyan c-bold'} ]);
     }
     scrollCLI();
 });
 
 document.getElementById('cli-layer').addEventListener('click', () => { if (!guiMode) cliInput.focus(); });
-
-boot();
 </script>
-
-<script data-goatcounter="https://samludwig.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>
 </html>
