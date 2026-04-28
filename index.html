@@ -5,58 +5,104 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sam Ludwig | SharePoint Automation & Escalation Engineer</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         body { font-family: 'Inter', sans-serif; }
+        
+        /* Modern Grid Background */
         .bg-grid {
             background-size: 40px 40px;
-            background-image: linear-gradient(to right, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
-                              linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+            background-image: linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+                              linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+            mask-image: linear-gradient(to bottom, black 40%, transparent 100%);
+            -webkit-mask-image: linear-gradient(to bottom, black 40%, transparent 100%);
+        }
+
+        /* Scroll Animation Classes */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.5, 0, 0, 1);
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* Glassmorphism utility */
+        .glass {
+            background: rgba(17, 24, 39, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
         }
     </style>
 </head>
-<body class="bg-gray-950 text-gray-300 antialiased selection:bg-blue-500 selection:text-white">
+<body class="bg-gray-950 text-gray-300 antialiased selection:bg-blue-500 selection:text-white flex flex-col min-h-screen">
 
-    <header class="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden border-b border-gray-800 bg-grid">
-        <div class="absolute inset-0 bg-gray-950/80"></div>
-        <div class="relative max-w-5xl mx-auto px-6 lg:px-8">
-            <h1 class="text-5xl lg:text-7xl font-bold tracking-tight text-white mb-6">
+    <nav class="fixed w-full z-50 glass border-b border-gray-800 transition-all duration-300" id="navbar">
+        <div class="max-w-5xl mx-auto px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <span class="text-white font-bold tracking-tight">SL.</span>
+                <div class="hidden md:flex space-x-8 text-sm font-medium text-gray-400">
+                    <a href="#about" class="hover:text-white transition-colors">About</a>
+                    <a href="#skills" class="hover:text-white transition-colors">Skills</a>
+                    <a href="#engineering" class="hover:text-white transition-colors">Engineering</a>
+                    <a href="#experience" class="hover:text-white transition-colors">Experience</a>
+                </div>
+                <a href="https://linkedin.com/in/sam-ludwig" target="_blank" class="text-sm font-semibold text-blue-400 hover:text-blue-300 transition-colors">Connect &rarr;</a>
+            </div>
+        </div>
+    </nav>
+
+    <header id="about" class="relative pt-40 pb-24 lg:pt-52 lg:pb-32 overflow-hidden border-b border-gray-800">
+        <div class="absolute inset-0 bg-grid pointer-events-none"></div>
+        <div class="relative max-w-5xl mx-auto px-6 lg:px-8 reveal">
+            <h1 class="text-5xl lg:text-7xl font-bold tracking-tight mb-6 text-transparent bg-clip-text bg-gradient-to-r from-white via-gray-200 to-gray-500">
                 Sam Ludwig
             </h1>
-            <h2 class="text-2xl lg:text-3xl font-light text-blue-400 mb-8">
+            <h2 class="text-2xl lg:text-3xl font-medium text-blue-400 mb-8">
                 SharePoint Automation & Escalation Engineer
             </h2>
-            <p class="text-lg lg:text-xl leading-relaxed text-gray-400 max-w-3xl mb-10">
+            <p class="text-lg lg:text-xl leading-relaxed text-gray-400 max-w-3xl mb-10 font-light">
                 Highly analytical systems engineer specializing in Microsoft 365 architecture, advanced PowerShell automation, and code-level troubleshooting. Combines foundational experience in SharePoint Framework (SPFx) development with extensive Tier-3 escalation expertise in massive-scale enterprise environments (660,000+ users).
             </p>
             <div class="flex flex-wrap gap-4">
-                <a href="mailto:sam.ludwig@gmail.com" class="px-6 py-3 bg-blue-600 hover:bg-blue-500 text-white font-semibold rounded-lg transition-colors">
-                    sam.ludwig@gmail.com
+                <a href="#engineering" class="px-6 py-3 bg-blue-600 hover:bg-blue-500 text-white font-semibold rounded-lg transition-all shadow-[0_0_20px_rgba(37,99,235,0.3)] hover:shadow-[0_0_25px_rgba(37,99,235,0.5)]">
+                    View Engineering Portfolio
                 </a>
-                <a href="https://linkedin.com/in/sam-ludwig" target="_blank" class="px-6 py-3 bg-gray-800 hover:bg-gray-700 text-white font-semibold rounded-lg border border-gray-700 transition-colors">
-                    LinkedIn Profile
+                <a href="mailto:sam.ludwig@gmail.com" class="px-6 py-3 bg-gray-800 hover:bg-gray-700 text-white font-semibold rounded-lg border border-gray-700 transition-colors">
+                    sam.ludwig@gmail.com
                 </a>
             </div>
         </div>
     </header>
 
-    <section class="py-20 bg-gray-900 border-b border-gray-800">
+    <section class="py-24 bg-gray-900/50 border-b border-gray-800" id="competencies">
         <div class="max-w-5xl mx-auto px-6 lg:px-8">
-            <h3 class="text-3xl font-bold text-white mb-12">Core Technical Competencies</h3>
+            <h3 class="text-3xl font-bold text-white mb-12 reveal">Core Technical Competencies</h3>
             <div class="grid gap-8 md:grid-cols-3">
-                <div class="bg-gray-800/50 p-8 rounded-2xl border border-gray-700/50 hover:border-blue-500/50 transition-colors">
+                <div class="bg-gray-800/40 p-8 rounded-2xl border border-gray-700/50 hover:border-blue-500/50 transition-all hover:-translate-y-1 reveal">
+                    <div class="h-10 w-10 rounded-lg bg-blue-900/50 border border-blue-800 flex items-center justify-center mb-6 text-blue-400">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>
+                    </div>
                     <h4 class="text-xl font-semibold text-white mb-4">Custom Software Engineering</h4>
                     <p class="text-gray-400 text-sm leading-relaxed">
                         Engineered custom JavaScript front-end overlays within ServiceNow to resolve out-of-the-box UI inefficiencies, integrating Microsoft 365 presence data. Developed an automated workload distribution algorithm to eliminate manual triage overhead and prevent SLA breaches.
                     </p>
                 </div>
-                <div class="bg-gray-800/50 p-8 rounded-2xl border border-gray-700/50 hover:border-blue-500/50 transition-colors">
+                <div class="bg-gray-800/40 p-8 rounded-2xl border border-gray-700/50 hover:border-purple-500/50 transition-all hover:-translate-y-1 reveal" style="transition-delay: 100ms;">
+                    <div class="h-10 w-10 rounded-lg bg-purple-900/50 border border-purple-800 flex items-center justify-center mb-6 text-purple-400">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+                    </div>
                     <h4 class="text-xl font-semibold text-white mb-4">L3 Code-Level Debugging</h4>
                     <p class="text-gray-400 text-sm leading-relaxed">
                         Resolved critical enterprise incidents via deep-dive root cause analysis, including inspecting network payloads, analyzing API traffic, and executing direct SQL database modifications. Engineered custom scripts to automate resolution of recurring faults.
                     </p>
                 </div>
-                <div class="bg-gray-800/50 p-8 rounded-2xl border border-gray-700/50 hover:border-blue-500/50 transition-colors">
+                <div class="bg-gray-800/40 p-8 rounded-2xl border border-gray-700/50 hover:border-green-500/50 transition-all hover:-translate-y-1 reveal" style="transition-delay: 200ms;">
+                    <div class="h-10 w-10 rounded-lg bg-green-900/50 border border-green-800 flex items-center justify-center mb-6 text-green-400">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+                    </div>
                     <h4 class="text-xl font-semibold text-white mb-4">Advanced Security Automation</h4>
                     <p class="text-gray-400 text-sm leading-relaxed">
                         Architected and deployed an automated PnP PowerShell solution to dynamically audit and enforce Multi-Factor Authentication (MFA) compliance across 200+ sensitive SharePoint sites. Integrated error-handling and automated compliance reporting.
@@ -66,154 +112,160 @@
         </div>
     </section>
 
-    <section class="py-20 border-b border-gray-800">
+    <section class="py-24 border-b border-gray-800" id="skills">
         <div class="max-w-5xl mx-auto px-6 lg:px-8">
-            <h3 class="text-3xl font-bold text-white mb-12">Technical Arsenal</h3>
+            <h3 class="text-3xl font-bold text-white mb-12 reveal">Technical Arsenal</h3>
+            <div class="space-y-10">
+                <div class="reveal">
+                    <h4 class="text-sm uppercase tracking-widest text-gray-500 mb-5 font-bold">Languages & Frameworks</h4>
+                    <div class="flex flex-wrap gap-3">
+                        <span class="px-4 py-2 bg-gray-900 text-blue-300 rounded-lg text-sm font-medium border border-gray-800 hover:border-blue-500/50 transition-colors cursor-default">PowerShell</span>
+                        <span class="px-4 py-2 bg-gray-900 text-blue-300 rounded-lg text-sm font-medium border border-gray-800 hover:border-blue-500/50 transition-colors cursor-default">JavaScript</span>
+                        <span class="px-4 py-2 bg-gray-900 text-blue-300 rounded-lg text-sm font-medium border border-gray-800 hover:border-blue-500/50 transition-colors cursor-default">TypeScript</span>
+                        <span class="px-4 py-2 bg-gray-900 text-blue-300 rounded-lg text-sm font-medium border border-gray-800 hover:border-blue-500/50 transition-colors cursor-default">React</span>
+                        <span class="px-4 py-2 bg-gray-900 text-blue-300 rounded-lg text-sm font-medium border border-gray-800 hover:border-blue-500/50 transition-colors cursor-default">SPFx</span>
+                        <span class="px-4 py-2 bg-gray-900 text-blue-300 rounded-lg text-sm font-medium border border-gray-800 hover:border-blue-500/50 transition-colors cursor-default">Python</span>
+                    </div>
+                </div>
+                <div class="reveal" style="transition-delay: 100ms;">
+                    <h4 class="text-sm uppercase tracking-widest text-gray-500 mb-5 font-bold">Cloud & Infrastructure</h4>
+                    <div class="flex flex-wrap gap-3">
+                        <span class="px-4 py-2 bg-gray-900 text-blue-300 rounded-lg text-sm font-medium border border-gray-800 hover:border-blue-500/50 transition-colors cursor-default">Azure</span>
+                        <span class="px-4 py-2 bg-gray-900 text-blue-300 rounded-lg text-sm font-medium border border-gray-800 hover:border-blue-500/50 transition-colors cursor-default">Entra ID</span>
+                        <span class="px-4 py-2 bg-gray-900 text-blue-300 rounded-lg text-sm font-medium border border-gray-800 hover:border-blue-500/50 transition-colors cursor-default">Microsoft 365</span>
+                        <span class="px-4 py-2 bg-gray-900 text-blue-300 rounded-lg text-sm font-medium border border-gray-800 hover:border-blue-500/50 transition-colors cursor-default">Exchange</span>
+                        <span class="px-4 py-2 bg-gray-900 text-blue-300 rounded-lg text-sm font-medium border border-gray-800 hover:border-blue-500/50 transition-colors cursor-default">Teams</span>
+                        <span class="px-4 py-2 bg-gray-900 text-blue-300 rounded-lg text-sm font-medium border border-gray-800 hover:border-blue-500/50 transition-colors cursor-default">SharePoint Online</span>
+                    </div>
+                </div>
+                <div class="reveal" style="transition-delay: 200ms;">
+                    <h4 class="text-sm uppercase tracking-widest text-gray-500 mb-5 font-bold">Tools & CI/CD</h4>
+                    <div class="flex flex-wrap gap-3">
+                        <span class="px-4 py-2 bg-gray-900 text-blue-300 rounded-lg text-sm font-medium border border-gray-800 hover:border-blue-500/50 transition-colors cursor-default">Git</span>
+                        <span class="px-4 py-2 bg-gray-900 text-blue-300 rounded-lg text-sm font-medium border border-gray-800 hover:border-blue-500/50 transition-colors cursor-default">Azure DevOps</span>
+                        <span class="px-4 py-2 bg-gray-900 text-blue-300 rounded-lg text-sm font-medium border border-gray-800 hover:border-blue-500/50 transition-colors cursor-default">ServiceNow</span>
+                        <span class="px-4 py-2 bg-gray-900 text-blue-300 rounded-lg text-sm font-medium border border-gray-800 hover:border-blue-500/50 transition-colors cursor-default">Splunk</span>
+                        <span class="px-4 py-2 bg-gray-900 text-blue-300 rounded-lg text-sm font-medium border border-gray-800 hover:border-blue-500/50 transition-colors cursor-default">ZenDesk</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-24 bg-gray-900/30 border-b border-gray-800" id="engineering">
+        <div class="max-w-5xl mx-auto px-6 lg:px-8">
+            <div class="mb-12 reveal">
+                <h3 class="text-3xl font-bold text-white">Featured Engineering</h3>
+                <p class="text-gray-500 mt-2">Deployed automation and architecture solutions.</p>
+            </div>
+            
             <div class="space-y-8">
-                <div>
-                    <h4 class="text-sm uppercase tracking-wider text-gray-500 mb-4 font-semibold">Languages & Frameworks</h4>
-                    <div class="flex flex-wrap gap-3">
-                        <span class="px-4 py-2 bg-gray-800 text-blue-300 rounded-md text-sm font-medium border border-gray-700">PowerShell</span>
-                        <span class="px-4 py-2 bg-gray-800 text-blue-300 rounded-md text-sm font-medium border border-gray-700">JavaScript</span>
-                        <span class="px-4 py-2 bg-gray-800 text-blue-300 rounded-md text-sm font-medium border border-gray-700">TypeScript</span>
-                        <span class="px-4 py-2 bg-gray-800 text-blue-300 rounded-md text-sm font-medium border border-gray-700">React</span>
-                        <span class="px-4 py-2 bg-gray-800 text-blue-300 rounded-md text-sm font-medium border border-gray-700">SPFx</span>
-                        <span class="px-4 py-2 bg-gray-800 text-blue-300 rounded-md text-sm font-medium border border-gray-700">Python</span>
+                <div class="bg-gray-800/40 border border-gray-700/50 rounded-2xl p-8 lg:p-10 hover:border-blue-500/50 transition-all hover:bg-gray-800/60 relative overflow-hidden group reveal">
+                    <div class="absolute top-0 right-0 p-8 opacity-5 group-hover:opacity-10 transition-opacity">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
                     </div>
+                    
+                    <div class="flex flex-wrap items-center gap-3 mb-5">
+                        <h4 class="text-2xl font-bold text-white mr-2">ServiceNow UI & Assignment Engine</h4>
+                        <span class="px-3 py-1 bg-blue-900/40 text-blue-300 text-xs font-semibold rounded-md border border-blue-800/50">JavaScript</span>
+                        <span class="px-3 py-1 bg-purple-900/40 text-purple-300 text-xs font-semibold rounded-md border border-purple-800/50">SharePoint REST API</span>
+                    </div>
+                    
+                    <p class="text-gray-400 leading-relaxed mb-8 max-w-3xl text-sm lg:text-base">
+                        Engineered a suite of client-side browser extensions to radically optimize the ServiceNow ITSM experience. The solution utilizes asynchronous REST API calls to merge live Microsoft 365/SharePoint presence data with active ticket queues, visually flagging unavailable engineers. Furthermore, it scrapes dashboard metrics and cross-references them against active directory groups to power an algorithmic workload recommendation engine.
+                    </p>
+                    
+                    <a href="https://github.com/Ludwixix/YellowSnow-main" target="_blank" class="inline-flex items-center text-white bg-gray-900 hover:bg-gray-700 border border-gray-700 px-5 py-2.5 rounded-lg text-sm font-semibold transition-all">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+                        View Repository
+                    </a>
                 </div>
-                <div>
-                    <h4 class="text-sm uppercase tracking-wider text-gray-500 mb-4 font-semibold">Cloud & Infrastructure</h4>
-                    <div class="flex flex-wrap gap-3">
-                        <span class="px-4 py-2 bg-gray-800 text-blue-300 rounded-md text-sm font-medium border border-gray-700">Azure</span>
-                        <span class="px-4 py-2 bg-gray-800 text-blue-300 rounded-md text-sm font-medium border border-gray-700">Entra ID</span>
-                        <span class="px-4 py-2 bg-gray-800 text-blue-300 rounded-md text-sm font-medium border border-gray-700">Microsoft 365</span>
-                        <span class="px-4 py-2 bg-gray-800 text-blue-300 rounded-md text-sm font-medium border border-gray-700">Exchange</span>
-                        <span class="px-4 py-2 bg-gray-800 text-blue-300 rounded-md text-sm font-medium border border-gray-700">Teams</span>
-                        <span class="px-4 py-2 bg-gray-800 text-blue-300 rounded-md text-sm font-medium border border-gray-700">SharePoint Online</span>
+
+                <div class="bg-gray-800/40 border border-gray-700/50 rounded-2xl p-8 lg:p-10 hover:border-blue-500/50 transition-all hover:bg-gray-800/60 relative overflow-hidden group reveal">
+                    <div class="absolute top-0 right-0 p-8 opacity-5 group-hover:opacity-10 transition-opacity">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"></path></svg>
                     </div>
+                    
+                    <div class="flex flex-wrap items-center gap-3 mb-5">
+                        <h4 class="text-2xl font-bold text-white mr-2">M365 Diagnostic GUI (PySPO)</h4>
+                        <span class="px-3 py-1 bg-green-900/40 text-green-300 text-xs font-semibold rounded-md border border-green-800/50">Python 3.12</span>
+                        <span class="px-3 py-1 bg-blue-900/40 text-blue-300 text-xs font-semibold rounded-md border border-blue-800/50">PowerShell 7</span>
+                    </div>
+                    
+                    <p class="text-gray-400 leading-relaxed mb-8 max-w-3xl text-sm lg:text-base">
+                        Engineered a Python-based Graphical User Interface (GUI) application designed to execute complex Microsoft 365 troubleshooting scripts. The tool acts as a "shift-left" operational wrapper, allowing tier-1 support staff to safely run advanced PowerShell diagnostics against Exchange Online and Teams accounts, reducing L3 escalation volumes.
+                    </p>
+                    
+                    <a href="https://github.com/Ludwixix/pyspo-tool" target="_blank" class="inline-flex items-center text-white bg-gray-900 hover:bg-gray-700 border border-gray-700 px-5 py-2.5 rounded-lg text-sm font-semibold transition-all">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+                        View Repository
+                    </a>
                 </div>
-                <div>
-                    <h4 class="text-sm uppercase tracking-wider text-gray-500 mb-4 font-semibold">Tools & CI/CD</h4>
-                    <div class="flex flex-wrap gap-3">
-                        <span class="px-4 py-2 bg-gray-800 text-blue-300 rounded-md text-sm font-medium border border-gray-700">Git</span>
-                        <span class="px-4 py-2 bg-gray-800 text-blue-300 rounded-md text-sm font-medium border border-gray-700">Azure DevOps</span>
-                        <span class="px-4 py-2 bg-gray-800 text-blue-300 rounded-md text-sm font-medium border border-gray-700">ServiceNow</span>
-                        <span class="px-4 py-2 bg-gray-800 text-blue-300 rounded-md text-sm font-medium border border-gray-700">Splunk</span>
-                        <span class="px-4 py-2 bg-gray-800 text-blue-300 rounded-md text-sm font-medium border border-gray-700">ZenDesk</span>
+
+                <div class="bg-gray-800/40 border border-gray-700/50 rounded-2xl p-8 lg:p-10 hover:border-blue-500/50 transition-all hover:bg-gray-800/60 relative overflow-hidden group reveal">
+                    <div class="absolute top-0 right-0 p-8 opacity-5 group-hover:opacity-10 transition-opacity">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>
                     </div>
+                    
+                    <div class="flex flex-wrap items-center gap-3 mb-5">
+                        <h4 class="text-2xl font-bold text-white mr-2">Browser Automation Engine</h4>
+                        <span class="px-3 py-1 bg-yellow-900/40 text-yellow-300 text-xs font-semibold rounded-md border border-yellow-800/50">Python / Selenium</span>
+                        <span class="px-3 py-1 bg-blue-900/40 text-blue-300 text-xs font-semibold rounded-md border border-blue-800/50">Web Scraping</span>
+                    </div>
+                    
+                    <p class="text-gray-400 leading-relaxed mb-8 max-w-3xl text-sm lg:text-base">
+                        Developed a robust web-scraping engine designed to automate the reconnaissance phase of the job search. Utilizing Python and Selenium, the tool programmatically navigates job boards to bypass API restrictions, extracts high-value requisition data based on custom Boolean parameters, and persists findings.
+                    </p>
+                    
+                    <a href="https://github.com/Ludwixix/JobGobblin" target="_blank" class="inline-flex items-center text-white bg-gray-900 hover:bg-gray-700 border border-gray-700 px-5 py-2.5 rounded-lg text-sm font-semibold transition-all">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+                        View Repository
+                    </a>
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="py-20 bg-gray-950 border-b border-gray-800">
+    <section class="py-24 bg-gray-950 flex-grow" id="experience">
         <div class="max-w-5xl mx-auto px-6 lg:px-8">
-            <h3 class="text-3xl font-bold text-white mb-12">Featured Engineering</h3>
+            <h3 class="text-3xl font-bold text-white mb-16 reveal">Professional Experience</h3>
             
-            <div class="bg-gray-900 border border-gray-800 rounded-2xl p-8 hover:border-blue-500/50 transition-colors relative overflow-hidden">
-                <div class="absolute top-0 right-0 p-6 opacity-10">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
-                </div>
+            <div class="space-y-14 border-l border-gray-800 pl-8 ml-3">
                 
-                <div class="flex flex-wrap items-center gap-4 mb-4">
-                    <h4 class="text-2xl font-bold text-white">ServiceNow UI & Assignment Engine</h4>
-                    <span class="px-3 py-1 bg-blue-900/50 text-blue-300 text-xs font-semibold rounded-full border border-blue-800">JavaScript / Tampermonkey</span>
-                    <span class="px-3 py-1 bg-purple-900/50 text-purple-300 text-xs font-semibold rounded-full border border-purple-800">SharePoint REST API</span>
-                </div>
-                
-                <p class="text-gray-400 leading-relaxed mb-6 max-w-3xl">
-                    Engineered a suite of client-side browser extensions to radically optimize the ServiceNow ITSM experience. The solution utilizes asynchronous REST API calls to merge live Microsoft 365/SharePoint presence data with active ticket queues, visually flagging unavailable engineers. Furthermore, it scrapes dashboard metrics and cross-references them against active directory groups to power an algorithmic workload recommendation engine, eliminating manual triage delays.
-                </p>
-                
-                <a href="https://github.com/Ludwixix/YellowSnow" target="_blank" class="inline-flex items-center text-blue-400 hover:text-blue-300 font-semibold transition-colors">
-                    View Source Code on GitHub 
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ml-2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
-                </a>
-            </div>
-
-            <div class="bg-gray-900 border border-gray-800 rounded-2xl p-8 hover:border-blue-500/50 transition-colors relative overflow-hidden mt-8">
-                <div class="absolute top-0 right-0 p-6 opacity-10">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"></path></svg>
-                </div>
-                
-                <div class="flex flex-wrap items-center gap-4 mb-4">
-                    <h4 class="text-2xl font-bold text-white">M365 Diagnostic GUI (PySPO-Tool)</h4>
-                    <span class="px-3 py-1 bg-green-900/50 text-green-300 text-xs font-semibold rounded-full border border-green-800">Python 3.12</span>
-                    <span class="px-3 py-1 bg-blue-900/50 text-blue-300 text-xs font-semibold rounded-full border border-blue-800">PowerShell 7</span>
-                </div>
-                
-                <p class="text-gray-400 leading-relaxed mb-6 max-w-3xl">
-                    Engineered a Python-based Graphical User Interface (GUI) application designed to execute complex Microsoft 365 troubleshooting scripts. The tool acts as a "shift-left" operational wrapper, allowing tier-1 support staff to safely run advanced PowerShell 7 diagnostics against Exchange Online and Microsoft Teams accounts. It features automated HTML/CSV reporting and historical data appending, significantly reducing L3 escalation volumes for routine account health checks.
-                </p>
-                
-                <a href="https://github.com/Ludwixix/pyspo-tool" target="_blank" class="inline-flex items-center text-blue-400 hover:text-blue-300 font-semibold transition-colors">
-                    View Source Code on GitHub 
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ml-2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
-                </a>
-            </div>
-            <div class="bg-gray-900 border border-gray-800 rounded-2xl p-8 hover:border-blue-500/50 transition-colors relative overflow-hidden mt-8">
-                <div class="absolute top-0 right-0 p-6 opacity-10">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>
-                </div>
-                
-                <div class="flex flex-wrap items-center gap-4 mb-4">
-                    <h4 class="text-2xl font-bold text-white">Browser Automation Engine (JobGobblin)</h4>
-                    <span class="px-3 py-1 bg-yellow-900/50 text-yellow-300 text-xs font-semibold rounded-full border border-yellow-800">Python / Selenium</span>
-                    <span class="px-3 py-1 bg-blue-900/50 text-blue-300 text-xs font-semibold rounded-full border border-blue-800">Web Scraping</span>
-                </div>
-                
-                <p class="text-gray-400 leading-relaxed mb-6 max-w-3xl">
-                    Developed a robust web-scraping engine designed to automate the reconnaissance phase of the job search. Utilizing Python and Selenium, the tool programmatically navigates job boards to bypass API restrictions, extracts high-value requisition data based on custom Boolean parameters, and persists findings to a structured database. This project demonstrates advanced capabilities in browser automation, data extraction, and handling dynamic web content.
-                </p>
-                
-                <a href="https://github.com/Ludwixix/JobGobblin" target="_blank" class="inline-flex items-center text-blue-400 hover:text-blue-300 font-semibold transition-colors">
-                    View Source Code on GitHub 
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ml-2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <section class="py-20 bg-gray-900">
-        <div class="max-w-5xl mx-auto px-6 lg:px-8">
-            <h3 class="text-3xl font-bold text-white mb-12">Professional Experience</h3>
-            
-            <div class="space-y-12 border-l-2 border-gray-800 pl-6 lg:pl-8 ml-4">
-                
-                <div class="relative">
-                    <div class="absolute -left-[41px] lg:-left-[49px] top-1.5 h-4 w-4 rounded-full bg-blue-500 ring-4 ring-gray-900"></div>
+                <div class="relative reveal">
+                    <div class="absolute -left-[37px] top-1.5 h-3 w-3 rounded-full bg-blue-500 ring-4 ring-gray-950 shadow-[0_0_10px_rgba(59,130,246,0.8)]"></div>
                     <h4 class="text-xl font-bold text-white">IT Support Specialist (ITHUB)</h4>
-                    <div class="text-blue-400 font-medium mb-4">Australia Post <span class="text-gray-500 font-normal ml-2">| Present</span></div>
-                    <ul class="list-disc list-outside ml-5 text-gray-400 space-y-2 text-sm lg:text-base leading-relaxed marker:text-gray-600">
-                        <li>Engineered custom keystroke injection automation to circumvent stringent system access limitations, successfully automating repetitive ITSM ticket creation and modification workflows to eliminate manual data-entry overhead.</li>
-                    </ul>
+                    <div class="text-blue-400 font-medium mb-4 text-sm mt-1">Australia Post <span class="text-gray-500 font-normal ml-2 tracking-wide">| PRESENT</span></div>
+                    <p class="text-gray-400 text-sm lg:text-base leading-relaxed">
+                        Engineered custom keystroke injection automation to circumvent stringent system access limitations, successfully automating repetitive ITSM ticket creation and modification workflows to eliminate manual data-entry overhead.
+                    </p>
                 </div>
 
-                <div class="relative">
-                    <div class="absolute -left-[41px] lg:-left-[49px] top-1.5 h-4 w-4 rounded-full bg-gray-700 ring-4 ring-gray-900"></div>
+                <div class="relative reveal">
+                    <div class="absolute -left-[37px] top-1.5 h-3 w-3 rounded-full bg-gray-600 ring-4 ring-gray-950"></div>
                     <h4 class="text-xl font-bold text-white">Senior Managed Services Engineer</h4>
-                    <div class="text-blue-400 font-medium mb-4">Capgemini <span class="text-gray-500 font-normal ml-2">| Dec 2021 – Present</span></div>
-                    <ul class="list-disc list-outside ml-5 text-gray-400 space-y-2 text-sm lg:text-base leading-relaxed marker:text-gray-600">
+                    <div class="text-blue-400 font-medium mb-4 text-sm mt-1">Capgemini <span class="text-gray-500 font-normal ml-2 tracking-wide">| DEC 2021 – PRESENT</span></div>
+                    <ul class="list-disc list-outside ml-4 text-gray-400 space-y-2 text-sm lg:text-base leading-relaxed marker:text-gray-600">
                         <li>Maintained operational stability and provided ultimate Tier-3 escalation support for a massive-scale enterprise ecosystem encompassing both Microsoft 365/SharePoint and Google Workspace environments.</li>
                         <li>Supported an infrastructure servicing over 660,000 active users, ensuring uninterrupted access to critical corporate applications.</li>
                         <li>Bridged the gap between infrastructure operations and application development, acting as the primary technical authority for complex system integrations.</li>
                     </ul>
                 </div>
 
-                <div class="relative">
-                    <div class="absolute -left-[41px] lg:-left-[49px] top-1.5 h-4 w-4 rounded-full bg-gray-700 ring-4 ring-gray-900"></div>
+                <div class="relative reveal">
+                    <div class="absolute -left-[37px] top-1.5 h-3 w-3 rounded-full bg-gray-600 ring-4 ring-gray-950"></div>
                     <h4 class="text-xl font-bold text-white">Application Support Engineer</h4>
-                    <div class="text-blue-400 font-medium mb-4">Knosys <span class="text-gray-500 font-normal ml-2">| Dec 2020 – Dec 2021</span></div>
-                    <ul class="list-disc list-outside ml-5 text-gray-400 space-y-2 text-sm lg:text-base leading-relaxed marker:text-gray-600">
-                        <li>Delivered expert L3 support for enterprise intranet platforms, achieving a 95% issue resolution rate within strict SLAs for major clients including Cotton On and Harvey Norman.</li>
-                    </ul>
+                    <div class="text-blue-400 font-medium mb-4 text-sm mt-1">Knosys <span class="text-gray-500 font-normal ml-2 tracking-wide">| DEC 2020 – DEC 2021</span></div>
+                    <p class="text-gray-400 text-sm lg:text-base leading-relaxed">
+                        Delivered expert L3 support for enterprise intranet platforms, achieving a 95% issue resolution rate within strict SLAs for major clients including Cotton On and Harvey Norman.
+                    </p>
                 </div>
 
-                <div class="relative">
-                    <div class="absolute -left-[41px] lg:-left-[49px] top-1.5 h-4 w-4 rounded-full bg-gray-700 ring-4 ring-gray-900"></div>
+                <div class="relative reveal">
+                    <div class="absolute -left-[37px] top-1.5 h-3 w-3 rounded-full bg-gray-600 ring-4 ring-gray-950"></div>
                     <h4 class="text-xl font-bold text-white">SharePoint Developer</h4>
-                    <div class="text-blue-400 font-medium mb-4">Engage Squared <span class="text-gray-500 font-normal ml-2">| Mar 2018 – Dec 2020</span></div>
-                    <ul class="list-disc list-outside ml-5 text-gray-400 space-y-2 text-sm lg:text-base leading-relaxed marker:text-gray-600">
+                    <div class="text-blue-400 font-medium mb-4 text-sm mt-1">Engage Squared <span class="text-gray-500 font-normal ml-2 tracking-wide">| MAR 2018 – DEC 2020</span></div>
+                    <ul class="list-disc list-outside ml-4 text-gray-400 space-y-2 text-sm lg:text-base leading-relaxed marker:text-gray-600">
                         <li>Architected and delivered 5+ bespoke SharePoint Online intranet solutions utilizing custom SPFx components for enterprise clients, including Transurban and Victoria Police.</li>
                         <li>Implemented full CI/CD pipelines using Azure DevOps and Git, accelerating testing and deployment processes and reducing release cycles by 25%.</li>
                     </ul>
@@ -223,9 +275,46 @@
         </div>
     </section>
 
-    <footer class="py-8 bg-gray-950 text-center text-gray-600 text-sm border-t border-gray-800">
-        <p>Engineered for High-Performance Enterprise Environments.</p>
+    <footer class="py-10 bg-gray-950 border-t border-gray-900 mt-auto">
+        <div class="max-w-5xl mx-auto px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center text-sm text-gray-600">
+            <p>&copy; <script>document.write(new Date().getFullYear())</script> Sam Ludwig. All rights reserved.</p>
+            <p class="mt-2 md:mt-0">Engineered for High-Performance Enterprise Environments.</p>
+        </div>
     </footer>
 
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.15
+            };
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                        observer.unobserve(entry.target); // Run once
+                    }
+                });
+            }, observerOptions);
+
+            document.querySelectorAll('.reveal').forEach((element) => {
+                observer.observe(element);
+            });
+
+            // Navbar Blur Effect on Scroll
+            const navbar = document.getElementById('navbar');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 10) {
+                    navbar.classList.add('shadow-lg', 'bg-gray-950/80');
+                    navbar.classList.remove('bg-transparent');
+                } else {
+                    navbar.classList.remove('shadow-lg', 'bg-gray-950/80');
+                    navbar.classList.add('bg-transparent');
+                }
+            });
+        });
+    </script>
 </body>
 </html>
