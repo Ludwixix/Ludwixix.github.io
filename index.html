@@ -226,7 +226,7 @@
         </div>
     </section>
 
-    <section class="py-24 bg-gray-950 flex-grow" id="experience">
+    <secti<section class="py-24 bg-gray-950 flex-grow" id="experience">
         <div class="max-w-5xl mx-auto px-6 lg:px-8">
             <h3 class="text-3xl font-bold text-white mb-16 reveal">Professional Experience</h3>
             
@@ -234,41 +234,132 @@
                 
                 <div class="relative reveal">
                     <div class="absolute -left-[37px] top-1.5 h-3 w-3 rounded-full bg-blue-500 ring-4 ring-gray-950 shadow-[0_0_10px_rgba(59,130,246,0.8)]"></div>
-                    <h4 class="text-xl font-bold text-white">IT Support Specialist (ITHUB)</h4>
-                    <div class="text-blue-400 font-medium mb-4 text-sm mt-1">Australia Post <span class="text-gray-500 font-normal ml-2 tracking-wide">| PRESENT</span></div>
-                    <p class="text-gray-400 text-sm lg:text-base leading-relaxed">
-                        Engineered custom keystroke injection automation to circumvent stringent system access limitations, successfully automating repetitive ITSM ticket creation and modification workflows to eliminate manual data-entry overhead.
-                    </p>
+                    <div class="cursor-pointer group" onclick="toggleExperience('role-auspost')">
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <h4 class="text-xl font-bold text-white group-hover:text-blue-400 transition-colors">IT Support Specialist (ITHUB)</h4>
+                                <div class="text-blue-400 font-medium mb-2 text-sm mt-1">Australia Post <span class="text-gray-500 font-normal ml-2 tracking-wide">| PRESENT</span></div>
+                            </div>
+                            <button class="text-gray-500 group-hover:text-white transition-colors p-2" aria-label="Toggle details">
+                                <svg id="icon-role-auspost" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="transition-transform duration-300"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                            </button>
+                        </div>
+                        <p class="text-gray-400 text-sm lg:text-base leading-relaxed">
+                            Engineered custom keystroke injection automation to circumvent stringent system access limitations for ITSM ticket workflows.
+                        </p>
+                    </div>
+                    
+                    <div id="role-auspost" class="max-h-0 opacity-0 overflow-hidden transition-all duration-500 ease-in-out">
+                        <ul class="list-disc list-outside ml-4 mt-5 pt-5 text-gray-400 space-y-3 text-sm lg:text-base leading-relaxed marker:text-gray-600 border-t border-gray-800/50">
+                            <li>Engineered custom keystroke injection automation (macro-level scripting) to circumvent stringent system access limitations, successfully automating repetitive ITSM ticket creation and modification workflows to eliminate manual data-entry overhead.</li>
+                            <li>Acted as a rapid-response escalation point for localized infrastructure faults, ensuring continuous operational uptime for the face-to-face ITHUB service center.</li>
+                        </ul>
+                    </div>
                 </div>
 
                 <div class="relative reveal">
                     <div class="absolute -left-[37px] top-1.5 h-3 w-3 rounded-full bg-gray-600 ring-4 ring-gray-950"></div>
-                    <h4 class="text-xl font-bold text-white">Senior Managed Services Engineer</h4>
-                    <div class="text-blue-400 font-medium mb-4 text-sm mt-1">Capgemini <span class="text-gray-500 font-normal ml-2 tracking-wide">| DEC 2021 – PRESENT</span></div>
-                    <ul class="list-disc list-outside ml-4 text-gray-400 space-y-2 text-sm lg:text-base leading-relaxed marker:text-gray-600">
-                        <li>Maintained operational stability and provided ultimate Tier-3 escalation support for a massive-scale enterprise ecosystem encompassing both Microsoft 365/SharePoint and Google Workspace environments.</li>
-                        <li>Supported an infrastructure servicing over 660,000 active users, ensuring uninterrupted access to critical corporate applications.</li>
-                        <li>Bridged the gap between infrastructure operations and application development, acting as the primary technical authority for complex system integrations.</li>
-                    </ul>
+                    <div class="cursor-pointer group" onclick="toggleExperience('role-sjog')">
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <h4 class="text-xl font-bold text-white group-hover:text-blue-400 transition-colors">Windows 11 Deployment Engineer</h4>
+                                <div class="text-blue-400 font-medium mb-2 text-sm mt-1">St John of God Health Care <span class="text-gray-500 font-normal ml-2 tracking-wide">| OCT 2025 – PRESENT</span></div>
+                            </div>
+                            <button class="text-gray-500 group-hover:text-white transition-colors p-2" aria-label="Toggle details">
+                                <svg id="icon-role-sjog" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="transition-transform duration-300"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                            </button>
+                        </div>
+                        <p class="text-gray-400 text-sm lg:text-base leading-relaxed">
+                            Executing a high-velocity Windows 11 enterprise migration across critical clinical endpoints, ensuring zero operational disruption.
+                        </p>
+                    </div>
+                    
+                    <div id="role-sjog" class="max-h-0 opacity-0 overflow-hidden transition-all duration-500 ease-in-out">
+                        <ul class="list-disc list-outside ml-4 mt-5 pt-5 text-gray-400 space-y-3 text-sm lg:text-base leading-relaxed marker:text-gray-600 border-t border-gray-800/50">
+                            <li>Executed a high-velocity Windows 11 enterprise migration across 100+ clinical endpoints, ensuring zero disruption to critical healthcare operations.</li>
+                            <li>Managed endpoint provisioning and strict Standard Operating Environment (SOE) compliance, proactively resolving complex hardware and clinical software compatibility issues prior to deployment.</li>
+                        </ul>
+                    </div>
                 </div>
 
                 <div class="relative reveal">
                     <div class="absolute -left-[37px] top-1.5 h-3 w-3 rounded-full bg-gray-600 ring-4 ring-gray-950"></div>
-                    <h4 class="text-xl font-bold text-white">Application Support Engineer</h4>
-                    <div class="text-blue-400 font-medium mb-4 text-sm mt-1">Knosys <span class="text-gray-500 font-normal ml-2 tracking-wide">| DEC 2020 – DEC 2021</span></div>
-                    <p class="text-gray-400 text-sm lg:text-base leading-relaxed">
-                        Delivered expert L3 support for enterprise intranet platforms, achieving a 95% issue resolution rate within strict SLAs for major clients including Cotton On and Harvey Norman.
-                    </p>
+                    <div class="cursor-pointer group" onclick="toggleExperience('role-capgemini')">
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <h4 class="text-xl font-bold text-white group-hover:text-blue-400 transition-colors">Senior Managed Services Engineer</h4>
+                                <div class="text-blue-400 font-medium mb-2 text-sm mt-1">Capgemini <span class="text-gray-500 font-normal ml-2 tracking-wide">| DEC 2021 – PRESENT</span></div>
+                            </div>
+                            <button class="text-gray-500 group-hover:text-white transition-colors p-2" aria-label="Toggle details">
+                                <svg id="icon-role-capgemini" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="transition-transform duration-300"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                            </button>
+                        </div>
+                        <p class="text-gray-400 text-sm lg:text-base leading-relaxed">
+                            Maintained operational stability and provided ultimate Tier-3 escalation support for an infrastructure servicing over 660,000 active users.
+                        </p>
+                    </div>
+                    
+                    <div id="role-capgemini" class="max-h-0 opacity-0 overflow-hidden transition-all duration-500 ease-in-out">
+                        <ul class="list-disc list-outside ml-4 mt-5 pt-5 text-gray-400 space-y-3 text-sm lg:text-base leading-relaxed marker:text-gray-600 border-t border-gray-800/50">
+                            <li>Maintained operational stability and provided ultimate Tier-3 escalation support for a massive-scale enterprise ecosystem encompassing both Microsoft 365/SharePoint and Google Workspace environments.</li>
+                            <li>Supported an infrastructure servicing over 660,000 active users, ensuring uninterrupted access to critical educational and corporate applications.</li>
+                            <li>Diagnosed and resolved complex architectural anomalies, leading to a documented 15% reduction in recurring incidents across key Department of Education accounts.</li>
+                            <li>Spearheaded Azure cloud adoption initiatives and legacy application remediation, aligning hybrid-cloud infrastructure with modern enterprise security baselines.</li>
+                        </ul>
+                    </div>
                 </div>
 
                 <div class="relative reveal">
                     <div class="absolute -left-[37px] top-1.5 h-3 w-3 rounded-full bg-gray-600 ring-4 ring-gray-950"></div>
-                    <h4 class="text-xl font-bold text-white">SharePoint Developer</h4>
-                    <div class="text-blue-400 font-medium mb-4 text-sm mt-1">Engage Squared <span class="text-gray-500 font-normal ml-2 tracking-wide">| MAR 2018 – DEC 2020</span></div>
-                    <ul class="list-disc list-outside ml-4 text-gray-400 space-y-2 text-sm lg:text-base leading-relaxed marker:text-gray-600">
-                        <li>Architected and delivered 5+ bespoke SharePoint Online intranet solutions utilizing custom SPFx components for enterprise clients, including Transurban and Victoria Police.</li>
-                        <li>Implemented full CI/CD pipelines using Azure DevOps and Git, accelerating testing and deployment processes and reducing release cycles by 25%.</li>
-                    </ul>
+                    <div class="cursor-pointer group" onclick="toggleExperience('role-knosys')">
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <h4 class="text-xl font-bold text-white group-hover:text-blue-400 transition-colors">Application Support Engineer</h4>
+                                <div class="text-blue-400 font-medium mb-2 text-sm mt-1">Knosys <span class="text-gray-500 font-normal ml-2 tracking-wide">| DEC 2020 – DEC 2021</span></div>
+                            </div>
+                            <button class="text-gray-500 group-hover:text-white transition-colors p-2" aria-label="Toggle details">
+                                <svg id="icon-role-knosys" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="transition-transform duration-300"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                            </button>
+                        </div>
+                        <p class="text-gray-400 text-sm lg:text-base leading-relaxed">
+                            Delivered expert L3 support for enterprise intranet platforms, engineering PowerShell automation to reduce processing time by 87%.
+                        </p>
+                    </div>
+                    
+                    <div id="role-knosys" class="max-h-0 opacity-0 overflow-hidden transition-all duration-500 ease-in-out">
+                        <ul class="list-disc list-outside ml-4 mt-5 pt-5 text-gray-400 space-y-3 text-sm lg:text-base leading-relaxed marker:text-gray-600 border-t border-gray-800/50">
+                            <li>Delivered expert L3 support for enterprise intranet platforms, achieving a 95% issue resolution rate within strict SLAs for major clients including Cotton On and Harvey Norman.</li>
+                            <li>Engineered PowerShell automation to replace inefficient manual data compilation during large-scale cloud migrations, reducing processing time by 87% (from 2 hours to 15 minutes) and saving over 10 hours of manual overhead per month.</li>
+                            <li>Contributed to a complex platform upgrade and AWS migration project, authoring definitive root-cause analysis documentation to permanently resolve recurring version conflicts.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="relative reveal">
+                    <div class="absolute -left-[37px] top-1.5 h-3 w-3 rounded-full bg-gray-600 ring-4 ring-gray-950"></div>
+                    <div class="cursor-pointer group" onclick="toggleExperience('role-engage')">
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <h4 class="text-xl font-bold text-white group-hover:text-blue-400 transition-colors">SharePoint Developer</h4>
+                                <div class="text-blue-400 font-medium mb-2 text-sm mt-1">Engage Squared <span class="text-gray-500 font-normal ml-2 tracking-wide">| MAR 2018 – DEC 2020</span></div>
+                            </div>
+                            <button class="text-gray-500 group-hover:text-white transition-colors p-2" aria-label="Toggle details">
+                                <svg id="icon-role-engage" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="transition-transform duration-300"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                            </button>
+                        </div>
+                        <p class="text-gray-400 text-sm lg:text-base leading-relaxed">
+                            Architected bespoke SharePoint Online solutions using custom SPFx components, implementing full CI/CD pipelines via Azure DevOps.
+                        </p>
+                    </div>
+                    
+                    <div id="role-engage" class="max-h-0 opacity-0 overflow-hidden transition-all duration-500 ease-in-out">
+                        <ul class="list-disc list-outside ml-4 mt-5 pt-5 text-gray-400 space-y-3 text-sm lg:text-base leading-relaxed marker:text-gray-600 border-t border-gray-800/50">
+                            <li>Architected and delivered 5+ bespoke SharePoint Online intranet solutions utilizing custom SPFx, React, and TypeScript components for enterprise clients, including Transurban and Victoria Police.</li>
+                            <li>Implemented full CI/CD pipelines using Azure DevOps and Git, accelerating testing and deployment processes and reducing release cycles by 25%.</li>
+                            <li>Led the migration of legacy on-premise intranets to Microsoft 365, architecting strategic governance frameworks and permission structures to ensure strict ISO 27001 compliance.</li>
+                            <li>Facilitated highly technical client-facing workshops, demonstrating bespoke product features and driving a 20% increase in the enterprise adoption of new M365 technologies.</li>
+                        </ul>
+                    </div>
                 </div>
 
             </div>
@@ -315,6 +406,24 @@
                 }
             });
         });
+    </script>
+    <script>
+        function toggleExperience(id) {
+            const content = document.getElementById(id);
+            const icon = document.getElementById('icon-' + id);
+            
+            if (content.classList.contains('max-h-0')) {
+                // Open
+                content.classList.remove('max-h-0', 'opacity-0');
+                content.classList.add('max-h-[1000px]', 'opacity-100');
+                icon.classList.add('rotate-180');
+            } else {
+                // Close
+                content.classList.add('max-h-0', 'opacity-0');
+                content.classList.remove('max-h-[1000px]', 'opacity-100');
+                icon.classList.remove('rotate-180');
+            }
+        }
     </script>
 </body>
 </html>
