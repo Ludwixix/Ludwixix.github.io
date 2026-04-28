@@ -5,29 +5,60 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sam Ludwig | Senior M365 & SharePoint Engineer</title>
     
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://gc.zgo.at; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; connect-src 'self' https://get.geojs.io https://api.open-meteo.com https://samludwig.goatcounter.com; img-src 'self' data: https://samludwig.goatcounter.com;">
+    <meta name="theme-color" content="#0a0e17">
+    <link rel="canonical" href="https://samludwig.au/">
+    <link rel="preconnect" href="https://get.geojs.io" crossorigin>
+    <link rel="preconnect" href="https://api.open-meteo.com" crossorigin>
+
     <meta name="title" content="Sam Ludwig | Senior M365 & SharePoint Engineer">
     <meta name="description" content="Senior M365 & SharePoint Engineer based in Melbourne. Specialist in PowerShell automation, enterprise escalation, SPFx development, and managing massive-scale infrastructure.">
     <meta name="author" content="Sam Ludwig">
-    <meta name="theme-color" content="#0a0e17">
-
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://samludwig.au/">
     <meta property="og:title" content="Sam Ludwig | Senior M365 & SharePoint Engineer">
     <meta property="og:description" content="Managing the largest SharePoint farm in the Southern Hemisphere (660k+ users). PowerShell & Python automation specialist.">
-    <meta property="og:image" content="https://samludwig.au/profile.jpg"> <meta property="twitter:card" content="summary_large_image">
+    <meta property="og:image" content="https://samludwig.au/preview.jpg"> 
+    <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="https://samludwig.au/">
     <meta property="twitter:title" content="Sam Ludwig | Senior M365 & SharePoint Engineer">
     <meta property="twitter:description" content="Managing the largest SharePoint farm in the Southern Hemisphere (660k+ users). PowerShell & Python automation specialist.">
-    <meta property="twitter:image" content="https://samludwig.au/profile.jpg">
+    <meta property="twitter:image" content="https://samludwig.au/preview.jpg">
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Sam Ludwig",
+      "jobTitle": "Senior M365 & SharePoint Engineer",
+      "url": "https://samludwig.au/",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Melbourne",
+        "addressRegion": "VIC",
+        "addressCountry": "AU"
+      },
+      "sameAs": [
+        "https://linkedin.com/in/sam-ludwig",
+        "https://github.com/Ludwixix"
+      ]
+    }
+    </script>
 
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 rx=%2220%22 fill=%22%230f172a%22/><text x=%2250%%22 y=%2250%%22 font-family=%22Georgia%22 font-size=%2245%22 font-weight=%22bold%22 fill=%22white%22 dominant-baseline=%22central%22 text-anchor=%22middle%22>SL</text></svg>">
-
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,600;0,9..144,700;1,9..144,300;1,9..144,400&family=DM+Mono:wght@400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+    
 <style>
+/* =========================================
+   CORE CSS & RESET
+   ========================================= */
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
+
+/* Accessibility Focus States */
+:focus-visible { outline: 2px solid var(--gui-accent); outline-offset: 4px; border-radius: 2px; }
 
 :root{
     /* CLI Variables */
@@ -46,7 +77,6 @@ html{scroll-behavior:smooth}
     --sans:'DM Sans',sans-serif;
 }
 
-/* Night Mode Overrides */
 body.night-mode {
     --gui-ink: #f8fafc; --gui-ink2: #cbd5e1; --gui-ink3: #94a3b8;
     --gui-paper: #0f172a; --gui-paper2: #1e293b; --gui-rule: #334155;
@@ -56,46 +86,21 @@ body.night-mode {
 body{font-family:var(--mono);background:var(--cli-bg);color:var(--cli-text);-webkit-font-smoothing:antialiased;overflow-x:hidden;min-height:100vh;transition:background 0.5s ease;}
 ::selection{background:var(--cli-blue);color:var(--cli-bg)}
 
-/* =========================================
-   WEATHER & ENVIRONMENTAL OVERLAYS
-   ========================================= */
+/* Weather & Overlays */
 .weather-overlay { position: fixed; inset: 0; z-index: 400; pointer-events: none; opacity: 0; transition: opacity 2s ease; overflow: hidden; mix-blend-mode: normal; }
 .weather-overlay.active { opacity: 0.35; }
-body.night-mode .weather-overlay.active { opacity: 0.2; } /* Darker, subtler weather at night */
-
-/* Rain */
-.w-rain {
-    background-image: linear-gradient(175deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.8) 100%);
-    background-size: 2px 70px; background-position: 0 0;
-    animation: wRain 0.6s linear infinite;
-}
+body.night-mode .weather-overlay.active { opacity: 0.2; }
+.w-rain { background-image: linear-gradient(175deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.8) 100%); background-size: 2px 70px; background-position: 0 0; animation: wRain 0.6s linear infinite; }
 body.night-mode .w-rain { background-image: linear-gradient(175deg, rgba(150,200,255,0) 0%, rgba(150,200,255,0.6) 100%); }
 @keyframes wRain { 0% { background-position: 0 0; } 100% { background-position: 15px 100vh; } }
-
-/* Snow */
-.w-snow {
-    background-image: 
-        radial-gradient(circle at 50% 50%, rgba(255,255,255,1) 0%, transparent 10%),
-        radial-gradient(circle at 50% 50%, rgba(255,255,255,0.8) 0%, transparent 10%);
-    background-size: 30px 30px, 45px 45px; background-position: 0 0, 15px 15px;
-    animation: wSnow 5s linear infinite;
-}
+.w-snow { background-image: radial-gradient(circle at 50% 50%, rgba(255,255,255,1) 0%, transparent 10%), radial-gradient(circle at 50% 50%, rgba(255,255,255,0.8) 0%, transparent 10%); background-size: 30px 30px, 45px 45px; background-position: 0 0, 15px 15px; animation: wSnow 5s linear infinite; }
 @keyframes wSnow { 0% { background-position: 0 0, 15px 15px; } 100% { background-position: 80px 100vh, 100px 100vh; } }
-
-/* Fog / Cloud */
-.w-fog {
-    background: radial-gradient(ellipse at center, rgba(255,255,255,0.5) 0%, transparent 60%);
-    background-size: 150vw 150vh; animation: wFog 15s ease-in-out infinite alternate;
-}
+.w-fog { background: radial-gradient(ellipse at center, rgba(255,255,255,0.5) 0%, transparent 60%); background-size: 150vw 150vh; animation: wFog 15s ease-in-out infinite alternate; }
 @keyframes wFog { 0% { transform: scale(1) translate(-5%, -5%); } 100% { transform: scale(1.1) translate(5%, 5%); } }
-
-/* Thunderstorm */
 .w-thunder { animation: wRain 0.6s linear infinite, wFlash 8s infinite; }
 @keyframes wFlash { 0%, 95%, 98%, 100% { background-color: transparent; } 96%, 99% { background-color: rgba(255,255,255,0.9); } }
 
-/* =========================================
-   MODE TOGGLE HUD
-   ========================================= */
+/* HUD / System */
 .mode-toggle{ position:fixed;top:1.25rem;right:1.5rem;z-index:1000;display:flex;align-items:center;gap:0.6rem;background:rgba(15,22,35,0.92);border:1px solid var(--cli-border);padding:0.4rem 0.9rem 0.4rem 0.6rem;border-radius:4px;cursor:pointer;backdrop-filter:blur(8px);transition:border-color 0.2s;font-family:var(--mono); }
 .mode-toggle:hover{border-color:var(--cli-blue)}
 .mode-dot{width:8px;height:8px;border-radius:50%;background:var(--cli-green);box-shadow:0 0 6px var(--cli-green);animation:pdot 2s infinite}
@@ -107,11 +112,9 @@ body.gui-mode .mode-toggle:hover{border-color:var(--gui-accent)}
 body.gui-mode .mode-dot{background:var(--gui-accent);box-shadow:0 0 6px var(--gui-accent);animation:none}
 body.gui-mode .mode-label{color:var(--gui-ink3)}
 body.gui-mode .mode-label span{color:var(--gui-accent)}
-body.gui-mode.night-mode .mode-toggle{background:rgba(15,23,42,0.95);} /* Dark toggle for night mode */
+body.gui-mode.night-mode .mode-toggle{background:rgba(15,23,42,0.95);}
 
-/* =========================================
-   CLI LAYER
-   ========================================= */
+/* CLI LAYER */
 #cli-layer{min-height:100vh;display:flex;flex-direction:column;padding:2rem;transition:opacity 0.45s,transform 0.45s}
 body.gui-mode #cli-layer{opacity:0;pointer-events:none;position:fixed;inset:0;transform:scale(0.97)}
 .cli-titlebar{display:flex;align-items:center;gap:0.5rem;margin-bottom:2rem;padding-bottom:1rem;border-bottom:1px solid var(--cli-border)}
@@ -126,9 +129,7 @@ body.gui-mode #cli-layer{opacity:0;pointer-events:none;position:fixed;inset:0;tr
 .c-yellow{color:var(--cli-yellow)}.c-red{color:var(--cli-red)}.c-cyan{color:var(--cli-cyan)}
 .c-purple{color:var(--cli-purple)}.c-white{color:#fff}.c-bold{font-weight:500}
 
-/* =========================================
-   GUI LAYER & STRUCTURE
-   ========================================= */
+/* GUI LAYER */
 #gui-layer{
     position:fixed;inset:0;overflow-y:auto;
     background:var(--gui-paper);color:var(--gui-ink);font-family:var(--sans);
@@ -213,7 +214,6 @@ body.night-mode .gnav { background:rgba(15,23,42,0.94); }
 @media(max-width:600px){.proj-card{grid-template-columns:1fr}}
 .ptags{display:flex;gap:0.4rem;flex-wrap:wrap;margin-bottom:0.65rem}
 .ptag{font-family:var(--mono);font-size:0.6rem;letter-spacing:0.06em;text-transform:uppercase;padding:0.15rem 0.5rem;border-radius:2px; color: #fff;}
-/* Adjusted tags for night mode compatibility */
 .tag-js{background:#b45309;}.tag-py{background:#1e40af;}
 .tag-ps{background:#5b21b6;}.tag-api{background:#065f46;}
 .proj-card h4{font-family:var(--serif);font-size:1.2rem;font-weight:600;letter-spacing:-0.02em;margin-bottom:0.5rem}
@@ -224,6 +224,7 @@ body.night-mode .gnav { background:rgba(15,23,42,0.94); }
 .exp-list{display:flex;flex-direction:column}
 .exp-item{border-bottom:1px solid var(--gui-rule)}
 .exp-trigger{width:100%;background:none;border:none;padding:1.75rem 0;cursor:pointer;display:grid;grid-template-columns:1fr auto;gap:2rem;align-items:center;text-align:left}
+.exp-trigger:focus-visible { outline: 2px solid var(--gui-accent); outline-offset: -2px; }
 .exp-trigger:hover .exp-role{color:var(--gui-accent)}
 .exp-meta{font-family:var(--mono);font-size:0.62rem;color:var(--gui-ink3);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:0.3rem}
 .exp-role{font-family:var(--serif);font-size:1.15rem;font-weight:600;letter-spacing:-0.02em;color:var(--gui-ink);transition:color 0.2s;margin-bottom:0.2rem}
@@ -237,7 +238,7 @@ body.night-mode .gnav { background:rgba(15,23,42,0.94); }
 .exp-body li{font-size:0.87rem;line-height:1.7;color:var(--gui-ink2);padding-left:1.25rem;position:relative}
 .exp-body li::before{content:'—';position:absolute;left:0;color:var(--gui-accent);font-family:var(--mono)}
 
-/* Contact / Footer (Dark in both modes) */
+/* Contact / Footer */
 .gcontact{background:#0f172a;}
 .gcontact .gsec-title{color:white}
 .gcontact .gsec-num{color:#38bdf8}
@@ -278,7 +279,7 @@ body.night-mode .gnav { background:rgba(15,23,42,0.94); }
 @keyframes pulseBg { 0% { transform: scale(1); } 100% { transform: scale(1.1); } }
 @keyframes scanScroll { 0% { background-position: 0 0; } 100% { background-position: 0 100vh; } }
 
-/* Cyber Override (Overrides Day/Night modes entirely) */
+/* Cyber Override */
 body.cyber-override {
     --gui-ink: #fff; --gui-ink2: #00f3ff; --gui-ink3: #bc13fe;
     --gui-paper: rgba(10, 12, 20, 0.85); --gui-paper2: rgba(3, 3, 5, 0.95);
@@ -294,7 +295,7 @@ body.cyber-override {
 body.cyber-override .cyber-bg { display: block; }
 body.cyber-override .scanlines { display: block; opacity: 0.9; background-size: 100% 2px; animation: scanScroll 5s linear infinite; }
 body.cyber-override #matrixCanvas.active { display: block; opacity: 0.4; }
-body.cyber-override .weather-overlay { display: none !important; } /* Hide weather in cyber mode */
+body.cyber-override .weather-overlay { display: none !important; }
 
 body.cyber-override .gsec-title, body.cyber-override .ghero-name, body.cyber-override .gmetric-num { text-shadow: 0 0 10px var(--gui-accent); }
 body.cyber-override .gnav-logo { animation: logoGlitch 0.2s infinite alternate-reverse; color: #ff003c; text-shadow: 3px 0 #00f3ff, -3px 0 #bc13fe; }
@@ -302,7 +303,6 @@ body.cyber-override .ghero-name { animation: textGlitch 2s infinite; }
 body.cyber-override .btn-s { background: transparent; border-color: #ff003c; color: #ff003c; box-shadow: 0 0 10px rgba(255,0,60,0.5); }
 body.cyber-override .comp-card, body.cyber-override .proj-card { backdrop-filter: blur(5px); }
 
-/* Morphing Node Cyber Override */
 body.cyber-override .g-node { background: transparent; border-color: #00f3ff; box-shadow: 0 0 30px rgba(0, 243, 255, 0.2); }
 body.cyber-override .g-node-orb { background: linear-gradient(135deg, #ff003c, #bc13fe, #00f3ff); box-shadow: 0 0 60px rgba(188, 19, 254, 0.5); animation: orbMorph 4s ease-in-out infinite, orbGrad 3s ease infinite; }
 body.cyber-override .g-node-ring { border-color: #00f3ff; opacity: 0.8; }
@@ -314,11 +314,11 @@ body.cyber-override .g-node-ring-alt { border-color: #ff003c; opacity: 0.5; }
 </head>
 <body class="gui-mode"> 
 
-<div id="weatherOverlay" class="weather-overlay"></div>
+<div id="weatherOverlay" class="weather-overlay" aria-hidden="true"></div>
 
-<canvas id="matrixCanvas"></canvas>
-<div class="cyber-bg"></div>
-<div class="scanlines"></div>
+<canvas id="matrixCanvas" aria-hidden="true"></canvas>
+<div class="cyber-bg" aria-hidden="true"></div>
+<div class="scanlines" aria-hidden="true"></div>
 
 <button class="mode-toggle" id="modeToggle" onclick="toggleMode()" aria-label="Switch between CLI and GUI mode">
     <div class="mode-dot" id="modeDot"></div>
@@ -326,28 +326,28 @@ body.cyber-override .g-node-ring-alt { border-color: #ff003c; opacity: 0.5; }
 </button>
 
 <div class="do-not-press" id="doNotPress" title="???"></div>
-<div id="wipeModal">
+<div id="wipeModal" aria-hidden="true" role="alert">
     <div id="wipeText">[CRITICAL ERROR] SYSTEM PURGE INITIATED...</div>
     <div class="wipe-bar"><div class="wipe-fill" id="wipeFill"></div></div>
 </div>
 
-<div id="cli-layer">
-    <div class="cli-titlebar">
+<main id="cli-layer" aria-label="Command Line Interface Profile">
+    <header class="cli-titlebar">
         <div class="cdot cdot-r"></div>
         <div class="cdot cdot-y"></div>
         <div class="cdot cdot-g"></div>
         <span class="cli-wintitle">Windows PowerShell  —  SamLudwig.Engineering v2.0  —  samludwig.au</span>
-    </div>
-    <div id="cli-output"></div>
+    </header>
+    <div id="cli-output" role="log" aria-live="polite"></div>
     <div class="cli-input-row">
         <span class="cli-ps">PS C:\Enterprise\Recruiter&gt;</span>
-        <input type="text" id="cli-input" autocomplete="off" spellcheck="false" aria-label="Terminal input">
+        <input type="text" id="cli-input" autocomplete="off" spellcheck="false" aria-label="Terminal command input">
     </div>
-</div>
+</main>
 
 <div id="gui-layer">
-    <nav class="gnav">
-        <a href="#ghero" class="gnav-logo">Sam<span>.</span></a>
+    <nav class="gnav" aria-label="Main Navigation">
+        <a href="#ghero" class="gnav-logo" aria-label="Home">Sam<span>.</span></a>
         <ul class="gnav-links">
             <li><a href="#gcomp">Competencies</a></li>
             <li><a href="#gskills">Skills</a></li>
@@ -357,7 +357,7 @@ body.cyber-override .g-node-ring-alt { border-color: #ff003c; opacity: 0.5; }
         </ul>
     </nav>
 
-    <div id="ghero" style="padding:7rem 2rem 4rem;border-bottom:1px solid var(--gui-rule); position: relative; z-index: 10;">
+    <header id="ghero" style="padding:7rem 2rem 4rem;border-bottom:1px solid var(--gui-rule); position: relative; z-index: 10;">
         <div style="max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:start" class="ghero-wrap">
             <div class="gr">
                 <div class="ghero-eyebrow">Melbourne, VIC · <span id="envStatus">Syncing Telemetry...</span></div>
@@ -376,43 +376,41 @@ body.cyber-override .g-node-ring-alt { border-color: #ff003c; opacity: 0.5; }
                     <div class="gmetric"><div class="gmetric-num">7<span>+</span></div><div class="gmetric-label">Years IT Experience</div></div>
                     <div class="gmetric"><div class="gmetric-num">15<span>%</span></div><div class="gmetric-label">Incident Reduction (DoE)</div></div>
                 </div>
-                
-                <div class="g-node">
+                <div class="g-node" aria-hidden="true">
                     <div class="g-node-orb"></div>
                     <div class="g-node-ring"></div>
                     <div class="g-node-ring g-node-ring-alt"></div>
                 </div>
-                
             </div>
         </div>
-    </div>
+    </header>
 
-    <div class="gsec gsec-alt" id="gcomp">
+    <section class="gsec gsec-alt" id="gcomp">
         <div class="gsec-inner">
-            <div class="gsec-hdr gr"><span class="gsec-num">01</span><h2 class="gsec-title">Core Competencies</h2></div>
+            <header class="gsec-hdr gr"><span class="gsec-num">01</span><h2 class="gsec-title">Core Competencies</h2></header>
             <div class="comp-grid gr">
                 <div class="comp-card">
-                    <svg class="comp-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+                    <svg class="comp-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
                     <h4>Custom Software Engineering</h4>
                     <p>Engineered client-side JavaScript overlays for ServiceNow integrating live M365 presence data, plus an algorithmic workload distribution engine to eliminate manual triage and prevent SLA breaches.</p>
                 </div>
                 <div class="comp-card">
-                    <svg class="comp-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                    <svg class="comp-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
                     <h4>Advanced Security Automation</h4>
                     <p>Architected PnP PowerShell solutions to dynamically audit and enforce MFA compliance across 200+ sensitive SharePoint sites, with integrated error-handling and automated compliance reporting.</p>
                 </div>
                 <div class="comp-card">
-                    <svg class="comp-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+                    <svg class="comp-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
                     <h4>L3 Code-Level Debugging</h4>
                     <p>Resolved critical enterprise incidents via deep-dive root cause analysis — inspecting network payloads, analysing API traffic, and executing direct SQL modifications. 15% recurring incident reduction across DoE.</p>
                 </div>
             </div>
         </div>
-    </div>
+    </section>
 
-    <div class="gsec" id="gskills">
+    <section class="gsec" id="gskills">
         <div class="gsec-inner">
-            <div class="gsec-hdr gr"><span class="gsec-num">02</span><h2 class="gsec-title">Technical Arsenal</h2></div>
+            <header class="gsec-hdr gr"><span class="gsec-num">02</span><h2 class="gsec-title">Technical Arsenal</h2></header>
             <div class="skills-grid gr">
                 <div>
                     <div class="sg-label">Languages & Frameworks</div>
@@ -432,67 +430,107 @@ body.cyber-override .g-node-ring-alt { border-color: #ff003c; opacity: 0.5; }
                 </div>
             </div>
         </div>
-    </div>
+    </section>
 
-    <div class="gsec gsec-alt" id="geng">
+    <section class="gsec gsec-alt" id="geng">
         <div class="gsec-inner">
-            <div class="gsec-hdr gr"><span class="gsec-num">03</span><h2 class="gsec-title">Featured Engineering</h2></div>
+            <header class="gsec-hdr gr"><span class="gsec-num">03</span><h2 class="gsec-title">Featured Engineering</h2></header>
             <div class="proj-list gr">
-                <div class="proj-card">
-                    <div><div class="ptags"><span class="ptag tag-js">JavaScript</span><span class="ptag tag-api">SharePoint REST API</span></div><h4>ServiceNow UI & Assignment Engine</h4><p>A suite of client-side browser extensions that radically optimise the ServiceNow ITSM experience. Uses async REST API calls to merge live M365/SharePoint presence data with active ticket queues. Algorithmic workload recommendation engine eliminates manual triage overhead.</p></div>
-                    <a href="https://github.com/Ludwixix/YellowSnow" target="_blank" class="proj-link">GitHub →</a>
-                </div>
-                <div class="proj-card">
+                <article class="proj-card">
+                    <div><div class="ptags"><span class="ptag tag-js">JavaScript</span><span class="ptag tag-api">SharePoint REST API</span></div><h4>ServiceNow UI & Assignment Engine</h4><p>A suite of client-side browser extensions that radically optimise the ServiceNow ITSM experience. Uses async REST API calls to merge live M365/SharePoint presence data with active ticket queues, visually flagging unavailable engineers. An algorithmic workload recommendation engine cross-references dashboard metrics against active directory groups to eliminate manual triage overhead.</p></div>
+                    <a href="https://github.com/Ludwixix/YellowSnow" target="_blank" rel="noopener noreferrer" class="proj-link">GitHub →</a>
+                </article>
+                <article class="proj-card">
                     <div><div class="ptags"><span class="ptag tag-py">Python 3.12</span><span class="ptag tag-ps">PowerShell 7</span></div><h4>M365 Diagnostic GUI (PySPO)</h4><p>A Python-based GUI that acts as a "shift-left" operational wrapper, allowing Tier-1 support staff to safely run advanced PowerShell diagnostics against Exchange Online and Teams accounts — reducing L3 escalation volumes and freeing senior engineers for complex work.</p></div>
-                    <a href="https://github.com/Ludwixix/pyspo-tool" target="_blank" class="proj-link">GitHub →</a>
-                </div>
+                    <a href="https://github.com/Ludwixix/pyspo-tool" target="_blank" rel="noopener noreferrer" class="proj-link">GitHub →</a>
+                </article>
+                <article class="proj-card">
+                    <div><div class="ptags"><span class="ptag tag-py">Python / Selenium</span><span class="ptag tag-api">Web Scraping</span></div><h4>Browser Automation Engine (JobGobblin)</h4><p>A robust web-scraping engine that programmatically navigates job boards to bypass API restrictions, extracts high-value requisition data based on custom Boolean parameters, and persists findings — demonstrating practical automation architecture and systematic problem-solving.</p></div>
+                    <a href="https://github.com/Ludwixix/JobGobblin" target="_blank" rel="noopener noreferrer" class="proj-link">GitHub →</a>
+                </article>
             </div>
         </div>
-    </div>
+    </section>
 
-    <div class="gsec" id="gexp">
+    <section class="gsec" id="gexp">
         <div class="gsec-inner">
-            <div class="gsec-hdr gr"><span class="gsec-num">04</span><h2 class="gsec-title">Professional Experience</h2></div>
+            <header class="gsec-hdr gr"><span class="gsec-num">04</span><h2 class="gsec-title">Professional Experience</h2></header>
             <div class="exp-list gr">
-                <div class="exp-item">
-                    <button class="exp-trigger" onclick="toggleExp(this)">
+                <article class="exp-item">
+                    <button class="exp-trigger" onclick="toggleExp(this)" aria-expanded="false">
                         <div><div class="exp-meta">Present</div><div class="exp-role">IT Support Specialist (MyITHub)</div><div class="exp-co">Australia Post · via Capgemini</div></div>
-                        <svg class="exp-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+                        <svg class="exp-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
                     </button>
                     <div class="exp-body"><div class="exp-body-inner"><ul>
                         <li>Delivered L1/L2 face-to-face and remote technical support within the MyITHub service centre at Australia Post's Burnley site — a walk-in hub covering device repair, OS reimaging, loan device management, new employee provisioning, and accessories fulfillment.</li>
                         <li>Engineered custom keystroke injection automation (macro-level scripting) to circumvent stringent system access controls within ServiceNow, fully automating repetitive ITSM ticket creation and modification workflows and eliminating significant manual data-entry overhead.</li>
                         <li>Managed end-to-end endpoint lifecycle tasks including OS migrations, device imaging, Autopilot/UEM enrolment, and compliant equipment disposal — ensuring every device left the hub deployment-ready.</li>
+                        <li>Maintained the hub's spares and accessories inventory, reviewing stock watermarks monthly and contributing to a ServiceNow Stock Accessories module implementation to improve SLA visibility.</li>
+                        <li>Supported rollout of a self-help kiosk programme enabling staff to independently access the Knowledge Base, perform password resets, log tickets, and book hub appointments.</li>
+                        <li>Acted as escalation point for complex infrastructure faults, collaborating with L3 teams to drive incidents to resolution while maintaining accurate ServiceNow documentation and SLA compliance.</li>
                     </ul></div></div>
-                </div>
-                <div class="exp-item">
-                    <button class="exp-trigger" onclick="toggleExp(this)">
+                </article>
+                <article class="exp-item">
+                    <button class="exp-trigger" onclick="toggleExp(this)" aria-expanded="false">
                         <div><div class="exp-meta">Oct 2025 – Present</div><div class="exp-role">Windows 11 Deployment Engineer</div><div class="exp-co">St John of God Health Care · via Capgemini</div></div>
-                        <svg class="exp-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+                        <svg class="exp-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
                     </button>
                     <div class="exp-body"><div class="exp-body-inner"><ul>
                         <li>Led the execution of a Windows 11 enterprise migration across 100+ clinical endpoints, maintaining 100% adherence to Autopilot provisioning workflows and strict SOE standards throughout a live healthcare environment.</li>
+                        <li>Managed the full endpoint lifecycle — hardware preparation, Autopilot enrolment, Intune policy application, and post-deployment validation — ensuring clinical software compatibility before handoff.</li>
+                        <li>Served as primary liaison between clinical end-users and the engineering team, translating complex technical issues into actionable feedback that informed SOE refinements.</li>
                         <li>Provided hypercare support to medical staff post-migration, diagnosing and resolving compatibility issues with clinical applications (EMR systems, diagnostic tools) to minimise disruption to patient care.</li>
+                        <li>Proactively identified patterns in recurring user-reported issues and escalated systemic findings, contributing to a reduction in repeat support requests across later deployment waves.</li>
                     </ul></div></div>
-                </div>
-                <div class="exp-item">
-                    <button class="exp-trigger" onclick="toggleExp(this)">
+                </article>
+                <article class="exp-item">
+                    <button class="exp-trigger" onclick="toggleExp(this)" aria-expanded="false">
                         <div><div class="exp-meta">Dec 2021 – Sep 2025</div><div class="exp-role">Managed Services Engineer</div><div class="exp-co">Capgemini · Consultant to Dept. of Education VIC</div></div>
-                        <svg class="exp-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+                        <svg class="exp-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
                     </button>
                     <div class="exp-body"><div class="exp-body-inner"><ul>
                         <li>Managed and maintained the largest SharePoint farm in the Southern Hemisphere — 660,000+ active users across 1,000+ sites — executing critical CRs and security patching achieving 99.9% uptime.</li>
                         <li>Acted as the ultimate Tier-3 escalation point across M365/SharePoint Online and Google Workspace, leading RCA to permanently eliminate recurring faults — resulting in a documented 15% reduction in repeat incidents.</li>
                         <li>Engineered PnP PowerShell automation to dynamically audit and enforce MFA compliance across 200+ sensitive SharePoint sites, generating automated compliance reports for stakeholder review.</li>
+                        <li>Administered Exchange Hybrid environments alongside Microsoft Teams, resolving complex mail-flow, calendar, and federation issues across the entire organisation.</li>
+                        <li>Oversaw synchronisation of On-Premise Active Directory, Entra ID (Azure AD), and Google Workspace, resolving identity conflicts and authentication failures to maintain seamless SSO.</li>
+                        <li>Spearheaded Azure cloud adoption and legacy application remediation, aligning hybrid-cloud infrastructure with ACSC Essential 8 and modern enterprise security baselines.</li>
+                        <li>Produced detailed as-built documentation and RCA reports, creating a knowledge base that reduced resolution time for recurring incidents and improved team onboarding.</li>
                     </ul></div></div>
-                </div>
+                </article>
+                <article class="exp-item">
+                    <button class="exp-trigger" onclick="toggleExp(this)" aria-expanded="false">
+                        <div><div class="exp-meta">Dec 2020 – Dec 2021</div><div class="exp-role">Application Support Engineer</div><div class="exp-co">Knosys</div></div>
+                        <svg class="exp-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+                    </button>
+                    <div class="exp-body"><div class="exp-body-inner"><ul>
+                        <li>Delivered expert L3 application support for Knosys's enterprise intranet platform (GreenOrbit), achieving a 95% issue resolution rate within SLA for clients including Cotton On and Harvey Norman.</li>
+                        <li>Engineered PowerShell automation to replace manual data compilation during cloud migrations — reducing processing time by 87% (2 hours → 15 minutes) and saving 10+ hours of overhead per month.</li>
+                        <li>Developed Python and PowerShell scripts to streamline system patching procedures, reducing manual patching effort by 20% and improving patch-cycle consistency.</li>
+                        <li>Contributed to a complex platform upgrade and AWS migration, authoring RCA documentation that permanently resolved recurring version conflicts and became the reference guide for future cycles.</li>
+                        <li>Diagnosed deep application-layer issues including database query failures, API integration errors, and front-end rendering defects, frequently engaging the development team to engineer code-level fixes.</li>
+                    </ul></div></div>
+                </article>
+                <article class="exp-item">
+                    <button class="exp-trigger" onclick="toggleExp(this)" aria-expanded="false">
+                        <div><div class="exp-meta">Mar 2018 – Dec 2020</div><div class="exp-role">SharePoint Developer / Consultant</div><div class="exp-co">Engage Squared</div></div>
+                        <svg class="exp-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+                    </button>
+                    <div class="exp-body"><div class="exp-body-inner"><ul>
+                        <li>Architected and delivered 5+ bespoke SharePoint Online intranet solutions for major enterprise clients — including Victoria Police and Transurban — using custom SPFx components built with React and TypeScript.</li>
+                        <li>Implemented full CI/CD pipelines using Azure DevOps and Git, automating build, test, and release processes and reducing deployment cycle times by 25%.</li>
+                        <li>Led end-to-end migration of legacy on-premise SharePoint intranets to M365, architecting governance frameworks and permission structures to ensure ISO 27001 compliance from day one.</li>
+                        <li>Facilitated client-facing technical workshops and product demonstrations, driving a 20% increase in enterprise adoption of new M365 platform features.</li>
+                        <li>Collaborated with UX designers and project managers in an Agile/Scrum delivery model, contributing to sprint planning, backlog refinement, and retrospectives.</li>
+                    </ul></div></div>
+                </article>
             </div>
         </div>
-    </div>
+    </section>
 
-    <div class="gsec gcontact" id="gcontact">
+    <section class="gsec gcontact" id="gcontact">
         <div class="gsec-inner">
-            <div class="gsec-hdr gr"><span class="gsec-num">05</span><h2 class="gsec-title">Get in Touch</h2></div>
+            <header class="gsec-hdr gr"><span class="gsec-num">05</span><h2 class="gsec-title">Get in Touch</h2></header>
             <div class="contact-grid gr">
                 <div>
                     <p class="contact-tagline">Open to the right opportunity.</p>
@@ -500,32 +538,32 @@ body.cyber-override .g-node-ring-alt { border-color: #ff003c; opacity: 0.5; }
                 </div>
                 <div class="contact-links">
                     <a href="mailto:sam.ludwig@gmail.com" class="contact-link">
-                        <svg class="cl-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+                        <svg class="cl-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
                         <div><div class="cl-label">Email</div><div class="cl-value">sam.ludwig@gmail.com</div></div>
                     </a>
-                    <a href="https://linkedin.com/in/sam-ludwig" target="_blank" class="contact-link">
-                        <svg class="cl-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
+                    <a href="https://linkedin.com/in/sam-ludwig" target="_blank" rel="noopener noreferrer" class="contact-link">
+                        <svg class="cl-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
                         <div><div class="cl-label">LinkedIn</div><div class="cl-value">linkedin.com/in/sam-ludwig</div></div>
                     </a>
-                    <a href="https://github.com/Ludwixix" target="_blank" class="contact-link">
-                        <svg class="cl-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+                    <a href="https://github.com/Ludwixix" target="_blank" rel="noopener noreferrer" class="contact-link">
+                        <svg class="cl-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
                         <div><div class="cl-label">GitHub</div><div class="cl-value">github.com/Ludwixix</div></div>
                     </a>
                 </div>
             </div>
         </div>
-    </div>
+    </section>
     
-    <div class="gfooter">
+    <footer class="gfooter">
         <div class="gfooter-inner">
-            <p id="easterEggTrigger" class="ver-trigger">© <script>document.write(new Date().getFullYear())</script> Sam Ludwig · Melbourne, VIC</p>
+            <p id="easterEggTrigger" class="ver-trigger" tabindex="0" role="button" aria-label="Version string - triple click to activate easter egg">© <script>document.write(new Date().getFullYear())</script> Sam Ludwig · Melbourne, VIC</p>
             <p>Built for high-performance enterprise environments</p>
         </div>
-    </div>
+    </footer>
 </div>
 
 <script>
-// ── ENVIRONMENTAL TELEMETRY (Weather & Time) ─────────────
+// ── ENVIRONMENTAL TELEMETRY (Robust Error Handling) ──────
 let userEnvStatus = "Clear";
 let bootWeatherLog = "";
 
@@ -534,18 +572,17 @@ async function initEnvironment() {
     const statusText = document.getElementById('envStatus');
     
     try {
-        // 1. IP Geolocation (No API Key Required)
-        const geoReq = await fetch('https://get.geojs.io/v1/ip/geo.json');
+        const geoReq = await fetch('https://get.geojs.io/v1/ip/geo.json', { signal: AbortSignal.timeout(3000) });
+        if (!geoReq.ok) throw new Error('Geo API failed');
         const geo = await geoReq.json();
         
-        // 2. Weather Data (No API Key Required)
-        const weatherReq = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${geo.latitude}&longitude=${geo.longitude}&current_weather=true`);
+        const weatherReq = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${geo.latitude}&longitude=${geo.longitude}&current_weather=true`, { signal: AbortSignal.timeout(3000) });
+        if (!weatherReq.ok) throw new Error('Weather API failed');
         const weather = await weatherReq.json();
         
         const isDay = weather.current_weather.is_day === 1;
         const code = weather.current_weather.weathercode;
         
-        // Map WMO codes to CSS classes & strings
         let wClass = '';
         if ([51,53,55,56,57,61,63,65,66,67,80,81,82].includes(code)) { wClass = 'w-rain'; userEnvStatus = 'Raining'; }
         else if ([71,73,75,77,85,86].includes(code)) { wClass = 'w-snow'; userEnvStatus = 'Snowing'; }
@@ -554,13 +591,8 @@ async function initEnvironment() {
         else if ([1,2,3].includes(code)) { userEnvStatus = 'Cloudy'; }
         else { userEnvStatus = 'Clear Skies'; }
 
-        // Apply Time of Day (Night Mode)
         document.body.classList.toggle('night-mode', !isDay);
-        
-        // Apply Weather Effect overlay
-        if (wClass) {
-            overlay.className = 'weather-overlay active ' + wClass;
-        }
+        if (wClass) overlay.className = 'weather-overlay active ' + wClass;
 
         const timeStr = isDay ? "Daytime" : "Nighttime";
         statusText.innerHTML = `Available for Opportunities<br><span style="color:var(--gui-ink3); font-size:0.55rem; letter-spacing:0.05em; font-family:var(--mono);">[ENV: ${geo.city} // ${userEnvStatus} // ${timeStr}]</span>`;
@@ -569,14 +601,13 @@ async function initEnvironment() {
         console.log(`[SYS] Telemetry Synced: ${geo.city} | ${userEnvStatus} | ${timeStr}`);
 
     } catch (e) {
-        console.warn('[SYS] Environmental telemetry failed. Bypassing API constraints and defaulting to local system clock.');
+        // Fallback gracefully without breaking the site
         const hr = new Date().getHours();
         document.body.classList.toggle('night-mode', hr < 6 || hr >= 18);
         statusText.innerHTML = `Available for Opportunities`;
         bootWeatherLog = `> ENV SYNC: FAILED. USING LOCAL CLOCK FALLBACK.\n`;
     }
 }
-// Trigger environment sync immediately
 initEnvironment();
 
 // ── EASTER EGG 1: HACKER CONSOLE LOG ─────────────────────
@@ -596,12 +627,15 @@ function toggleCyber() {
     setTimeout(() => document.body.style.filter = 'none', 150);
 }
 
-// Trigger 1: Triple Click Footer
+// Trigger 1: Triple Click Footer (Support keyboard Enter)
 let clickCount = 0;
-document.getElementById('easterEggTrigger').addEventListener('click', () => {
+const easterEggBtn = document.getElementById('easterEggTrigger');
+const triggerCyber = () => {
     clickCount++;
     if (clickCount >= 3) { toggleCyber(); clickCount = 0; }
-});
+};
+easterEggBtn.addEventListener('click', triggerCyber);
+easterEggBtn.addEventListener('keydown', (e) => { if(e.key === 'Enter') triggerCyber(); });
 
 // ── EASTER EGG 2: THE KONAMI CODE ────────────────────────
 const konamiCode = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'];
@@ -638,10 +672,17 @@ document.getElementById('doNotPress').addEventListener('click', () => {
 // ── EASTER EGG 4: MATRIX DIGITAL RAIN ────────────────────
 const canvas = document.getElementById('matrixCanvas');
 const ctx = canvas.getContext('2d');
-canvas.width = window.innerWidth; canvas.height = window.innerHeight;
+let cols = 0;
+let drops = [];
 const matrixChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789$+-*/=%\"'#&_(),.;:?!\\|{}<>[]^~";
-const fontSize = 14; const columns = canvas.width / fontSize;
-const drops = []; for(let x = 0; x < columns; x++) drops[x] = 1;
+const fontSize = 14; 
+
+function initMatrix() {
+    canvas.width = window.innerWidth; canvas.height = window.innerHeight;
+    cols = canvas.width / fontSize;
+    drops = []; for(let x = 0; x < cols; x++) drops[x] = 1;
+}
+initMatrix();
 
 function drawMatrix() {
     if(!matrixActive) return;
@@ -657,8 +698,14 @@ function drawMatrix() {
     requestAnimationFrame(drawMatrix);
 }
 
+// ── PERFORMANCE: Debounced Resize Listener ───────────────
+let resizeTimeout;
 window.addEventListener('resize', () => {
-    canvas.width = window.innerWidth; canvas.height = window.innerHeight;
+    clearTimeout(resizeTimeout);
+    resizeTimeout = setTimeout(() => {
+        initMatrix();
+        fixHeroGrid();
+    }, 200);
 });
 
 // ── MODE TOGGLE (GUI/CLI) ────────────────────────────────
@@ -688,14 +735,12 @@ function triggerReveals() {
 
 document.addEventListener('DOMContentLoaded', () => { triggerReveals(); });
 
-// GUI hero grid responsive fix
 function fixHeroGrid() {
     const wrap = document.querySelector('.ghero-wrap');
     if (!wrap) return;
     if (window.innerWidth <= 820) wrap.style.gridTemplateColumns = '1fr';
     else wrap.style.gridTemplateColumns = '1fr 1fr';
 }
-window.addEventListener('resize', fixHeroGrid);
 fixHeroGrid();
 
 // ── GUI ACCORDION ────────────────────────────────────────
@@ -705,9 +750,14 @@ function toggleExp(btn) {
     const isOpen = item.classList.contains('open');
     guiLayer.querySelectorAll('.exp-item.open').forEach(i => {
         i.classList.remove('open');
+        i.querySelector('.exp-trigger').setAttribute('aria-expanded', 'false');
         i.querySelector('.exp-body').style.maxHeight = null;
     });
-    if (!isOpen) { item.classList.add('open'); body.style.maxHeight = body.scrollHeight + 'px'; }
+    if (!isOpen) { 
+        item.classList.add('open'); 
+        btn.setAttribute('aria-expanded', 'true');
+        body.style.maxHeight = body.scrollHeight + 'px'; 
+    }
 }
 
 // ── CLI ENGINE ───────────────────────────────────────────
@@ -758,6 +808,8 @@ const CMDS = {
         {t:'[ACTIVE]   ',c:'c-green'},{t:'Present             IT Support Specialist (MyITHub)     Australia Post · Capgemini\n',c:'c-white'},
         {t:'[ACTIVE]   ',c:'c-green'},{t:'Oct 2025–Present    Win 11 Deployment Engineer           St John of God · Capgemini\n',c:'c-white'},
         {t:'[CLOSED]   ',c:'c-dim'}, {t:'Dec 2021–Sep 2025   Managed Services Engineer            Capgemini → Dept. of Education VIC\n',c:'c-white'},
+        {t:'[CLOSED]   ',c:'c-dim'}, {t:'Dec 2020–Dec 2021   Application Support Engineer          Knosys\n',c:'c-white'},
+        {t:'[CLOSED]   ',c:'c-dim'}, {t:'Mar 2018–Dec 2020   SharePoint Developer / Consultant    Engage Squared\n',c:'c-white'},
         {t:'\n→ Run ',c:'c-dim'},{t:'gui',c:'c-purple'},{t:' for full role descriptions and bullet points.\n\n',c:'c-dim'},
     ],
     'get-portfolio': () => [
@@ -765,6 +817,7 @@ const CMDS = {
         {t:'───────        ─────                      ───────────\n',c:'c-dim'},
         {t:'YellowSnow     ',c:'c-cyan'},{t:'JS / Tampermonkey          ServiceNow UX & Algorithmic Assignment Engine\n',c:'c-white'},
         {t:'PySPO-Tool     ',c:'c-cyan'},{t:'Python 3.12 / PS 7         Shift-Left M365 Diagnostic GUI\n',c:'c-white'},
+        {t:'JobGobblin     ',c:'c-cyan'},{t:'Python / Selenium          Browser Automation & Recon Engine\n',c:'c-white'},
         {t:'\n→ ',c:'c-dim'},{t:'https://github.com/Ludwixix\n\n',c:'c-blue'},
     ],
     'get-metrics': () => [
@@ -854,5 +907,6 @@ cliInput.addEventListener('keydown', e => {
 document.getElementById('cli-layer').addEventListener('click', () => { if (!guiMode) cliInput.focus(); });
 </script>
 
+<script data-goatcounter="https://samludwig.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>
 </html>
