@@ -6,7 +6,10 @@
 
   // ========== THEME TOGGLE ==========
   var themeToggle = document.getElementById('theme-toggle');
-  var savedTheme = localStorage.getItem('theme') || 'dark';
+  var savedTheme = localStorage.getItem('theme');
+  if (!savedTheme) {
+    savedTheme = window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+  }
   document.documentElement.setAttribute('data-theme', savedTheme);
   if (themeToggle) themeToggle.textContent = savedTheme === 'dark' ? '\u{1F319}' : '\u{2600}\u{FE0F}';
 
