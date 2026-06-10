@@ -6,3 +6,75 @@
 .cta-banner{background:linear-gradient(135deg,rgba(0,255,136,0.08),rgba(96,165,250,0.08));border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:60px 0}
 .cta-banner h2{font-size:clamp(1.5rem,3vw,2.2rem);font-weight:700;margin-bottom:8px}
 .footer-links{display:flex;justify-content:center;gap:24px;margin-bottom:16px}.footer-links a{color:var(--text-muted);text-decoration:none;font-size:13px;transition:color 0.2s}.footer-links a:hover{color:var(--accent)}
+
+/* ========== SECTION RHYTHM ========== */
+#about, #certifications, #testimonials, #resources {background:var(--bg-card)}
+#looking-for, #projects, .cta-banner {background:linear-gradient(180deg,transparent 0%,rgba(0,255,136,0.02) 50%,transparent 100%)}
+section{position:relative}
+section::before{content:'';position:absolute;top:0;left:50%;width:60px;height:1px;background:linear-gradient(90deg,transparent,var(--accent),transparent);transform:translateX(-50%)}
+.hero::before,.cta-banner::before{display:none}
+
+/* ========== HERO UPGRADE ========== */
+.hero{background:radial-gradient(ellipse at 50% 30%,rgba(0,255,136,0.04) 0%,transparent 70%)}
+.hero h1{font-weight:900;letter-spacing:-0.02em}
+.hero-tagline strong{color:var(--accent)}
+
+/* ========== SKILL BAR UPGRADE ========== */
+.skill-bar{height:8px;border-radius:4px}
+.skill-fill{border-radius:4px;background:linear-gradient(90deg,var(--accent-dim),var(--accent),var(--blue))}
+
+/* ========== CARD GLOW ON HOVER ========== */
+.fact-card:hover,.skill-category:hover,.project-card:hover,.cert-card:hover,.why-card:hover,.testimonial-card:hover{box-shadow:0 0 40px rgba(0,255,136,0.08),0 8px 32px rgba(0,0,0,0.3);border-color:rgba(0,255,136,0.3)}
+.exp-item:hover{background:rgba(0,255,136,0.02);border-radius:8px;padding-left:24px;transition:all 0.3s}
+
+/* ========== TRUST GRID UPGRADE ========== */
+.trust-item{background:linear-gradient(135deg,var(--bg-card),rgba(0,255,136,0.03))}
+.trust-item:hover{background:linear-gradient(135deg,rgba(0,255,136,0.05),rgba(0,255,136,0.08))}
+
+/* ========== TIMELINE GLOW ========== */
+.timeline::before{width:2px;background:linear-gradient(to bottom,var(--accent),var(--border),transparent)}
+.exp-item::before{box-shadow:0 0 8px rgba(0,255,136,0.4)}
+.exp-item:first-child::before{background:var(--accent);box-shadow:0 0 12px rgba(0,255,136,0.6)}
+
+/* ========== CERTS UPGRADE ========== */
+.cert-card{background:linear-gradient(135deg,var(--bg-card),rgba(0,255,136,0.02));border-left:3px solid transparent;transition:all 0.3s}
+.cert-card:hover{border-left-color:var(--accent);background:linear-gradient(135deg,rgba(0,255,136,0.04),rgba(0,255,136,0.01))}
+.cert-icon{width:48px;height:48px;display:flex;align-items:center;justify-content:center;background:rgba(0,255,136,0.08);border-radius:12px;font-size:24px}
+
+/* ========== CTA UPGRADE ========== */
+.cta-banner{background:linear-gradient(135deg,rgba(0,255,136,0.06) 0%,rgba(96,165,250,0.04) 50%,rgba(167,139,250,0.04) 100%);position:relative;overflow:hidden}
+.cta-banner::after{content:'';position:absolute;top:-50%;left:-50%;width:200%;height:200%;background:radial-gradient(circle at 30% 50%,rgba(0,255,136,0.03) 0%,transparent 50%);pointer-events:none}
+
+/* ========== LOOKING-FOR UPGRADE ========== */
+.looking-for{background:linear-gradient(135deg,rgba(0,255,136,0.04),rgba(96,165,250,0.03),rgba(167,139,250,0.03));border:1px solid rgba(0,255,136,0.15)}
+.looking-for-item{transition:all 0.2s}
+.looking-for-item:hover{background:rgba(0,255,136,0.12);transform:translateX(4px)}
+
+/* ========== SECTION HEADER UPGRADE ========== */
+.section-header h2{position:relative;display:inline-block}
+.section-header h2::after{content:'';display:block;width:40px;height:3px;background:var(--accent);border-radius:2px;margin-top:12px}
+
+/* ========== FORM UPGRADE ========== */
+.form-group input:focus,.form-group textarea:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(0,255,136,0.15)}
+.btn-primary{background:linear-gradient(135deg,var(--accent),var(--accent-dim));font-weight:700}
+.btn-primary:hover{background:linear-gradient(135deg,#00ffaa,var(--accent));box-shadow:0 0 40px rgba(0,255,136,0.3)}
+
+/* ========== EXPERIENCE UPGRADE ========== */
+.exp-item{padding:24px;border:1px solid transparent;border-radius:12px;transition:all 0.3s}
+.exp-item:hover{border-color:var(--border);background:var(--bg-card);box-shadow:0 4px 24px rgba(0,0,0,0.2)}
+.exp-item:first-child{border-color:rgba(0,255,136,0.15);background:rgba(0,255,136,0.02)}
+.metric-badge{transition:all 0.2s}
+.metric-badge:hover{background:rgba(0,255,136,0.15);transform:scale(1.05)}
+
+/* ========== TESTIMONIAL UPGRADE ========== */
+.testimonial-card{background:linear-gradient(135deg,var(--bg-card),rgba(0,255,136,0.02));position:relative;overflow:hidden}
+.testimonial-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--accent),var(--blue),var(--purple));opacity:0;transition:opacity 0.3s}
+.testimonial-card:hover::after{opacity:1}
+.testimonial-text{font-size:15px;line-height:1.8}
+
+/* ========== WHY-HIRE UPGRADE ========== */
+.why-card{background:linear-gradient(180deg,var(--bg-card),rgba(0,255,136,0.02));position:relative;overflow:hidden}
+.why-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--accent),var(--blue));transform:scaleX(0);transition:transform 0.3s;transform-origin:left}
+.why-card:hover::before{transform:scaleX(1)}
+.why-icon{transition:transform 0.3s}
+.why-card:hover .why-icon{transform:scale(1.15)}
