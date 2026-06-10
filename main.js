@@ -358,7 +358,6 @@ btn.innerHTML = '<span>🚀</span> Send Message';
 alert('Something went wrong. Please try emailing me directly at sam.ludwig@gmail.com');
 });
 });
-}
 function calculateReadingTime() {
 var mainContent = document.getElementById('gui-mode');
 if (!mainContent) return;
@@ -390,4 +389,5 @@ nav.classList.remove('nav-open');
 });
 });
 });
+})();
 })();
