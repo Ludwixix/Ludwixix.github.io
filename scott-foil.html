@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scott Foil RC — Every Model</title>
+    <meta name="description" content="A visual collection of every Scott Foil RC model — Ultimate, Pro, Team, 10, 20, 30. Aero road bikes in all their glory.">
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0 }
+        :root {
+            --bg: #0a0a0a;
+            --card: #111113;
+            --border: #1e1e22;
+            --accent: #00ff88;
+            --text: #e4e4e7;
+            --text-dim: #6b7280;
+            --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            --font-mono: 'SF Mono', 'Fira Code', 'Cascadia Code', monospace;
+        }
+        html { scroll-behavior: smooth }
+        body {
+            font-family: var(--font-sans);
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Hero */
+        .hero {
+            text-align: center;
+            padding: 80px 24px 40px;
+            background: radial-gradient(ellipse at 50% 0%, rgba(0,255,136,0.06) 0%, transparent 60%);
+        }
+        .hero h1 {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            margin-bottom: 8px;
+        }
+        .hero h1 .accent { color: var(--accent) }
+        .hero p {
+            color: var(--text-dim);
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .hero .tagline {
+            font-family: var(--font-mono);
+            font-size: 14px;
+            color: var(--accent);
+            margin-bottom: 16px;
+            letter-spacing: 1px;
+        }
+
+        /* Nav */
+        .model-nav {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            padding: 16px 24px;
+            flex-wrap: wrap;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(10,10,10,0.9);
+            backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--border);
+        }
+        .model-nav a {
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text-dim);
+            text-decoration: none;
+            border: 1px solid var(--border);
+            transition: all 0.2s;
+        }
+        .model-nav a:hover, .model-nav a.active {
+            color: var(--accent);
+            border-color: var(--accent);
+            background: rgba(0,255,136,0.08);
+        }
+
+        /* Model Section */
+        .model-section {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 60px 24px 40px;
+        }
+        .model-header {
+            display: flex;
+            align-items: baseline;
+            gap: 16px;
+            margin-bottom: 8px;
+        }
+        .model-header h2 {
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+        .model-badge {
+            font-family: var(--font-mono);
+            font-size: 12px;
+            padding: 4px 10px;
+            border-radius: 20px;
+            background: rgba(0,255,136,0.1);
+            color: var(--accent);
+            border: 1px solid rgba(0,255,136,0.2);
+        }
+        .model-desc {
+            color: var(--text-dim);
+            font-size: 15px;
+            margin-bottom: 24px;
+            max-width: 700px;
+        }
+        .model-specs {
+            display: flex;
+            gap: 24px;
+            margin-bottom: 32px;
+            flex-wrap: wrap;
+        }
+        .spec {
+            font-family: var(--font-mono);
+            font-size: 13px;
+        }
+        .spec-label { color: var(--text-dim) }
+        .spec-value { color: var(--text); font-weight: 600 }
+
+        /* Image Grid */
+        .image-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+            gap: 16px;
+            margin-bottom: 40px;
+        }
+        @media (max-width: 480px) {
+            .image-grid { grid-template-columns: 1fr }
+        }
+        .image-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            overflow: hidden;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+        .image-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-4px);
+            box-shadow: 0 12px 40px rgba(0,255,136,0.08);
+        }
+        .image-card img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.4s;
+        }
+        .image-card:hover img {
+            transform: scale(1.03);
+        }
+        .image-card .caption {
+            padding: 12px 16px;
+            font-size: 13px;
+            color: var(--text-dim);
+        }
+        .image-card .source {
+            font-size: 11px;
+            color: var(--text-dim);
+            opacity: 0.5;
+            padding: 0 16px 12px;
+        }
+
+        /* Divider */
+        .divider {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+        .divider hr {
+            border: none;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--border), transparent);
+        }
+
+        /* Lightbox */
+        .lightbox {
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.95);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+        .lightbox.active { opacity: 1; visibility: visible }
+        .lightbox img {
+            max-width: 90vw;
+            max-height: 90vh;
+            object-fit: contain;
+            border-radius: 8px;
+        }
+        .lightbox-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 32px;
+            cursor: pointer;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 40px 24px;
+            border-top: 1px solid var(--border);
+            color: var(--text-dim);
+            font-size: 13px;
+        }
+        footer a { color: var(--accent); text-decoration: none }
+    </style>
+</head>
+<body>
+
+    <div class="hero">
+        <p class="tagline">// AERO · LIGHTWEIGHT · COMFORT</p>
+        <h1>Scott <span class="accent">Foil</span> RC</h1>
+        <p>Every model. Every angle. The fastest road bike Scott has ever made — from the entry-level RC 30 to the WorldTour-grade RC Ultimate.</p>
+    </div>
+
+    <nav class="model-nav">
+        <a href="#ultimate">RC Ultimate</a>
+        <a href="#pro">RC Pro</a>
+        <a href="#10">RC 10</a>
+        <a href="#20">RC 20</a>
+        <a href="#review">Reviews</a>
+        <a href="#geometry">Geometry</a>
+    </nav>
+
+    <!-- RC Ultimate -->
+    <section class="model-section" id="ultimate">
+        <div class="model-header">
+            <h2>Foil RC <span class="accent">Ultimate</span></h2>
+            <span class="model-badge">$12,790 AUD</span>
+        </div>
+        <p class="model-desc">The pinnacle. SRAM RED eTap AXS, Syncros Capital SL Aero 60mm carbon wheels, HMX SL carbon frame. This is what the pros race.</p>
+        <div class="model-specs">
+            <div class="spec"><span class="spec-label">Frame: </span><span class="spec-value">HMX SL Carbon</span></div>
+            <div class="spec"><span class="spec-label">Groupset: </span><span class="spec-value">SRAM RED eTap AXS</span></div>
+            <div class="spec"><span class="spec-label">Wheels: </span><span class="spec-value">Syncros Capital SL Aero 60mm</span></div>
+            <div class="spec"><span class="spec-label">Weight: </span><span class="spec-value">~7.3kg</span></div>
+        </div>
+        <div class="image-grid">
+            <div class="image-card" onclick="openLightbox(this)">
+                <img src="https://www.sefiles.net/images/library/large/scott-foil-rc-ultimate-tw-419417-1.png" alt="Scott Foil RC Ultimate - Drive Side" loading="lazy">
+                <div class="caption">RC Ultimate — Drive Side</div>
+                <div class="source">sefiles.net</div>
+            </div>
+            <div class="image-card" onclick="openLightbox(this)">
+                <img src="https://www.sefiles.net/images/library/large/scott-foil-rc-ultimate-tw-419417-11.png" alt="Scott Foil RC Ultimate - Non-Drive Side" loading="lazy">
+                <div class="caption">RC Ultimate — Non-Drive Side</div>
+                <div class="source">sefiles.net</div>
+            </div>
+            <div class="image-card" onclick="openLightbox(this)">
+                <img src="https://www.sefiles.net/images/library/zoom/scott-foil-rc-ultimate-tw-419417-1.png" alt="Scott Foil RC Ultimate - Detail" loading="lazy">
+                <div class="caption">RC Ultimate — Zoom Detail</div>
+                <div class="source">sefiles.net</div>
+            </div>
+        </div>
+    </section>
+
+    <div class="divider"><hr></div>
+
+    <!-- RC Pro -->
+    <section class="model-section" id="pro">
+        <div class="model-header">
+            <h2>Foil RC <span class="accent">Pro</span></h2>
+            <span class="model-badge">$9,499 AUD</span>
+        </div>
+        <p class="model-desc">Shimano Dura-Ace Di2, Syncros C50 carbon wheels, one-piece Creston iC SL Aero cockpit. The race weapon that balances aero with only 7.4kg.</p>
+        <div class="model-specs">
+            <div class="spec"><span class="spec-label">Frame: </span><span class="spec-value">HMX Carbon</span></div>
+            <div class="spec"><span class="spec-label">Groupset: </span><span class="spec-value">Shimano Dura-Ace Di2</span></div>
+            <div class="spec"><span class="spec-label">Wheels: </span><span class="spec-value">Syncros C50 Carbon</span></div>
+            <div class="spec"><span class="spec-label">Weight: </span><span class="spec-value">~7.4kg</span></div>
+        </div>
+        <div class="image-grid">
+            <div class="image-card" onclick="openLightbox(this)">
+                <img src="https://cdn-jupiter.metropolis.co.uk/wp-content/uploads/sites/9/2023/04/scott-foil-rc-pro-1.webp" alt="Scott Foil RC Pro - Full Bike" loading="lazy">
+                <div class="caption">RC Pro — Full Profile</div>
+                <div class="source">Cyclist Magazine</div>
+            </div>
+            <div class="image-card" onclick="openLightbox(this)">
+                <img src="https://dqh479dn9vg99.cloudfront.net/wp-content/uploads/sites/9/2023/04/scott-foil-rc-pro-1.jpg" alt="Scott Foil RC Pro - High Res" loading="lazy">
+                <div class="caption">RC Pro — High Resolution</div>
+                <div class="source">Cyclist Magazine</div>
+            </div>
+            <div class="image-card" onclick="openLightbox(this)">
+                <img src="https://escapecollective.com/content/images/size/w1200/2025/04/Scott-Foil-RC-review-Escape-Collective-Ronan-Mc-Laughlin-2.jpg" alt="Scott Foil RC - Review" loading="lazy">
+                <div class="caption">Foil RC — Escape Collective Review</div>
+                <div class="source">Escape Collective</div>
+            </div>
+        </div>
+    </section>
+
+    <div class="divider"><hr></div>
+
+    <!-- RC 10 -->
+    <section class="model-section" id="10">
+        <div class="model-header">
+            <h2>Foil RC <span class="accent">10</span></h2>
+            <span class="model-badge">$6,499 AUD</span>
+        </div>
+        <p class="model-desc">Shimano Ultegra Di2, Syncros Capital 1.0 50mm wheels. The sweet spot — race-level performance without the Ultimate price tag.</p>
+        <div class="model-specs">
+            <div class="spec"><span class="spec-label">Frame: </span><span class="spec-value">HMX Carbon</span></div>
+            <div class="spec"><span class="spec-label">Groupset: </span><span class="spec-value">Shimano Ultegra Di2</span></div>
+            <div class="spec"><span class="spec-label">Wheels: </span><span class="spec-value">Syncros Capital 1.0 50mm</span></div>
+            <div class="spec"><span class="spec-label">Weight: </span><span class="spec-value">~7.9kg</span></div>
+        </div>
+        <div class="image-grid">
+            <div class="image-card" onclick="openLightbox(this)">
+                <img src="https://www.insideoutsports.com/media/catalog/product/cache/d563c261176df35df0d4789fdf0196ca/1/2/127732_2R3jxdsDAvhDOXQG.jpg" alt="Scott Foil RC 10 - Ultegra Di2" loading="lazy">
+                <div class="caption">RC 10 — Ultegra Di2 Build</div>
+                <div class="source">Inside Out Sports</div>
+            </div>
+            <div class="image-card" onclick="openLightbox(this)">
+                <img src="https://www.insideoutsports.com/media/catalog/product/cache/f8bb638382840025bc4f2c5326ff3203/1/2/126330_9svhalhdtRluXQ44.jpg" alt="Scott Foil - Alternate View" loading="lazy">
+                <div class="caption">Foil — Alternate Angle</div>
+                <div class="source">Inside Out Sports</div>
+            </div>
+            <div class="image-card" onclick="openLightbox(this)">
+                <img src="https://www.insideoutsports.com/media/catalog/product/cache/f8bb638382840025bc4f2c5326ff3203/1/2/127824_Afw8QlwDVbKZJHs6.jpg" alt="Scott Foil - Another Color" loading="lazy">
+                <div class="caption">Foil — Colorway Variant</div>
+                <div class="source">Inside Out Sports</div>
+            </div>
+        </div>
+    </section>
+
+    <div class="divider"><hr></div>
+
+    <!-- RC 20 -->
+    <section class="model-section" id="20">
+        <div class="model-header">
+            <h2>Foil RC <span class="accent">20</span></h2>
+            <span class="model-badge">$4,999 AUD</span>
+        </div>
+        <p class="model-desc">Shimano 105 Di2, same HMX carbon frame as the top models. Entry into the Foil platform without sacrificing the aero advantage.</p>
+        <div class="model-specs">
+            <div class="spec"><span class="spec-label">Frame: </span><span class="spec-value">HMX Carbon</span></div>
+            <div class="spec"><span class="spec-label">Groupset: </span><span class="spec-value">Shimano 105 Di2</span></div>
+            <div class="spec"><span class="spec-label">Wheels: </span><span class="spec-value">Syncros Capital 1.0 50mm</span></div>
+            <div class="spec"><span class="spec-label">Weight: </span><span class="spec-value">~8.2kg</span></div>
+        </div>
+        <div class="image-grid">
+            <div class="image-card" onclick="openLightbox(this)">
+                <img src="https://cdn.shoplightspeed.com/shops/644001/files/66126172/scott-scott-foil-rc-20.jpg" alt="Scott Foil RC 20" loading="lazy">
+                <div class="caption">RC 20 — Full Profile</div>
+                <div class="source">Bicycle House</div>
+            </div>
+            <div class="image-card" onclick="openLightbox(this)">
+                <img src="https://cdn.shoplightspeed.com/shops/644001/files/66126172/1652x2313x2/scott-scott-foil-rc-20.jpg" alt="Scott Foil RC 20 - Large" loading="lazy">
+                <div class="caption">RC 20 — High Resolution</div>
+                <div class="source">Bicycle House</div>
+            </div>
+            <div class="image-card" onclick="openLightbox(this)">
+                <img src="https://cdn.shoplightspeed.com/shops/644001/files/66126173/1652x2313x2/scott-scott-foil-rc-20.jpg" alt="Scott Foil RC 20 - Alternate" loading="lazy">
+                <div class="caption">RC 20 — Alternate Angle</div>
+                <div class="source">Bicycle House</div>
+            </div>
+            <div class="image-card" onclick="openLightbox(this)">
+                <img src="https://images.cdn.europe-west1.gcp.commercetools.com/078b97e9-ed31-4c81-baae-cdd44f3bf3c1/57319745b3fa9e0f2c00-1WTIgRGp-large.png" alt="Scott Foil RC 20 - BikeExchange" loading="lazy">
+                <div class="caption">RC 20 — 2025 Colorway</div>
+                <div class="source">BikeExchange</div>
+            </div>
+        </div>
+    </section>
+
+    <div class="divider"><hr></div>
+
+    <!-- Reviews & Media -->
+    <section class="model-section" id="review">
+        <div class="model-header">
+            <h2>Reviews & <span class="accent">Media</span></h2>
+        </div>
+        <p class="model-desc">What the cycling press says about the Scott Foil RC platform.</p>
+        <div class="image-grid">
+            <div class="image-card" onclick="openLightbox(this)">
+                <img src="https://www.CICLONLINE.COM/images/stories/fbici20222/scott-foil-2023.jpg" alt="Scott Foil RC - Media" loading="lazy">
+                <div class="caption">Foil RC — 2023 Launch</div>
+                <div class="source">CyclOnline</div>
+            </div>
+            <div class="image-card" onclick="openLightbox(this)">
+                <img src="https://racycles.com/cdn/shop/collections/scott-foil-road-bike-383862.jpg?crop=center&height=1200&v=1746215657&width=1200" alt="Scott Foil RC Collection" loading="lazy">
+                <div class="caption">The Full Foil RC Range</div>
+                <div class="source">RA Cycles</div>
+            </div>
+        </div>
+    </section>
+
+    <div class="divider"><hr></div>
+
+    <!-- Geometry -->
+    <section class="model-section" id="geometry">
+        <div class="model-header">
+            <h2>Geometry <span class="accent">Chart</span></h2>
+        </div>
+        <p class="model-desc">Frame geometry for all 7 sizes (47–61cm). F01 Airfoil tube profiles optimised for rider-on-bike aero performance.</p>
+        <div class="image-grid">
+            <div class="image-card" onclick="openLightbox(this)" style="max-width:800px">
+                <img src="https://www.sefiles.net/images/library/features/23-SCT-GEO-FOIL-RC_111.png" alt="Scott Foil RC Geometry" loading="lazy" style="height:auto;object-fit:contain;background:#fff;">
+                <div class="caption">Foil RC — Full Geometry Chart</div>
+                <div class="source">Scott Sports</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>All images belong to their respective owners. Built by <a href="https://samludwig.au">Sam Ludwig</a> with ☕</p>
+    </footer>
+
+    <!-- Lightbox -->
+    <div class="lightbox" id="lightbox" onclick="closeLightbox()">
+        <button class="lightbox-close">&times;</button>
+        <img id="lightbox-img" src="" alt="">
+    </div>
+
+    <script>
+        // Lightbox
+        function openLightbox(card) {
+            var img = card.querySelector('img');
+            var lb = document.getElementById('lightbox');
+            var lbImg = document.getElementById('lightbox-img');
+            lbImg.src = img.src;
+            lbImg.alt = img.alt;
+            lb.classList.add('active');
+        }
+        function closeLightbox() {
+            document.getElementById('lightbox').classList.remove('active');
+        }
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') closeLightbox();
+        });
+
+        // Active nav on scroll
+        var sections = document.querySelectorAll('.model-section');
+        var navLinks = document.querySelectorAll('.model-nav a');
+        window.addEventListener('scroll', function() {
+            var current = '';
+            sections.forEach(function(s) {
+                if (window.scrollY >= s.offsetTop - 120) {
+                    current = s.getAttribute('id');
+                }
+            });
+            navLinks.forEach(function(a) {
+                a.classList.remove('active');
+                if (a.getAttribute('href') === '#' + current) {
+                    a.classList.add('active');
+                }
+            });
+        }, { passive: true });
+    </script>
+</body>
+</html>
