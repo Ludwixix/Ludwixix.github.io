@@ -5,6 +5,22 @@
 (function () {
   'use strict';
 
+  // ========== THEME TOGGLE ==========
+  var themeToggle = document.getElementById('theme-toggle');
+  var savedTheme = localStorage.getItem('theme') || 'dark';
+  document.documentElement.setAttribute('data-theme', savedTheme);
+  if (themeToggle) themeToggle.textContent = savedTheme === 'dark' ? '🌙' : '☀️';
+
+  if (themeToggle) {
+    themeToggle.addEventListener('click', function () {
+      var current = document.documentElement.getAttribute('data-theme');
+      var next = current === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', next);
+      localStorage.setItem('theme', next);
+      themeToggle.textContent = next === 'dark' ? '🌙' : '☀️';
+    });
+  }
+
   // ========== MODE TOGGLE ==========
   const guiMode = document.getElementById('gui-mode');
   const cliMode = document.getElementById('cli-mode');
@@ -185,52 +201,6 @@
       if (progress < 1) requestAnimationFrame(tick);
     }
     requestAnimationFrame(tick);
-  }
-
-  // ========== WEATHER PARTICLES ==========
-  var canvas = document.getElementById('weather-canvas');
-  if (canvas) {
-    var ctx = canvas.getContext('2d');
-    var particles = [];
-    var PARTICLE_COUNT = 60;
-
-    function resizeCanvas() {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-    }
-    window.addEventListener('resize', resizeCanvas);
-    resizeCanvas();
-
-    function Particle() { this.reset(); }
-    Particle.prototype.reset = function () {
-      this.x = Math.random() * canvas.width;
-      this.y = Math.random() * canvas.height;
-      this.vx = (Math.random() - 0.5) * 0.3;
-      this.vy = Math.random() * 0.3 + 0.1;
-      this.size = Math.random() * 2 + 0.5;
-      this.alpha = Math.random() * 0.5 + 0.1;
-    };
-    Particle.prototype.update = function () {
-      this.x += this.vx;
-      this.y += this.vy;
-      if (this.y > canvas.height) { this.reset(); this.y = -5; }
-      if (this.x < 0 || this.x > canvas.width) this.vx *= -1;
-    };
-    Particle.prototype.draw = function () {
-      ctx.beginPath();
-      ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-      ctx.fillStyle = 'rgba(0, 255, 136, ' + this.alpha + ')';
-      ctx.fill();
-    };
-
-    for (var p = 0; p < PARTICLE_COUNT; p++) { particles.push(new Particle()); }
-
-    function animateParticles() {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      particles.forEach(function (pt) { pt.update(); pt.draw(); });
-      requestAnimationFrame(animateParticles);
-    }
-    animateParticles();
   }
 
   // ========== EASTER EGG ==========

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 — Page Not Found | Sam Ludwig</title>
+    <meta name="robots" content="noindex">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #0a0a0a;
+            color: #e4e4e7;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 2rem;
+        }
+        .container { max-width: 500px; }
+        .code {
+            font-size: 8rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #00ff88, #60a5fa);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1;
+        }
+        h1 { font-size: 1.5rem; margin: 1rem 0 0.5rem; }
+        p { color: #9ca3af; margin-bottom: 2rem; line-height: 1.6; }
+        .btn {
+            display: inline-block;
+            padding: 12px 28px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.2s;
+            margin: 0 8px;
+        }
+        .btn-primary {
+            background: #00ff88;
+            color: #0a0a0a;
+        }
+        .btn-primary:hover { background: #00cc6a; }
+        .btn-secondary {
+            border: 1px solid #333;
+            color: #e4e4e7;
+        }
+        .btn-secondary:hover { border-color: #00ff88; color: #00ff88; }
+        .cli {
+            font-family: 'SF Mono', 'Fira Code', monospace;
+            background: #111;
+            border: 1px solid #222;
+            border-radius: 8px;
+            padding: 1rem;
+            margin-top: 2rem;
+            text-align: left;
+            font-size: 0.85rem;
+            color: #9ca3af;
+        }
+        .cli .prompt { color: #00ff88; }
+        .cli .cmd { color: #e4e4e7; }
+        .cli .output { color: #6b7280; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="code">404</div>
+        <h1>Page not found</h1>
+        <p>The page you're looking for doesn't exist or has been moved. Like a misconfigured DNS record — it just isn't there.</p>
+        <a href="/" class="btn btn-primary">← Back to Portfolio</a>
+        <a href="mailto:sam.ludwig@gmail.com" class="btn btn-secondary">Contact Me</a>
+        <div class="cli">
+            <div><span class="prompt">$ </span><span class="cmd">curl -I https://samludwig.au/this-page</span></div>
+            <div><span class="output">HTTP/2 404</span></div>
+            <div><span class="output">content-type: text/plain</span></div>
+            <div class="output" style="margin-top: 8px;"># hint: try the <a href="/" style="color: #00ff88;">homepage</a> instead</div>
+        </div>
+    </div>
+</body>
+</html>

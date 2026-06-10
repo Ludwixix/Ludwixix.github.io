@@ -87,9 +87,6 @@
     <!-- Skip Link (a11y) -->
     <a href="#main-content" class="skip-link">Skip to main content</a>
 
-    <!-- Weather Canvas -->
-    <canvas id="weather-canvas" aria-hidden="true"></canvas>
-
     <!-- Open to Work Banner -->
     <div class="open-banner" role="banner" aria-label="Open to work">
         🟢 <span>Open to Opportunities</span> — Available for Managed Services, Systems & Infrastructure Engineering roles in Melbourne
@@ -101,6 +98,9 @@
         <button id="gui-btn" class="active" role="radio" aria-checked="true" onclick="setMode('gui')">GUI</button>
         <button id="cli-btn" role="radio" aria-checked="false" onclick="setMode('cli')">CLI</button>
     </div>
+
+    <!-- Theme Toggle -->
+    <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark/light mode" title="Toggle theme">🌙</button>
 
     <!-- ==================== GUI MODE ==================== -->
     <div class="gui-mode" id="gui-mode">
@@ -120,7 +120,7 @@
             <!-- Hero -->
             <section class="hero" id="hero">
                 <div class="hero-content">
-                    <img src="profile-optimized.jpg" alt="Sam Ludwig - Infrastructure & M365 Engineer" style="width: 120px; height: 120px; border-radius: 50%; object-fit: cover; border: 3px solid var(--accent); margin-bottom: 1.5rem;" loading="lazy">
+                    <img src="profile-optimized.jpg" alt="Sam Ludwig - Infrastructure & M365 Engineer" width="120" height="120" style="width: 120px; height: 120px; border-radius: 50%; object-fit: cover; border: 3px solid var(--accent); margin-bottom: 1.5rem;" loading="eager" fetchpriority="high">
                     <p class="hero-greeting">👋 Hello, I'm</p>
                     <h1><span class="gradient">Sam Ludwig</span></h1>
                     <p class="hero-tagline">
@@ -308,7 +308,7 @@
                                 <div class="skill-bar"><div class="skill-fill" data-width="95"></div></div>
                             </div>
                             <div class="skill-item">
-                                <div class="skill-label"><span class="skill-name">SCCM / SCCM</span><span class="skill-level">Advanced</span></div>
+                                <div class="skill-label"><span class="skill-name">SCCM / MEMCM</span><span class="skill-level">Advanced</span></div>
                                 <div class="skill-bar"><div class="skill-fill" data-width="85"></div></div>
                             </div>
                             <div class="skill-item">
@@ -766,8 +766,10 @@
 
         <!-- Footer -->
         <footer>
-            <p>© 2026 Sam Ludwig · Built with ☕ and PowerShell · <a href="https://samludwig.au">samludwig.au</a></p>
-            <p style="margin-top: 8px;">Melbourne, VIC · Australian Citizen · <a href="mailto:sam.ludwig@gmail.com">sam.ludwig@gmail.com</a></p>
+            <div class="container">
+                <p>© 2026 Sam Ludwig · Built with ☕ and PowerShell · <a href="https://samludwig.au">samludwig.au</a></p>
+                <p style="margin-top: 8px; font-size: 0.85rem; color: var(--text-dim);">Melbourne, VIC · Australian Citizen · <a href="mailto:sam.ludwig@gmail.com">sam.ludwig@gmail.com</a></p>
+            </div>
         </footer>
     </div>
 
