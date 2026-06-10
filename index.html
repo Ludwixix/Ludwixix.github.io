@@ -10,7 +10,49 @@
     <meta name="robots" content="index, follow">
     <meta name="theme-color" content="#0a0a0a">
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <meta name="google-site-verification" content="" />
+
+    <!-- JobPosting structured data for recruiters -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "JobPosting",
+        "title": "Infrastructure Engineer / M365 Engineer",
+        "description": "Seeking a managed services, systems, or infrastructure engineering role in Melbourne. 7+ years enterprise IT experience managing 660K+ user environments.",
+        "datePosted": "2026-06-01",
+        "validThrough": "2026-12-31",
+        "employmentType": "FULL_TIME",
+        "hiringOrganization": {
+            "@type": "Organization",
+            "name": "Open to Opportunities"
+        },
+        "jobLocation": {
+            "@type": "Place",
+            "address": {
+                "@type": "PostalAddress",
+                "addressLocality": "Melbourne",
+                "addressRegion": "VIC",
+                "addressCountry": "AU"
+            }
+        },
+        "baseSalary": {
+            "@type": "MonetaryAmount",
+            "currency": "AUD",
+            "value": {
+                "@type": "QuantitativeValue",
+                "minValue": 100000,
+                "maxValue": 140000,
+                "unitText": "YEAR"
+            }
+        },
+        "applicantLocationRequirements": {
+            "@type": "Country",
+            "name": "AU"
+        }
+    }
+    </script>
 
 
     <!-- Open Graph -->
@@ -821,6 +863,10 @@
             <div class="shortcut-row">
                 <span>Download resume</span>
                 <span class="shortcut-key">D</span>
+            </div>
+            <div class="shortcut-row">
+                <span>Toggle dark/light mode</span>
+                <span class="shortcut-key">L</span>
             </div>
             <p style="margin-top: 1rem; color: var(--text-dim); font-size: 0.85rem;">Press any key to close</p>
         </div>

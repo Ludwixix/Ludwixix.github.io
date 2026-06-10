@@ -307,6 +307,13 @@
       case 'C':
         setMode('cli');
         break;
+      case 'l':
+      case 'L':
+        if (!e.ctrlKey && !e.metaKey) {
+          var toggle = document.getElementById('theme-toggle');
+          if (toggle) toggle.click();
+        }
+        break;
     }
   });
 
@@ -343,8 +350,37 @@
         return;
       }
 
-      // For Formspree, let the native submit happen.
-      // After redirect, show a thank-you state.
+      // Show sending state
+      var btn = form.querySelector('button[type="submit"]');
+      if (btn) {
+        btn.disabled = true;
+        btn.innerHTML = '<span>⏳</span> Sending...';
+      }
+
+      // Submit via fetch for smooth UX
+      e.preventDefault();
+      var formData = new FormData(form);
+      fetch(form.action, {
+        method: 'POST',
+        body: formData,
+        headers: { 'Accept': 'application/json' }
+      }).then(function (response) {
+        if (response.ok) {
+          form.innerHTML = '<div style="text-align:center;padding:2rem 0;">
+            <div style="font-size:3rem;margin-bottom:1rem;">✅</div>
+            <h3 style="color:var(--accent);margin-bottom:0.5rem;">Message Sent!</h3>
+            <p style="color:var(--text-muted);">Thanks for reaching out. I\'ll get back to you within 24 hours.</p>
+          </div>';
+        } else {
+          throw new Error('Form submission failed');
+        }
+      }).catch(function () {
+        if (btn) {
+          btn.disabled = false;
+          btn.innerHTML = '<span>🚀</span> Send Message';
+        }
+        alert('Something went wrong. Please try emailing me directly at sam.ludwig@gmail.com');
+      });
     });
   }
 
