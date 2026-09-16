@@ -15,11 +15,19 @@
 
   if (themeToggle) {
     themeToggle.addEventListener('click', function () {
-      var current = document.documentElement.getAttribute('data-theme');
+      var current = document.documentElement.getAttribute('data-theme') || 'dark';
       var next = current === 'dark' ? 'light' : 'dark';
       document.documentElement.setAttribute('data-theme', next);
       localStorage.setItem('theme', next);
       themeToggle.textContent = next === 'dark' ? '\u{1F319}' : '\u{2600}\u{FE0F}';
+    });
+  }
+
+  // ========== SHORTCUTS TRIGGER BUTTON ==========
+  var shortcutsTrigger = document.getElementById('shortcuts-trigger');
+  if (shortcutsTrigger) {
+    shortcutsTrigger.addEventListener('click', function () {
+      showShortcuts();
     });
   }
 
@@ -139,7 +147,7 @@
         '\u2709\uFE0F  sam.ludwig@gmail.com',
         '\u{1F4BC} linkedin.com/in/sam-ludwig',
         '\u{1F419} github.com/Ludwixix',
-        '\u{1F4C4} Download Resume: SamLudwigResume.pdf',
+        '\u{1F4C4} Download Resume: Sam_Ludwig_Resume.pdf',
       ]},
       { type: 'output', text: '' },
       { type: 'prompt', cmd: 'echo "Type a command or switch to GUI mode \u2191"', output: [] },
@@ -325,6 +333,12 @@
     shortcutsModal.addEventListener('click', function (e) {
       if (e.target === shortcutsModal) hideShortcuts();
     });
+    var closeBtn = document.getElementById('close-shortcuts');
+    if (closeBtn) {
+      closeBtn.addEventListener('click', function () {
+        hideShortcuts();
+      });
+    }
   }
 
   document.addEventListener('keydown', function (e) {
@@ -349,7 +363,7 @@
         break;
       case 'd':
       case 'D':
-        if (!e.ctrlKey && !e.metaKey) window.location.href = 'SamLudwigResume.pdf';
+        if (!e.ctrlKey && !e.metaKey) window.location.href = 'Sam_Ludwig_Resume.pdf';
         break;
       case 'g':
       case 'G':

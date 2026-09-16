@@ -1,7 +1,7 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://samludwig.au/sitemap.xml
+Sitemap: https://ludwixix.github.io/sitemap.xml
 
 # Sam Ludwig's Portfolio
 # Infrastructure & M365 Engineer — Melbourne, VIC

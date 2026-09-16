@@ -23,7 +23,7 @@
         .code {
             font-size: 8rem;
             font-weight: 800;
-            background: linear-gradient(135deg, #00ff88, #60a5fa);
+            background: linear-gradient(135deg, #ff5500, #fb923c);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
@@ -41,19 +41,21 @@
             margin: 0 8px;
         }
         .btn-primary {
-            background: #00ff88;
-            color: #0a0a0a;
+            background: #ff5500;
+            color: #ffffff;
+            box-shadow: 0 4px 14px rgba(255, 85, 0, 0.3);
         }
-        .btn-primary:hover { background: #00cc6a; }
+        .btn-primary:hover { background: #ff6a00; transform: translateY(-2px); }
         .btn-secondary {
-            border: 1px solid #333;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            background: rgba(255, 255, 255, 0.05);
             color: #e4e4e7;
         }
-        .btn-secondary:hover { border-color: #00ff88; color: #00ff88; }
+        .btn-secondary:hover { border-color: #ff5500; color: #ff5500; transform: translateY(-2px); }
         .cli {
-            font-family: 'SF Mono', 'Fira Code', monospace;
-            background: #111;
-            border: 1px solid #222;
+            font-family: 'JetBrains Mono', 'SF Mono', 'Fira Code', monospace;
+            background: #111114;
+            border: 1px solid rgba(255, 255, 255, 0.1);
             border-radius: 8px;
             padding: 1rem;
             margin-top: 2rem;
@@ -61,7 +63,7 @@
             font-size: 0.85rem;
             color: #9ca3af;
         }
-        .cli .prompt { color: #00ff88; }
+        .cli .prompt { color: #ff5500; }
         .cli .cmd { color: #e4e4e7; }
         .cli .output { color: #6b7280; }
     </style>
@@ -74,10 +76,10 @@
         <a href="/" class="btn btn-primary">← Back to Portfolio</a>
         <a href="mailto:sam.ludwig@gmail.com" class="btn btn-secondary">Contact Me</a>
         <div class="cli">
-            <div><span class="prompt">$ </span><span class="cmd">curl -I https://samludwig.au/this-page</span></div>
+            <div><span class="prompt">$ </span><span class="cmd">curl -I https://ludwixix.github.io/this-page</span></div>
             <div><span class="output">HTTP/2 404</span></div>
             <div><span class="output">content-type: text/plain</span></div>
-            <div class="output" style="margin-top: 8px;"># hint: try the <a href="/" style="color: #00ff88;">homepage</a> instead</div>
+            <div class="output" style="margin-top: 8px;"># hint: try the <a href="/" style="color: #ff5500;">homepage</a> instead</div>
         </div>
     </div>
 </body>
