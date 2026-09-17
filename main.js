@@ -165,6 +165,18 @@
         '   Maker: Custom PCB & macro pad soldering, Tasmanian Oak timber joinery',
       ]},
       { type: 'output', text: '' },
+      { type: 'prompt', cmd: 'cat --bike-lab', output: [
+        '\u{1F527} SCOTT FOIL UPGRADES & WORKSHOP PROJECTS:',
+        '   [\u2713] Shimano Di2 12s: E-Tube BLE mapping & \u00B10.2mm micro-trim tuning',
+        '   [\u2713] Magene Exar Carbon: Continental GP5000 S TR tubeless setup',
+        '   [\u2713] Drivetrain Efficiency: Ultrasonic bath & hot-melt paraffin waxing',
+        '   [\u2713] Internal Hydraulic Cockpit: Integrated aero stem hose routing',
+        '   [\u2713] Hydraulic Lab: Dual-syringe mineral bleed & zero-rub rotor truing',
+        '   [\u2713] Wheel Lab: Park Tool tensiometer spoke tension balancing & dish',
+        '   [\u2713] Carbon Assembly: Effetto Mariposa torque wrench & friction paste',
+        '   \u2192 Full Workshop Log: https://ludwixix.github.io/scott-foil.html#my-build',
+      ]},
+      { type: 'output', text: '' },
       { type: 'prompt', cmd: 'cat --contact', output: [
         '\u2709\uFE0F  sam.ludwig@gmail.com',
         '\u{1F4BC} linkedin.com/in/sam-ludwig',

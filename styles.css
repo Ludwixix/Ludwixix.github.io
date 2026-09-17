@@ -761,6 +761,13 @@ section { padding: 90px 0; border-top: 1px solid var(--border); position: relati
     font-family: var(--font-mono); font-size: 13px; font-weight: 700;
     color: var(--text); margin-top: 4px;
 }
+.tech-log-preview {
+    margin-top: 4px; margin-bottom: 12px;
+}
+.tech-log-title {
+    font-family: var(--font-mono); font-size: 10px; text-transform: uppercase;
+    letter-spacing: 0.8px; color: var(--text-dim); margin-bottom: 8px; font-weight: 700;
+}
 .endurance-actions {
     margin-top: auto; display: flex; gap: 12px; flex-wrap: wrap; align-items: center;
 }
