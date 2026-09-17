@@ -1,5 +1,6 @@
 /**
  * main.js — Sam Ludwig Personal Site
+ * Clean, Humble, Human & Robust
  */
 (function () {
   'use strict';
@@ -11,7 +12,7 @@
     savedTheme = window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
   }
   document.documentElement.setAttribute('data-theme', savedTheme);
-  if (themeToggle) themeToggle.textContent = savedTheme === 'dark' ? '\u{1F319}' : '\u{2600}\u{FE0F}';
+  if (themeToggle) themeToggle.textContent = savedTheme === 'dark' ? '🌙' : '☀️';
 
   if (themeToggle) {
     themeToggle.addEventListener('click', function () {
@@ -19,7 +20,7 @@
       var next = current === 'dark' ? 'light' : 'dark';
       document.documentElement.setAttribute('data-theme', next);
       localStorage.setItem('theme', next);
-      themeToggle.textContent = next === 'dark' ? '\u{1F319}' : '\u{2600}\u{FE0F}';
+      themeToggle.textContent = next === 'dark' ? '🌙' : '☀️';
     });
   }
 
@@ -31,7 +32,7 @@
     });
   }
 
-  // ========== MODE TOGGLE ==========
+  // ========== MODE TOGGLE (GUI / CLI) ==========
   var guiMode = document.getElementById('gui-mode');
   var cliMode = document.getElementById('cli-mode');
   var guiBtn = document.getElementById('gui-btn');
@@ -39,153 +40,113 @@
 
   window.setMode = function (mode) {
     if (mode === 'cli') {
-      guiMode.classList.add('hidden');
-      cliMode.classList.add('active');
-      guiBtn.classList.remove('active');
-      cliBtn.classList.add('active');
-      guiBtn.setAttribute('aria-checked', 'false');
-      cliBtn.setAttribute('aria-checked', 'true');
+      if (guiMode) guiMode.classList.add('hidden');
+      if (cliMode) cliMode.classList.add('active');
+      if (guiBtn) {
+        guiBtn.classList.remove('active');
+        guiBtn.setAttribute('aria-checked', 'false');
+      }
+      if (cliBtn) {
+        cliBtn.classList.add('active');
+        cliBtn.setAttribute('aria-checked', 'true');
+      }
       renderCLI();
     } else {
-      guiMode.classList.remove('hidden');
-      cliMode.classList.remove('active');
-      guiBtn.classList.add('active');
-      cliBtn.classList.remove('active');
-      guiBtn.setAttribute('aria-checked', 'true');
-      cliBtn.setAttribute('aria-checked', 'false');
+      if (guiMode) guiMode.classList.remove('hidden');
+      if (cliMode) cliMode.classList.remove('active');
+      if (guiBtn) {
+        guiBtn.classList.add('active');
+        guiBtn.setAttribute('aria-checked', 'true');
+      }
+      if (cliBtn) {
+        cliBtn.classList.remove('active');
+        cliBtn.setAttribute('aria-checked', 'false');
+      }
     }
   };
 
   // ========== CLI RENDERER ==========
+  var cliRendered = false;
   function renderCLI() {
+    if (cliRendered) return;
+    cliRendered = true;
     var body = document.getElementById('terminal-body');
     if (!body) return;
+
     var lines = [
-      { type: 'header', text: '\u2554\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2557' },
-      { type: 'header', text: '\u2551  SAM LUDWIG \u2014 Infrastructure & M365 Engineer           \u2551' },
-      { type: 'header', text: '\u2551  Melbourne, VIC \u00B7 sam.ludwig@gmail.com                 \u2551' },
-      { type: 'header', text: '\u255A\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u255D' },
-      { type: 'output', text: '' },
-      { type: 'prompt', cmd: 'cat --status', output: [
-        '\u{1F7E2} STATUS: ACTIVELY SEEKING',
-        'Salary Range: $100K \u2013 $140K + Super',
-        'Availability: Immediate / 2 weeks notice',
-        'Location: Melbourne, VIC (Eastern suburbs)',
-        'Work Type: Hybrid / On-site / Remote considered',
-        'Visa: Australian Citizen (no restrictions)',
-        '',
-        'Target Roles:',
-        '  \u2192 Managed Services Engineer',
-        '  \u2192 IT Service Desk Lead',
-        '  \u2192 Systems Engineer',
-        '  \u2192 Infrastructure Engineer',
-        '  \u2192 Technical Consultant',
-        '  \u2192 M365 / SharePoint Engineer',
-      ]},
+      { type: 'header', text: '┌─────────────────────────────────────────────────────────────┐' },
+      { type: 'header', text: '│  SAM LUDWIG — Infrastructure & Systems Engineer             │' },
+      { type: 'header', text: '│  Melbourne, VIC · sam.ludwig@gmail.com · 0405 993 245        │' },
+      { type: 'header', text: '└─────────────────────────────────────────────────────────────┘' },
       { type: 'output', text: '' },
       { type: 'prompt', cmd: 'cat --about', output: [
-        'Infrastructure and M365 Engineer with 7+ years bridging',
-        'physical infrastructure and large-scale cloud environments.',
-        'Trusted by Victoria Police, Transurban, and the Dept of',
-        'Education to manage complex infrastructure at scale.',
+        'Infrastructure and Systems Engineer with 6+ years managing',
+        'enterprise-scale environments supporting 660,000+ users across',
+        '1,500+ sites. Trusted by Victoria Police, Transurban, and the',
+        'Department of Education Victoria to deliver automation-driven',
+        'outcomes in hybrid cloud, identity, and endpoint management.',
       ]},
       { type: 'output', text: '' },
       { type: 'prompt', cmd: 'ls --metrics/', output: [
+        { label: 'Years Experience', value: '6+' },
         { label: 'Users Supported', value: '660,000+' },
+        { label: 'Sites & Endpoints', value: '1,500+' },
         { label: 'Uptime Achieved', value: '99.9%' },
-        { label: 'Sites Managed', value: '1,500+' },
-        { label: 'Repeat Incidents Reduced', value: '15%' },
+        { label: 'Incident Reduction', value: '15%' },
         { label: 'Processing Speedup', value: '87%' },
-        { label: 'Years Experience', value: '7+' },
       ]},
       { type: 'output', text: '' },
       { type: 'prompt', cmd: 'cat --certs', output: [
-        '\u{1F3C5} Azure Administrator Associate (AZ-104)',
-        '\u2601\uFE0F  Azure Fundamentals (AZ-900)',
-        '\u{1F4CB} ITIL 4 Foundation',
-        '\u{1F504} Certified Scrum Master (CSM)',
-        '\u{1F393} Coder Academy \u2014 Web Dev Bootcamp (2018)',
-        '\u{1F4DA} Diploma of Information Technology',
-      ]},
-      { type: 'output', text: '' },
-      { type: 'prompt', cmd: 'grep -r "skills" --cloud/', output: [
-        'SharePoint Online ............ Expert',
-        'Exchange Hybrid .............. Expert',
-        'Entra ID / Azure AD .......... Advanced',
-        'Intune (MDM/MAM) ............. Expert',
-        'Windows Autopilot ............ Expert',
-        'PowerShell (Advanced/PnP) .... Expert',
-        'Active Directory ............. Expert',
-        'ITIL 4 ....................... Certified',
-        'ServiceNow ................... Advanced',
-        'ACSC Essential 8 ............. Advanced',
-        'Conditional Access/MFA ....... Expert',
-        'Azure DevOps CI/CD ........... Advanced',
-      ]},
-      { type: 'output', text: '' },
-      { type: 'prompt', cmd: 'cat --case-studies', output: [
-        '\u{1F3C6} CASE STUDY 1: Largest SharePoint Farm (Southern Hemisphere)',
-        '   660K+ users, 1K+ sites, 99.9% uptime, -15% repeat incidents',
-        '',
-        '\u{1F3E5} CASE STUDY 2: Hospital Win11 Migration (Zero Disruption)',
-        '   100+ clinical endpoints, 100% Autopilot, zero patient impact',
-        '',
-        '\u26A1 CASE STUDY 3: Automation Pipeline (87% Faster Processing)',
-        '   2 hours \u2192 15 min, saving 10+ hrs/month at Cotton On, Harvey Norman',
+        '• Microsoft Certified: Azure Administrator Associate (AZ-104)',
+        '• Microsoft Certified: Azure Fundamentals (AZ-900)',
+        '• ITIL 4 Foundation',
+        '• Coder Academy — Web Development Fast Track (2018)',
+        '• Diploma of Information Technology',
       ]},
       { type: 'output', text: '' },
       { type: 'prompt', cmd: 'history --experience', output: [
-        { role: 'Senior Managed Services Engineer', company: 'CapGemini (Dept of Education)', period: 'Dec 2021 \u2014 Present' },
-        { role: 'L2/L3 Technical Support Engineer', company: 'Australia Post (via CapGemini)', period: '2023 \u2014 2024' },
+        { role: 'Senior Managed Services Engineer', company: 'CapGemini (Dept of Education)', period: 'Dec 2021 — Present' },
+        { role: 'L2/L3 Technical Support Engineer', company: 'Australia Post (via CapGemini)', period: '2023 — 2024' },
         { role: 'Endpoint Migration Engineer', company: 'St John of God Health Care', period: '2023' },
-        { role: 'Application Support Engineer', company: 'Knosys', period: 'Dec 2020 \u2014 Dec 2021' },
-        { role: 'SharePoint Developer', company: 'Engage Squared', period: 'Mar 2018 \u2014 Dec 2020' },
-        { role: 'Telecommunications Technician', company: 'NBN', period: 'Oct 2016 \u2014 Nov 2017' },
+        { role: 'Application Support Engineer', company: 'Knosys', period: 'Dec 2020 — Dec 2021' },
+        { role: 'SharePoint Developer', company: 'Engage Squared', period: 'Mar 2018 — Dec 2020' },
+        { role: 'Telecommunications Technician', company: 'NBN', period: 'Oct 2016 — Nov 2017' },
       ]},
       { type: 'output', text: '' },
       { type: 'prompt', cmd: 'ls -l ~/projects/', output: [
-        { label: '\u26A1 Job Dashboard (Featured)', value: 'github.com/Ludwixix/job-dashboard' },
-        { label: '\u{1F4BC} 365AdminApp Suite', value: 'github.com/Ludwixix/365AdminApp' },
-        { label: '\u{1F9EA} ServiceNow UI Engine', value: 'github.com/Ludwixix/YellowSnow' },
-        { label: '\u{1F527} M365 Diagnostic GUI', value: 'github.com/Ludwixix/pyspo-tool' },
-        { label: '\u{1F4DA} MSP Playbook', value: 'mspplaybook.com.au' },
-      ]},
-      { type: 'output', text: '' },
-      { type: 'prompt', cmd: 'cat --endurance', output: [
-        '\u{1F6B4} AERO ROAD CYCLING & TELEMETRY:',
-        '   Chassis: Scott Foil RC Custom Build',
-        '   Groupset: Shimano Ultegra Di2 12-Speed (52/36T mid-compact)',
-        '   Wheelset: Magene Exar Carbon Tubeless',
-        '   Cadence: ~100 RPM average high-spin pacing',
-        '   Strava Profile: https://www.strava.com/athletes/26852234',
-        '',
-        '\u{1F6E0}\uFE0F HOMELAB & MAKER CRAFTSMANSHIP:',
-        '   Hypervisor: Proxmox VE cluster (ZFS storage & network isolation)',
-        '   Smart Home: Home Assistant Green (Zigbee & Z-Wave mesh)',
-        '   Maker: Custom PCB & macro pad soldering, Tasmanian Oak timber joinery',
+        { label: '⚡ Job Dashboard (Featured)', value: 'github.com/Ludwixix/job-dashboard' },
+        { label: '💼 365AdminApp Suite', value: 'github.com/Ludwixix/365AdminApp' },
+        { label: '🧪 ServiceNow UI Engine', value: 'github.com/Ludwixix/YellowSnow' },
+        { label: '🔧 M365 Diagnostic GUI', value: 'github.com/Ludwixix/pyspo-tool' },
+        { label: '📚 MSP Playbook', value: 'mspplaybook.com.au' },
       ]},
       { type: 'output', text: '' },
       { type: 'prompt', cmd: 'cat --bike-lab', output: [
-        '\u{1F527} SCOTT FOIL UPGRADES & WORKSHOP PROJECTS:',
-        '   [\u2713] Shimano Di2 12s: E-Tube BLE mapping & \u00B10.2mm micro-trim tuning',
-        '   [\u2713] Magene Exar Carbon: Continental GP5000 S TR tubeless setup',
-        '   [\u2713] Drivetrain Efficiency: Ultrasonic bath & hot-melt paraffin waxing',
-        '   [\u2713] Internal Hydraulic Cockpit: Integrated aero stem hose routing',
-        '   [\u2713] Hydraulic Lab: Dual-syringe mineral bleed & zero-rub rotor truing',
-        '   [\u2713] Wheel Lab: Park Tool tensiometer spoke tension balancing & dish',
-        '   [\u2713] Carbon Assembly: Effetto Mariposa torque wrench & friction paste',
-        '   \u2192 Full Workshop Log: https://ludwixix.github.io/scott-foil.html#my-build',
+        'SCOTT FOIL RC & WORKSHOP ENGINEERING:',
+        '  Chassis: Scott Foil RC HMX Carbon · 52/36T Mid-Compact',
+        '  Drivetrain: Shimano Ultegra Di2 R8170 12-Speed Electronic',
+        '  Wheelset: Magene Exar Carbon Aero Tubeless · GP5000 S TR',
+        '  Cadence Target: ~100 RPM average pacing (dual power telemetry)',
+        '',
+        'Workshop Projects:',
+        '  [✓] Di2 12s E-Tube BLE mapping & ±0.2mm micro-trim indexing',
+        '  [✓] Hydraulic disc 2-way mineral bleed & laser caliper alignment',
+        '  [✓] Ultrasonic solvent stripping & hot-melt paraffin/PTFE waxing',
+        '  [✓] Park Tool TS-2.2 truing stand spoke deflection balancing',
+        '  → Workshop Gallery: https://ludwixix.github.io/scott-foil.html#my-build',
+        '  → Strava Profile:   https://www.strava.com/athletes/26852234',
       ]},
       { type: 'output', text: '' },
       { type: 'prompt', cmd: 'cat --contact', output: [
-        '\u2709\uFE0F  sam.ludwig@gmail.com',
-        '\u{1F4BC} linkedin.com/in/sam-ludwig',
-        '\u{1F419} github.com/Ludwixix',
-        '\u{1F6B4} strava.com/athletes/26852234',
-        '\u{1F4C4} Download Resume: Sam_Ludwig_Resume.pdf',
+        'Email:    sam.ludwig@gmail.com',
+        'Phone:    0405 993 245',
+        'LinkedIn: linkedin.com/in/sam-ludwig',
+        'GitHub:   github.com/Ludwixix',
+        'Strava:   strava.com/athletes/26852234',
+        'Resume:   Sam_Ludwig_Resume.pdf',
       ]},
       { type: 'output', text: '' },
-      { type: 'prompt', cmd: 'echo "Type a command or switch to GUI mode \u2191"', output: [] },
+      { type: 'prompt', cmd: 'echo "Switch back to GUI mode anytime with [GUI] button or press Esc"', output: [] },
       { type: 'cursor', text: '' },
     ];
 
@@ -217,7 +178,7 @@
           body.appendChild(odiv);
         });
         i++;
-        setTimeout(renderLine, 30);
+        setTimeout(renderLine, 25);
         return;
       } else if (line.type === 'cursor') {
         div.innerHTML = '<span class="cli-prompt">$ </span><span class="cli-cursor"></span>';
@@ -226,7 +187,7 @@
       }
       body.appendChild(div);
       i++;
-      setTimeout(renderLine, 15);
+      setTimeout(renderLine, 12);
     }
     renderLine();
   }
@@ -246,68 +207,8 @@
     }, { passive: true });
   }
 
-  // ========== SCROLL ANIMATIONS ==========
-  var revealEls = document.querySelectorAll('.reveal');
-  var observer = new IntersectionObserver(function (entries) {
-    entries.forEach(function (entry) {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
-        entry.target.querySelectorAll('.skill-fill[data-width]').forEach(function (bar) {
-          bar.style.width = bar.dataset.width + '%';
-        });
-        entry.target.querySelectorAll('.fact-number[data-count]').forEach(function (el) {
-          animateCounter(el);
-        });
-      }
-    });
-  }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
-  revealEls.forEach(function (el) { observer.observe(el); });
-
-  function animateCounter(el) {
-    var target = parseInt(el.dataset.count);
-    var suffix = el.dataset.suffix || '';
-    var duration = 1500;
-    var start = performance.now();
-    function tick(now) {
-      var progress = Math.min((now - start) / duration, 1);
-      var eased = 1 - Math.pow(1 - progress, 3);
-      var current = Math.round(target * eased);
-      el.textContent = current.toLocaleString() + suffix;
-      if (progress < 1) requestAnimationFrame(tick);
-    }
-    requestAnimationFrame(tick);
-  }
-
-  // ========== EASTER EGG ==========
-  var egg = document.getElementById('easter-egg');
-  if (egg) {
-    var clickCount = 0;
-    var quotes = [
-      '\u{1F6B4} Keep pedalling!',
-      '\u2615 Powered by caffeine and PowerShell',
-      '\u{1F916} Beep boop, I automate things',
-      '\u{1F3C6} 99.9% uptime, 100% vibes',
-      '\u{1F3AE} This is not a game... or is it?',
-      '\u{1F527} Have you tried turning it off and on again?',
-      '\u{1F680} To infinity and the cloud!',
-    ];
-    egg.addEventListener('click', function () {
-      clickCount++;
-      var msg = quotes[(clickCount - 1) % quotes.length];
-      var toast = document.createElement('div');
-      toast.style.cssText = 'position:fixed;bottom:60px;left:20px;background:#111;color:#00ff88;padding:12px 20px;border-radius:8px;border:1px solid #00ff8833;font-family:var(--font-mono);font-size:13px;z-index:1000;animation:fadeUp 0.3s forwards;opacity:0;';
-      toast.textContent = msg;
-      document.body.appendChild(toast);
-      setTimeout(function () { toast.style.opacity = '1'; }, 10);
-      setTimeout(function () { toast.style.opacity = '0'; setTimeout(function () { toast.remove(); }, 300); }, 2500);
-    });
-    egg.addEventListener('keydown', function (e) {
-      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); egg.click(); }
-    });
-  }
-
   // ========== ACTIVE NAV ON SCROLL ==========
-  var navLinks = document.querySelectorAll('nav a[href^="#"]');
+  var navLinks = document.querySelectorAll('.site-nav a[href^="#"]');
   var sections = [];
   navLinks.forEach(function (link) {
     var id = link.getAttribute('href').slice(1);
@@ -316,7 +217,7 @@
   });
 
   function updateActiveNav() {
-    var scrollY = window.scrollY + 120;
+    var scrollY = window.scrollY + 100;
     var current = null;
     for (var i = 0; i < sections.length; i++) {
       if (sections[i].el.offsetTop <= scrollY) current = sections[i];
@@ -328,40 +229,27 @@
   updateActiveNav();
 
   // ========== SMOOTH SCROLL FOR NAV ==========
-  document.querySelectorAll('nav a').forEach(function (a) {
+  document.querySelectorAll('a[href^="#"]').forEach(function (a) {
     a.addEventListener('click', function (e) {
       var href = a.getAttribute('href');
-      if (href && href.startsWith('#')) {
-        e.preventDefault();
+      if (href && href.startsWith('#') && href.length > 1) {
         var target = document.querySelector(href);
-        if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        if (target) {
+          e.preventDefault();
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
       }
     });
   });
 
-  // ========== BACK TO TOP BUTTON ==========
-  var backToTopBtn = document.getElementById('back-to-top');
-  if (backToTopBtn) {
-    window.addEventListener('scroll', function () {
-      if (window.scrollY > 500) {
-        backToTopBtn.classList.add('visible');
-      } else {
-        backToTopBtn.classList.remove('visible');
-      }
-    });
-    backToTopBtn.addEventListener('click', function () {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    });
-  }
-
-  // ========== KEYBOARD SHORTCUTS ==========
+  // ========== KEYBOARD SHORTCUTS MODAL ==========
   var shortcutsModal = document.getElementById('shortcuts-modal');
 
   function showShortcuts() {
-    if (shortcutsModal) shortcutsModal.classList.add('visible');
+    if (shortcutsModal) shortcutsModal.classList.add('active');
   }
   function hideShortcuts() {
-    if (shortcutsModal) shortcutsModal.classList.remove('visible');
+    if (shortcutsModal) shortcutsModal.classList.remove('active');
   }
 
   if (shortcutsModal) {
@@ -380,7 +268,7 @@
     if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
 
     if (e.key === 'Escape') {
-      if (shortcutsModal && shortcutsModal.classList.contains('visible')) {
+      if (shortcutsModal && shortcutsModal.classList.contains('active')) {
         hideShortcuts();
       } else if (cliMode && cliMode.classList.contains('active')) {
         setMode('gui');
@@ -418,42 +306,14 @@
     }
   });
 
-  // ========== FORM VALIDATION + FORMSPREE ==========
+  // ========== CONTACT FORM (FORMSPREE) ==========
   var form = document.querySelector('form[aria-label="Contact form"]');
   if (form) {
-    form.setAttribute('action', 'https://formspree.io/f/xvznrdzl');
-    form.setAttribute('method', 'POST');
-
     form.addEventListener('submit', function (e) {
-      var valid = true;
-      var fields = form.querySelectorAll('input[required], textarea[required]');
-
-      fields.forEach(function (field) {
-        var group = field.closest('.form-group');
-        if (!field.value.trim()) {
-          if (group) group.classList.add('error');
-          valid = false;
-        } else {
-          if (group) group.classList.remove('error');
-        }
-        if (field.type === 'email' && field.value) {
-          var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-          if (!emailRegex.test(field.value)) {
-            if (group) group.classList.add('error');
-            valid = false;
-          }
-        }
-      });
-
-      if (!valid) {
-        e.preventDefault();
-        return;
-      }
-
       var btn = form.querySelector('button[type="submit"]');
       if (btn) {
         btn.disabled = true;
-        btn.innerHTML = '<span>\u23F3</span> Sending...';
+        btn.textContent = 'Sending...';
       }
 
       e.preventDefault();
@@ -464,56 +324,18 @@
         headers: { 'Accept': 'application/json' }
       }).then(function (response) {
         if (response.ok) {
-          form.innerHTML = '<div style="text-align:center;padding:2rem 0;"><div style="font-size:3rem;margin-bottom:1rem;">\u2705</div><h3 style="color:var(--accent);margin-bottom:0.5rem;">Message Sent!</h3><p style="color:var(--text-muted);">Thanks for reaching out. I\'ll get back to you within 24 hours.</p></div>';
+          form.innerHTML = '<div style="padding: 24px 0;"><h4 style="color:var(--accent); font-family:var(--font-mono); font-size:14px; margin-bottom:8px;">MESSAGE SENT</h4><p style="color:var(--text-muted); font-size:14px;">Thank you for getting in touch. I will respond to your email directly.</p></div>';
         } else {
           throw new Error('Form submission failed');
         }
       }).catch(function () {
         if (btn) {
           btn.disabled = false;
-          btn.innerHTML = '<span>\u{1F680}</span> Send Message';
+          btn.textContent = 'Send Message →';
         }
-        alert('Something went wrong. Please try emailing me directly at sam.ludwig@gmail.com');
+        alert('Could not submit form. Please email directly at sam.ludwig@gmail.com');
       });
     });
   }
-
-  // ========== READING TIME CALCULATOR ==========
-  function calculateReadingTime() {
-    var mainContent = document.getElementById('gui-mode');
-    if (!mainContent) return;
-    var text = mainContent.textContent || mainContent.innerText;
-    var wordCount = text.split(/\s+/).filter(function (w) { return w.length > 0; }).length;
-    var readingTime = Math.max(1, Math.ceil(wordCount / 200));
-    var el = document.getElementById('reading-time');
-    if (el) el.textContent = '\u{1F4D6} Estimated reading time: ~' + readingTime + ' minutes';
-  }
-  calculateReadingTime();
-
-  // ========== HAMBURGER NAV (mobile) ==========
-  (function () {
-    var nav = document.querySelector('nav');
-    if (!nav) return;
-
-    var hamburger = document.createElement('button');
-    hamburger.className = 'nav-hamburger';
-    hamburger.setAttribute('aria-label', 'Toggle navigation');
-    hamburger.setAttribute('aria-expanded', 'false');
-    hamburger.innerHTML = '<span></span><span></span><span></span>';
-    nav.parentNode.insertBefore(hamburger, nav);
-
-    hamburger.addEventListener('click', function () {
-      var expanded = hamburger.getAttribute('aria-expanded') === 'true';
-      hamburger.setAttribute('aria-expanded', String(!expanded));
-      nav.classList.toggle('nav-open');
-    });
-
-    nav.querySelectorAll('a').forEach(function (a) {
-      a.addEventListener('click', function () {
-        hamburger.setAttribute('aria-expanded', 'false');
-        nav.classList.remove('nav-open');
-      });
-    });
-  })();
 
 })();
