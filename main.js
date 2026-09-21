@@ -118,7 +118,7 @@
         { label: '💼 365AdminApp Suite', value: 'github.com/Ludwixix/365AdminApp' },
         { label: '🧪 ServiceNow UI Engine', value: 'github.com/Ludwixix/YellowSnow' },
         { label: '🔧 M365 Diagnostic GUI', value: 'github.com/Ludwixix/pyspo-tool' },
-        { label: '📚 MSP Playbook', value: 'mspplaybook.com.au' },
+        { label: '📚 MSP Playbook', value: 'mspplaybook.reviews' },
       ]},
       { type: 'output', text: '' },
       { type: 'prompt', cmd: 'cat --bike-lab', output: [
