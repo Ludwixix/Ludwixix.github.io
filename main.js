@@ -123,18 +123,35 @@
       { type: 'output', text: '' },
       { type: 'prompt', cmd: 'cat --bike-lab', output: [
         'SCOTT FOIL RC & WORKSHOP ENGINEERING:',
-        '  Chassis: Scott Foil RC HMX Carbon · 52/36T Mid-Compact',
+        '  Chassis: Scott Foil RC HMX Carbon Aero Road',
         '  Drivetrain: Shimano Ultegra Di2 R8170 12-Speed Electronic',
-        '  Wheelset: Magene Exar Carbon Aero Tubeless · GP5000 S TR',
+        '  Power & Gearing: Magene spider power meter · CNC iridescent oval chainrings',
+        '  Efficiency: Ceramic OSPW cage · Ultrasonic hot-melt paraffin/PTFE waxed chain',
+        '  Wheelset: Magene Exar Carbon Aero Tubeless · Continental GP5000 S TR',
+        '  Fit: Evolutio Physio Bike Fit · -10.2mm stem reach · 7° medial hood inward tilt',
         '  Cadence Target: ~100 RPM average pacing (dual power telemetry)',
         '',
         'Workshop Projects:',
-        '  [✓] Di2 12s E-Tube BLE mapping & ±0.2mm micro-trim indexing',
+        '  [✓] Di2 12s E-Tube BLE mapping & oval chainring ±0.2mm micro-trim indexing',
         '  [✓] Hydraulic disc 2-way mineral bleed & laser caliper alignment',
         '  [✓] Ultrasonic solvent stripping & hot-melt paraffin/PTFE waxing',
         '  [✓] Park Tool TS-2.2 truing stand spoke deflection balancing',
         '  → Workshop Gallery: https://ludwixix.github.io/scott-foil.html#my-build',
         '  → Strava Profile:   https://www.strava.com/athletes/26852234',
+      ]},
+      { type: 'output', text: '' },
+      { type: 'prompt', cmd: 'cat --woodworking', output: [
+        'TIMBER JOINERY & DRIVEWAY FABRICATION:',
+        '  Primary Timbers: Tasmanian Oak (Eucalyptus regnans) · Radiata Pine · Merbau',
+        '  Techniques: Dowel joinery · Pocket-hole joinery · Architectural scribing · Danish oil',
+        '  Key Tools: Metabo 18V cordless · Japanese pull saw · Whetstone-honed chisels',
+        '',
+        'Workshop Projects:',
+        '  [✓] Handcrafted Tasmanian Oak speaker risers & audio plinths',
+        '  [✓] Architectural hardwood deck step & French door landing',
+        '  [✓] 3-tier slatted pine entryway shoe bench with anti-racking aprons',
+        '  [✓] Outdoor driveway vertical batten plinths & spacer jigs',
+        '  → Workshop Archive: https://ludwixix.github.io/woodworking.html',
       ]},
       { type: 'output', text: '' },
       { type: 'prompt', cmd: 'cat --contact', output: [
@@ -242,6 +259,45 @@
     });
   });
 
+  // ========== IMAGE LIGHTBOX MODAL ==========
+  var lightboxModal = document.getElementById('image-lightbox');
+  var lightboxImg = document.getElementById('lightbox-img');
+  var lightboxCaption = document.getElementById('lightbox-caption');
+  var lightboxClose = document.getElementById('lightbox-close');
+
+  function openLightbox(src, caption) {
+    if (!lightboxModal || !lightboxImg) return;
+    lightboxImg.src = src;
+    lightboxImg.alt = caption || 'Enlarged project photograph';
+    if (lightboxCaption) lightboxCaption.textContent = caption || '';
+    lightboxModal.classList.add('active');
+  }
+
+  function closeLightbox() {
+    if (!lightboxModal) return;
+    lightboxModal.classList.remove('active');
+    if (lightboxImg) lightboxImg.src = '';
+  }
+
+  document.querySelectorAll('[data-lightbox]').forEach(function (el) {
+    el.addEventListener('click', function () {
+      var src = el.getAttribute('data-lightbox');
+      var caption = el.getAttribute('data-caption');
+      if (src) openLightbox(src, caption);
+    });
+  });
+
+  if (lightboxClose) {
+    lightboxClose.addEventListener('click', closeLightbox);
+  }
+  if (lightboxModal) {
+    lightboxModal.addEventListener('click', function (e) {
+      if (e.target === lightboxModal || e.target.classList.contains('lightbox-dialog')) {
+        closeLightbox();
+      }
+    });
+  }
+
   // ========== KEYBOARD SHORTCUTS MODAL ==========
   var shortcutsModal = document.getElementById('shortcuts-modal');
 
@@ -268,7 +324,9 @@
     if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
 
     if (e.key === 'Escape') {
-      if (shortcutsModal && shortcutsModal.classList.contains('active')) {
+      if (lightboxModal && lightboxModal.classList.contains('active')) {
+        closeLightbox();
+      } else if (shortcutsModal && shortcutsModal.classList.contains('active')) {
         hideShortcuts();
       } else if (cliMode && cliMode.classList.contains('active')) {
         setMode('gui');
